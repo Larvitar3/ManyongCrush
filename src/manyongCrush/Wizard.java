@@ -5,21 +5,21 @@ import javax.swing.ImageIcon;
 public class Wizard extends Player {
 
 	Ground groundContext;
-	
-	
+
 	private SkillImpact skillImpact;
 	private String[] wizardLeftAttackMotion = { "images/wizardAttackMotionL.png", "images/wizardWaitingMotionL.png" };
 	private String[] wizardRightAttackMotion = { "images/wizardAttackMotionR.png", "images/wizardWaitingMotionR.png" };
 	private String[] wizardLeftSkillMotion = { "images/wizardSkillMotionL.png", "images/wizardWaitingMotionL.png" };
 	private String[] wizardRightSkillMotion = { "images/wizardSkillMotionR.png", "images/wizardWaitingMotionR.png" };
 
-	public Wizard(Ground groundContext,String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
+	public Wizard(Ground groundContext, String name, int hp, int power, int x, int y, int playerWidth,
+			int playerHeight) {
 		super(name, hp, power, x, y, playerWidth, playerHeight);
 		this.groundContext = groundContext;
 		System.out.println("위자드 생성");
 		initData();
 		setInitLayout();
-	
+
 	}
 
 	public void initData() {

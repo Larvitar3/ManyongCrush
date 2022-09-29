@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 public class Player extends JLabel implements Attack, Moveable {
 
-<<<<<<< HEAD
 	private MainFrame mContext;
 	
 	
@@ -23,17 +22,6 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected int playerHeight;
 	protected int state = 0;
 	protected int skillCount;
-=======
-	private String name;
-	private int hp;
-	private int power;
-	private int x;
-	private int y;
-	private int playerWidth;
-	private int playerHeight;
-	private int state = 0;
-	private int skillCount;
->>>>>>> dev
 
 	protected boolean left;
 	protected boolean right;
@@ -57,13 +45,10 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected ImageIcon[] playerLeftSkillMotionImg = new ImageIcon[2];
 	protected ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
 
-<<<<<<< HEAD
-	protected ImageIcon playerDieMotionImg;
-=======
-	protected SkillImpact[] skillImpacts = new SkillImpact[4];
->>>>>>> dev
 
 	protected ImageIcon playerDieMotionImg;
+
+	protected SkillImpact[] skillImpacts = new SkillImpact[4];
 
 	public Player(String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
 		this.name = name;

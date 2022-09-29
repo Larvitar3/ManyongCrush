@@ -93,7 +93,7 @@ public class GameState extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new GameState(0);
+		new GameState(0); // 테스트 코드
 	}
 
 }

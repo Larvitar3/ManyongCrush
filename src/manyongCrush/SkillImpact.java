@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 public class SkillImpact extends JLabel {
 
-<<<<<<< HEAD
 	protected int x;
 	protected int y;
 	protected int power;
@@ -21,34 +20,19 @@ public class SkillImpact extends JLabel {
 	protected int skillHeight;
 
 	protected int state;
-=======
+
 	private Boss boss;
 	private Player player;
-
-	private int x;
-	private int y;
->>>>>>> dev
 
 	protected int bossX;
 	protected int bossY;
 
-<<<<<<< HEAD
 	protected ImageIcon skillImpactImgL;
 	protected ImageIcon skillImpactImgR;
-=======
-	private int power;
-	private int skillPower;
->>>>>>> dev
 
-	private int skillWidth;
-	private int skillHeight;
 
 	private int bossWidt;
 	private int bossHeight;
-
-	private int skillCount;
-
-	private int state;
 
 	private ImageIcon skillImageL;
 	private ImageIcon skillImageR;
