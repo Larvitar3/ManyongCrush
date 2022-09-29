@@ -6,23 +6,22 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import manyongCrush.Player;
 
-public class BackgroundServiceNormal extends BackgroundService{
-	
-	private BufferedImage playerServiceNormal;
+public class BackgroundServiceNormal extends BackgroundService {
+
 	private Player player;
-	
 
 	public BackgroundServiceNormal(Player player) {
 		super(player);
-		
+		this.player = player;
 		try {
-			playerServiceNormal = ImageIO.read(new File("images/bossBackgroundMapService.jpg"));
-		} catch (IOException e) {
+			playerService = ImageIO.read(new File("images/bossBackgroundMapService.jpg"));
+		} catch (Exception e) {
 			System.out.println("이미지 경로 에러 ");
 		}
-		
+
 	}
 }

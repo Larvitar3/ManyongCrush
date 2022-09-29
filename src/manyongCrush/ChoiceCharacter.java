@@ -19,6 +19,8 @@ import lombok.Setter;
 @Setter
 public class ChoiceCharacter extends JFrame implements ActionListener {
 
+	Ground gContext;
+
 	private JLabel backgroundImage;
 	private JLabel wizardLabel;
 	private JLabel warriorLabel;
@@ -29,7 +31,7 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 
 	private int choiceCount;
 
-	public ChoiceCharacter() {
+	public ChoiceCharacter( ) {
 		initData();
 		setInitLayout();
 		addEventListenter();
@@ -41,22 +43,22 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 		setTitle("캐릭터 선택창");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		backgroundImage = new JLabel(new ImageIcon("Images/choiceBackground.png"));
+		backgroundImage = new JLabel(new ImageIcon("images/choiceBackground.png"));
 		setContentPane(backgroundImage);
 
-		ImageIcon wizardImg = new ImageIcon("Images/wizardChoiceImage.png");
+		ImageIcon wizardImg = new ImageIcon("images/wizardChoiceImage.png");
 		wizardLabel = new JLabel(wizardImg);
 
-		ImageIcon warriordImg = new ImageIcon("Images/warriorChoiceImage.png");
+		ImageIcon warriordImg = new ImageIcon("images/warriorChoiceImage.png");
 		warriorLabel = new JLabel(warriordImg);
 
-		ImageIcon choiceWizardBtn = new ImageIcon("Images/choiceWizard.png");
+		ImageIcon choiceWizardBtn = new ImageIcon("images/choiceWizard.png");
 		choiceWizard = new JButton(choiceWizardBtn);
 
-		ImageIcon choiceWarriorBtn = new ImageIcon("Images/choiceWarrior.png");
+		ImageIcon choiceWarriorBtn = new ImageIcon("images/choiceWarrior.png");
 		choiceWarrior = new JButton(choiceWarriorBtn);
 
-		ImageIcon startBtnImg = new ImageIcon("Images/startBtn.png");
+		ImageIcon startBtnImg = new ImageIcon("images/startBtn.png");
 
 		choiceWizard.setRolloverIcon(startBtnImg);
 		choiceWarrior.setRolloverIcon(startBtnImg);

@@ -9,13 +9,13 @@ import javax.imageio.ImageIO;
 
 import manyongCrush.Player;
 
-public class BackgroundServiceHellHell extends BackgroundService {
+public class BackgroundServiceHell extends BackgroundService {
 
 	private BufferedImage playerServiceHell;
 
 	private Player player;
 
-	public BackgroundServiceHellHell(Player player) {
+	public BackgroundServiceHell(Player player) {
 		super(player);
 		
 		try {

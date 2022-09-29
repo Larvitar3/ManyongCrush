@@ -10,9 +10,6 @@ import lombok.Setter;
 @Setter
 public class Player extends JLabel implements Attack, Moveable {
 
-	private MainFrame mContext;
-	
-	
 	private String name;
 	private int hp;
 	private int power;
@@ -45,8 +42,9 @@ public class Player extends JLabel implements Attack, Moveable {
 	private ImageIcon[] playerLeftSkillMotionImg = new ImageIcon[2];
 	private ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
 
-	private ImageIcon playerDieMotionImg;
+	private SkillImpact[] skillImpacts = new SkillImpact[4];
 
+	private ImageIcon playerDieMotionImg;
 
 	public Player(String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
 		this.name = name;
@@ -54,50 +52,47 @@ public class Player extends JLabel implements Attack, Moveable {
 		this.power = power;
 		this.x = x;
 		this.y = y;
+		this.playerWidth = playerWidth;
+		this.playerHeight = playerHeight;
+
+		down = false;
 
 		setInitLayout();
+
+//		new Thread(new BackgroundService(this)).start();
 	}
 
 	protected void setInitLayout() {
 		setIcon(playerLeftAttackMotionImg[1]);
-		setSize(playerWidth, playerHeight); // 위자드 이미지 사이즈
+		setSize(playerWidth, playerHeight);
 		setLocation(x, y);
 		System.out.println("케릭터 생성");
 	}
 
 	@Override
-	public void fireballAttack() {
-		
+	public void attack() {
+
 	}
 
 	@Override
-	public void chainFireballAttack() {
-		
+	public void skill() {
+
 	}
 
-	@Override
-	public void slashAttack() {
-		
-	}
-
-	@Override
-	public void megaSlashAttack() {
-		
-	}
 	@Override
 	public void right() {
-		this.setPWay(PlayerWay.RIGHT); // 오른쪽으로 보고있을때
-		setRight(true);
+		pWay = (PlayerWay.RIGHT); // 오른쪽으로 보고있을때
+		right = true;
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 
-				while (isRight() && getState() == 0) {
+				while (right) {
 					setIcon(playerRightAttackMotionImg[1]);
-					int position = getX() + getSPEED();
-					setX(position);
-					setLocation(getX(), getY());
+					int position = x + SPEED;
+					x = position;
+					setLocation(x, y);
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -111,18 +106,18 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	@Override
 	public void left() {
-		this.setPWay(PlayerWay.LEFT);
+		pWay = (PlayerWay.LEFT);
 
-		setLeft(true);
+		left = true;
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				while (isLeft() && getState() == 0) {
+				while (left) {
 					setIcon(playerLeftAttackMotionImg[1]);
-					int position = getX() - getSPEED();
-					setX(position);
-					setLocation(getX(), getY());
+					int position = x - SPEED;
+					x = position;
+					setLocation(x, y);
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -131,7 +126,6 @@ public class Player extends JLabel implements Attack, Moveable {
 				}
 			}
 		}).start();
-
 	}
 
 	@Override
@@ -142,7 +136,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 			@Override
 			public void run() {
-				while (down && state == 0) {
+				while (down) {
 					y += DOWNSPEED;
 					setLocation(x, y);
 					try {
@@ -164,15 +158,13 @@ public class Player extends JLabel implements Attack, Moveable {
 
 			@Override
 			public void run() {
-				if (state == 0) {
-					for (int i = 0; i < 130 / JUMPSPEED; i++) {
-						y -= JUMPSPEED;
-						setLocation(x, y);
-						try {
-							Thread.sleep(5);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+				for (int i = 0; i < 130 / JUMPSPEED; i++) {
+					y -= JUMPSPEED;
+					setLocation(x, y);
+					try {
+						Thread.sleep(5);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
 				}
 				jump = false;
@@ -185,6 +177,7 @@ public class Player extends JLabel implements Attack, Moveable {
 	@Override
 	public void die() {
 		state = 1;
+		setIcon(playerDieMotionImg); // 죽는모션으로 변경
 	}
 
 	@Override
@@ -194,20 +187,16 @@ public class Player extends JLabel implements Attack, Moveable {
 			beAttacked = true;
 			if (hp <= 0) {
 				hp = 0;
-				setIcon(playerDieMotionImg); // 죽는모션으로 변경
 				die();
 			}
-//			context.unitHpInfo();
 			try {
+				setIcon(playerDieMotionImg); // 깜빡깜빡으로 바꿔야함
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 			beAttacked = false;
 		}).start();
 	}
-
-
 
 }

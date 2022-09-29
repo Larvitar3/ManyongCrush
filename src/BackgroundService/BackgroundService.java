@@ -7,23 +7,26 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import lombok.Getter;
+import lombok.Setter;
 import manyongCrush.Player;
 
-public class BackgroundService implements Runnable{
-	
-	private BufferedImage playerService;
+@Getter
+@Setter
+public class BackgroundService implements Runnable {
+
+	protected BufferedImage playerService;
 
 	private Player player;
+
 	public BackgroundService(Player player) {
 		this.player = player;
-
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-
-			Color playerBottomLeftColor = new Color(playerService.getRGB(player.getX(), player.getY() + 92));
+			Color playerBottomLeftColor = new Color(playerService.getRGB(player.getX() + 30, player.getY() + 92));
 			Color playerBottomRightColor = new Color(playerService.getRGB(player.getX() + 116, player.getY() + 92));
 
 			int playerBottomLeft = playerService.getRGB(player.getX() + 50, player.getY() + 92);
