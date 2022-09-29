@@ -108,4 +108,8 @@ public class Meteor extends JLabel {
 //		}
 //	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f-metorBackgroundmerge

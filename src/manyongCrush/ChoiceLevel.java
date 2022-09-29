@@ -20,14 +20,17 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 	private JButton choiceNormal;
 	private JButton choiceHell;
 	private ChoiceCharacter choiceCharacter;
+	private LoginBgm loginBgm;
 
 	private int charcterNumber;
 	int flagCount;
 
 	public ChoiceLevel() {
+		this.loginBgm = loginBgm;
 		initData();
 		setInitLayout();
 		addEventListenter();
+//		this.loginBgm = loginBgm;
 	}
 
 	private void initData() {
@@ -123,6 +126,8 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 		} else {
 			System.out.println("값 없음");
 		}
+
+//		loginBgm.clipStop(); // 선택후 음악끄기
 
 	}
 

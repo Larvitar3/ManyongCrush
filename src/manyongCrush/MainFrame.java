@@ -115,7 +115,11 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		// 테스트용 메인창
+<<<<<<< HEAD
 		new MainFrame(3);
+=======
+		new MainFrame(4);
+>>>>>>> f-metorBackgroundmerge
 
 	}
 

@@ -1,5 +1,6 @@
 package manyongCrush;
 
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 
 	private JButton choiceWizard;
 	private JButton choiceWarrior;
+	private LoginBgm bgm;
 
 	private int choiceCount;
 
@@ -31,14 +33,14 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 		initData();
 		setInitLayout();
 		addEventListenter();
+//		LoginBgm bgm = new LoginBgm();
 	}
 
 	private void initData() {
 		setSize(1000, 700);
 		setTitle("캐릭터 선택창");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
+
 		backgroundImage = new JLabel(new ImageIcon("Images/choiceBackground.png"));
 		setContentPane(backgroundImage);
 
@@ -102,23 +104,28 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == choiceWizard) {
 			setVisible(false);
-			choiceCount =1 ;
+			choiceCount = 1;
+
+//			LoginBgm loginBgm = new LoginBgm();
 			ChoiceLevel choiceLevel = new ChoiceLevel();
+			System.out.println("생성위치: " + choiceLevel.hashCode());
 			choiceLevel.setCharcterNumber(choiceCount);
 			System.out.println("마법사 선택 ");
 			// wizard 선택
-			
+
 		} else {
 			choiceCount = 2;
 			setVisible(false);
+//			LoginBgm loginBgm = new LoginBgm();
 			ChoiceLevel choiceLevel = new ChoiceLevel();
 			choiceLevel.setCharcterNumber(choiceCount);
 			System.out.println("전사 선택");
 			// warrior 선택
+
 		}
-		
+//		bgm.clipStop();
 		System.out.println(choiceCount);
-		
+
 	}
 
 	public static void main(String[] args) {
