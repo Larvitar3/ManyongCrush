@@ -11,11 +11,11 @@ import lombok.Setter;
 @Setter
 public class Boss extends JLabel {
 
-	private ImageIcon[] boss = new ImageIcon[4];
+	protected ImageIcon[] boss = new ImageIcon[4];
 
-	private ImageIcon[] bossAttack = new ImageIcon[19];
+	protected ImageIcon[] bossAttack = new ImageIcon[19];
 
-	private ImageIcon[] bossDie = new ImageIcon[9];
+	protected ImageIcon[] bossDie = new ImageIcon[9];
 
 	private final int BOSS_WIDTH = 293;
 	private final int BOSS_HEIGHT = 590;
@@ -37,7 +37,7 @@ public class Boss extends JLabel {
 	public Boss(int hp, int power) {
 		this.hp = hp;
 		this.power = power;
-	
+
 		setInitLayout();
 	}
 
@@ -45,11 +45,12 @@ public class Boss extends JLabel {
 		setIcon(boss[0]);
 		setSize(BOSS_WIDTH, BOSS_HEIGHT);
 		setLocation(X, Y);
+
 	}
 
 	public void waiting() {
 		new Thread(() -> {
-
+			waiting = true;
 			while (waiting) {
 
 				for (int i = 0; i < boss.length; i++) {

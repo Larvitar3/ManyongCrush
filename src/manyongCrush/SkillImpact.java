@@ -10,7 +10,8 @@ import lombok.Setter;
 @Setter
 public class SkillImpact extends JLabel {
 
-	private Boss boss;
+	Ground groundContext;
+
 	private Player player;
 
 	private int x;
@@ -32,10 +33,12 @@ public class SkillImpact extends JLabel {
 
 	private int state;
 
-	private ImageIcon skillImageL;
-	private ImageIcon skillImageR;
+	protected ImageIcon skillImageL;
+	protected ImageIcon skillImageR;
 
-	public SkillImpact(Player player, int x, int y, int power, int skillPower, int skillWidth, int skillHeight) {
+	public SkillImpact(Ground groundContext, Player player, int x, int y, int power, int skillPower, int skillWidth,
+			int skillHeight) {
+		this.groundContext = groundContext;
 		this.x = x;
 		this.y = y;
 		this.power = power;
@@ -44,29 +47,55 @@ public class SkillImpact extends JLabel {
 		this.skillHeight = skillHeight;
 		this.player = player;
 
-		bossX = boss.getX();
-		bossY = boss.getY();
+		bossX = groundContext.boss.getX();
+		bossY = groundContext.boss.getY();
 
-		bossWidt = boss.getWidth();
-		bossHeight = boss.getHeight();
+		bossWidt = groundContext.boss.getWidth();
+		bossHeight = groundContext.boss.getHeight();
+
+		groundContext.add(this);
 	}
 
-	public void skillsFly() {
+	public void setInitLayout() {
+		setSize(skillWidth, skillHeight);
+		setLocation(x, y);
+	}
+
+	public void skillsLeftFly() {
 
 		new Thread(() -> {
 
 			// 만약 플레이어가 왼쪽을 보고 있다면?
-			if (player.isLeft()) {
-				setIcon(skillImageL);
-				x--;
-				setLocation(x, y);
-				checkBoss();
-			} else if (player.isRight()) {
-				// 만약 플레이어가 오른쪽을 보고 있다면?
-				setIcon(skillImageR);
-				x++;
-				setLocation(x, y);
-				checkBoss();
+			while (true) {
+//				System.out.println("asdfiojlk");
+				try {
+					setIcon(skillImageL);
+					x--;
+					setLocation(x, y);
+					checkBoss();
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
+	public void skillsRightFly() {
+		new Thread(() -> {
+
+			while (true) {
+
+				try {
+					setIcon(skillImageR);
+
+					x++;
+					setLocation(x, y);
+					checkBoss();
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}

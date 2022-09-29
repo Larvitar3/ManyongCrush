@@ -1,5 +1,7 @@
 package manyongCrush;
 
+import javax.swing.ImageIcon;
+
 public class NormalBoss extends Boss {
 
 	private String[] bossImg = { "images/boss1.png", "images/boss2.png", "images/boss3.png", "images/boss2.png" };
@@ -16,12 +18,23 @@ public class NormalBoss extends Boss {
 	public NormalBoss(int hp, int power) {
 		super(hp, power);
 
-	}
-	
-	public void initData() {
-		for (int i = 0; i < bossImg.length; i++) {
-			
-		}
+		initData();
+		setInitLayout();
+		waiting();
 	}
 
+	public void initData() {
+		System.out.println("ㅠㅠ");
+		for (int i = 0; i < bossImg.length; i++) {
+			boss[i] = new ImageIcon(bossImg[i]);
+		}
+
+		for (int i = 0; i < bossAttackImg.length; i++) {
+			bossAttack[i] = new ImageIcon(bossAttackImg[i]);
+		}
+
+		for (int i = 0; i < bossDieImg.length; i++) {
+			bossDie[i] = new ImageIcon(bossDieImg[i]);
+		}
+	}
 }
