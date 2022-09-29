@@ -23,6 +23,9 @@ public class Ground extends JFrame implements ActionListener {
 	// todoTestCode
 	Boss boss;
 
+	Player player;
+
+
 	JLabel backgroundHellImage;
 	JLabel backgroundNormalImage;
 	BackgroundService backgroundService;
@@ -31,7 +34,6 @@ public class Ground extends JFrame implements ActionListener {
 
 	List<Meteor> meteorList;
 
-	Player player;
 	boolean flag;
 
 	JLabel[] characterSkillCounts = new JLabel[5];
@@ -59,7 +61,7 @@ public class Ground extends JFrame implements ActionListener {
 
 		if (charcterNumber == 1 && modeCount == 1) {
 			player = new Wizard(groundContext, "마법사", 200, 30, 116, 92, 116, 92);
-			
+			boss = new NormalBoss(800, 100);
 		}
 		
 		initData();
@@ -94,7 +96,6 @@ public class Ground extends JFrame implements ActionListener {
 				meteorList.add(new Meteor());
 			}
 			meteorStart(modeCount);
-			System.out.println("슈ㅠㅠ");
 		}
 
 		System.out.println("모드 카운터 값 : " + modeCount);
@@ -105,6 +106,8 @@ public class Ground extends JFrame implements ActionListener {
 			setContentPane(backgroundNormalImage);
 			System.out.println("마법사 / 노말");
 			add(player);
+			add(boss);
+
 		} else if (modeCount == 2) {
 			// 전사 / 노말
 			backgroundNormalImage = new JLabel(new ImageIcon("images/bossBackgroundMap.jpg"));
