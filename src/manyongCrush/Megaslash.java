@@ -4,19 +4,19 @@ import javax.swing.ImageIcon;
 
 public class Megaslash extends SkillImpact {
 
-   public Megaslash(Player player, int x, int y, int power, int skillPower, int skillWidth, int skillHeight) {
-      super(player, x, y, power, skillPower, skillWidth, skillHeight);
+	public Megaslash(Ground groundContext, Player player, int x, int y, int power, int skillPower, int skillWidth,
+			int skillHeight) {
+		super(groundContext, player, x, y, power, skillPower, skillWidth, skillHeight);
 
-      initData();
+		initData();
 
-      skillsFly();
-   }
+	}
 
-   public void initData() {
+	public void initData() {
 
-      super.setSkillImageL(new ImageIcon("images/swordSkillSwingL.png"));
-      super.setSkillImageR(new ImageIcon("images/swordSkillSwingR.png"));
+		setSkillImageL(new ImageIcon("images/swordSkillSwingL.png"));
+		setSkillImageR(new ImageIcon("images/swordSkillSwingR.png"));
 
-   }
+	}
 
 }

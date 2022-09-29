@@ -5,21 +5,21 @@ import javax.swing.ImageIcon;
 public class Wizard extends Player {
 
 	Ground groundContext;
-	
-	
+
 	private SkillImpact skillImpact;
 	private String[] wizardLeftAttackMotion = { "images/wizardAttackMotionL.png", "images/wizardWaitingMotionL.png" };
 	private String[] wizardRightAttackMotion = { "images/wizardAttackMotionR.png", "images/wizardWaitingMotionR.png" };
 	private String[] wizardLeftSkillMotion = { "images/wizardSkillMotionL.png", "images/wizardWaitingMotionL.png" };
 	private String[] wizardRightSkillMotion = { "images/wizardSkillMotionR.png", "images/wizardWaitingMotionR.png" };
 
-	public Wizard(Ground groundContext,String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
+	public Wizard(Ground groundContext, String name, int hp, int power, int x, int y, int playerWidth,
+			int playerHeight) {
 		super(name, hp, power, x, y, playerWidth, playerHeight);
 		this.groundContext = groundContext;
 		System.out.println("위자드 생성");
+
 		initData();
 		setInitLayout();
-	
 	}
 
 	public void initData() {
@@ -47,28 +47,32 @@ public class Wizard extends Player {
 
 		new Thread(() -> {
 
-			if (isLeft()) {
+			if (getPWay() == PlayerWay.LEFT) {
+				System.out.println("qerd");
 				for (int i = 0; i < wizardLeftAttackMotion.length; i++) {
 					setIcon(getPlayerLeftAttackMotionImg()[i]);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(100);
 					} catch (Exception e) {
 						System.out.println("위자드 왼쪽 어택");
 					}
-					skillImpact = new Fireball(this, getX(), getY(), 30, 50, 74, 45);
-					groundContext.boss.beAttacked(skillImpact.getPower());
 				}
+				skillImpact = new Fireball(groundContext, this, getX(), getY(), 30, 50, 74, 45);
+				skillImpact.skillsLeftFly();
+				groundContext.boss.beAttacked(skillImpact.getPower());
+				System.out.println("sssafd");
 			} else {
 				for (int i = 0; i < wizardRightAttackMotion.length; i++) {
 					setIcon(getPlayerRightAttackMotionImg()[i]);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(100);
 					} catch (Exception e) {
 						System.out.println("위자드 오른쪽 어택");
 					}
-					skillImpact = new Fireball(this, getX(), getY(), 30, 50, 74, 45); // 스킬 다른걸로 바꿔야함
-					groundContext.boss.beAttacked(skillImpact.getPower());
 				}
+				skillImpact = new Fireball(groundContext, this, getX(), getY(), 30, 50, 74, 45); // 스킬 다른걸로 바꿔야함
+				skillImpact.skillsRightFly();
+				groundContext.boss.beAttacked(skillImpact.getPower());
 			}
 		}).start();
 	}
@@ -96,7 +100,7 @@ public class Wizard extends Player {
 						System.out.println("위자드 오른쪽 스킬");
 					}
 				}
-				skillImpact = new ChainFireball(this, getX(), getY(), 30, 50, 74, 45);
+				skillImpact = new ChainFireball(groundContext, this, getX(), getY(), 30, 50, 74, 45);
 			}
 		}).start();
 	}

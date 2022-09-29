@@ -16,11 +16,11 @@ import BackgroundService.BackgroundServiceNormal;
 
 public class Ground extends JFrame implements ActionListener {
 
-
 	Ground groundContext = this;
 	// todoTestCode
 	Boss boss;
-	
+	Player player;
+
 	JLabel backgroundHellImage;
 	JLabel backgroundNormalImage;
 
@@ -29,7 +29,6 @@ public class Ground extends JFrame implements ActionListener {
 	List<Meteor> meteorList;
 	int modeCount;
 	int charcterNumber;
-	Player player;
 	boolean flag;
 
 	public Ground(int modeCount, int charcterNumber) {
@@ -38,7 +37,8 @@ public class Ground extends JFrame implements ActionListener {
 
 		if (charcterNumber == 1 && modeCount == 1) {
 
-			player = new Wizard(groundContext,"vjhgjm", 200, 30, 116, 92, 116, 92);
+			boss = new NormalBoss(800, 100);
+			player = new Wizard(groundContext, "vjhgjm", 200, 30, 116, 92, 116, 92);
 
 			initData();
 			setInitLayout();
@@ -73,7 +73,6 @@ public class Ground extends JFrame implements ActionListener {
 				meteorList.add(new Meteor());
 			}
 			meteorStart(modeCount);
-			System.out.println("슈ㅠㅠ");
 		}
 
 		if (modeCount == 1) {
@@ -82,6 +81,8 @@ public class Ground extends JFrame implements ActionListener {
 			setContentPane(backgroundNormalImage);
 			System.out.println("마법사 / 노말");
 			add(player);
+			add(boss);
+
 		} else if (modeCount == 2) {
 			// 전사 / 노말
 			backgroundNormalImage = new JLabel(new ImageIcon("images/bossBackgroundMap.jpg"));

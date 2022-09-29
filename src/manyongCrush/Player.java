@@ -42,8 +42,6 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected ImageIcon[] playerLeftSkillMotionImg = new ImageIcon[2];
 	protected ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
 
-	protected SkillImpact[] skillImpacts = new SkillImpact[4];
-
 	protected ImageIcon playerDieMotionImg;
 
 	public Player(String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
@@ -56,9 +54,6 @@ public class Player extends JLabel implements Attack, Moveable {
 		this.playerHeight = playerHeight;
 
 		down = false;
-
-		setInitLayout();
-
 //		new Thread(new BackgroundService(this)).start();
 	}
 
@@ -71,12 +66,10 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	@Override
 	public void attack() {
-
 	}
 
 	@Override
 	public void skill() {
-
 	}
 
 	@Override
@@ -90,8 +83,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 				while (right) {
 					setIcon(playerRightAttackMotionImg[1]);
-					int position = x + SPEED;
-					x = position;
+					x += SPEED;
 					setLocation(x, y);
 					try {
 						Thread.sleep(10);
@@ -106,7 +98,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	@Override
 	public void left() {
-		pWay = (PlayerWay.LEFT);
+		pWay = PlayerWay.LEFT;
 
 		left = true;
 		new Thread(new Runnable() {
@@ -115,8 +107,7 @@ public class Player extends JLabel implements Attack, Moveable {
 			public void run() {
 				while (left) {
 					setIcon(playerLeftAttackMotionImg[1]);
-					int position = x - SPEED;
-					x = position;
+					x -= SPEED;
 					setLocation(x, y);
 					try {
 						Thread.sleep(10);

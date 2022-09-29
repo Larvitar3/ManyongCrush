@@ -53,7 +53,7 @@ public class Warrior extends Player {
 					} catch (Exception e) {
 						System.out.println("워리어 왼쪽 어택");
 					}
-					skillImpact = new Slash(this, getX(), getY(), 30, 50, 110, 89);
+					skillImpact = new Slash(groundContext, this, getX(), getY(), 30, 50, 110, 89);
 					groundContext.boss.beAttacked(skillImpact.getPower());
 				}
 			} else {
@@ -64,7 +64,7 @@ public class Warrior extends Player {
 					} catch (Exception e) {
 						System.out.println("워리어 오른쪽 어택");
 					}
-					skillImpact = new Slash(this, getX(), getY(), 30, 50, 110, 89);
+					skillImpact = new Slash(groundContext, this, getX(), getY(), 30, 50, 110, 89);
 					groundContext.boss.beAttacked(skillImpact.getPower());
 				}
 			}
@@ -85,7 +85,7 @@ public class Warrior extends Player {
 						System.out.println("워리어 왼쪽 스킬");
 					}
 				}
-				skillImpact = new Megaslash(this, getX(), getY(), 50, 70, 110, 104);
+				skillImpact = new Megaslash(groundContext, this, getX(), getY(), 50, 70, 110, 104);
 			} else {
 				for (int i = 0; i < warriorRightSkillMotion.length; i++) {
 					setIcon(getPlayerRightSkillMotionImg()[i]);
@@ -95,7 +95,7 @@ public class Warrior extends Player {
 						System.out.println("워리어 오른쪽 스킬");
 					}
 				}
-				skillImpact = new Megaslash(this, getX(), getY(), 30, 50, 110, 104);
+				skillImpact = new Megaslash(groundContext, this, getX(), getY(), 30, 50, 110, 104);
 			}
 		}).start();
 	}
