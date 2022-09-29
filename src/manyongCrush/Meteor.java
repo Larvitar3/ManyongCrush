@@ -84,6 +84,7 @@ public class Meteor extends JLabel {
 		}).start();
 
 	}
+}
 
 //	public void attack() {
 //		if (!player.isBeAttacked()) {
@@ -108,8 +109,4 @@ public class Meteor extends JLabel {
 //		}
 //	}
 
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> f-metorBackgroundmerge
+
