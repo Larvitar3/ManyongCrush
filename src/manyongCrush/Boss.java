@@ -37,10 +37,14 @@ public class Boss extends JLabel {
 	public Boss(int hp, int power) {
 		this.hp = hp;
 		this.power = power;
-	}
 	
-	public void initData() {
+		setInitLayout();
+	}
+
+	public void setInitLayout() {
 		setIcon(boss[0]);
+		setSize(BOSS_WIDTH, BOSS_HEIGHT);
+		setLocation(X, Y);
 	}
 
 	public void waiting() {
@@ -96,10 +100,10 @@ public class Boss extends JLabel {
 	}
 
 	public void beAttacked(int damage) {
+
 		new Thread(() -> {
 
 			hp -= damage;
-			
 			beAttacked = true;
 			if (hp <= 0) {
 				die();
@@ -112,14 +116,4 @@ public class Boss extends JLabel {
 			beAttacked = false;
 		}).start();
 	}
-
-//	public void beAttacked() {
-//		// 보스 좌표 가져 옴//
-//
-//		if (Math.abs((x + skillWidth) - bossX) < 30
-//				&& Math.abs((y + (skillHeight / 2)) - bossY + (bossHeight / 2)) < 295) {
-//			boss.setHp(boss.getHp() - power);
-//		}
-//
-//	}
 }

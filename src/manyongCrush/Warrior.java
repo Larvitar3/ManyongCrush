@@ -4,94 +4,99 @@ import javax.swing.ImageIcon;
 
 public class Warrior extends Player {
 
-   private SkillImpact skillImpact;
-   private String[] warriorLeftAttackMotion = { "images/warriorAttackMotionL.png",
-         "images/warriorWaitingMotionL.png" };
-   private String[] warriorRightAttackMotion = { "images/warriorAttackMotionR.png",
-         "images/warriorWaitingMotionR.png" };
-   private String[] warriorLeftSkillMotion = { "images/warriorSkillMotionL.png", "images/warriorWaitingMotionL.png" };
-   private String[] warriorRightSkillMotion = { "images/warriorSkillMotionR.png", "images/warriorWaitingMotionR.png" };
+	Ground groundContext;
 
-   public Warrior(String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
-      super(name, hp, power, x, y, playerWidth, playerHeight);
+	private SkillImpact skillImpact;
+	private String[] warriorLeftAttackMotion = { "images/warriorAttackMotionL.png",
+			"images/warriorWaitingMotionL.png" };
+	private String[] warriorRightAttackMotion = { "images/warriorAttackMotionR.png",
+			"images/warriorWaitingMotionR.png" };
+	private String[] warriorLeftSkillMotion = { "images/warriorSkillMotionL.png", "images/warriorWaitingMotionL.png" };
+	private String[] warriorRightSkillMotion = { "images/warriorSkillMotionR.png", "images/warriorWaitingMotionR.png" };
 
-      initData();
-   }
+	public Warrior(Ground groundContext, String name, int hp, int power, int x, int y, int playerWidth,
+			int playerHeight) {
+		super(name, hp, power, x, y, playerWidth, playerHeight);
+		this.groundContext = groundContext;
+		initData();
+	}
 
-   public void initData() {
-      for (int i = 0; i < warriorLeftAttackMotion.length; i++) {
-         getPlayerLeftAttackMotionImg()[i] = new ImageIcon(warriorLeftAttackMotion[i]);
-      }
-      for (int i = 0; i < warriorRightAttackMotion.length; i++) {
-         getPlayerRightAttackMotionImg()[i] = new ImageIcon(warriorRightAttackMotion[i]);
-      }
-      for (int i = 0; i < warriorLeftSkillMotion.length; i++) {
-         getPlayerLeftSkillMotionImg()[i] = new ImageIcon(warriorLeftSkillMotion[i]);
-      }
-      for (int i = 0; i < warriorRightSkillMotion.length; i++) {
-         getPlayerRightSkillMotionImg()[i] = new ImageIcon(warriorRightSkillMotion[i]);
-      }
-   }
+	public void initData() {
+		for (int i = 0; i < warriorLeftAttackMotion.length; i++) {
+			getPlayerLeftAttackMotionImg()[i] = new ImageIcon(warriorLeftAttackMotion[i]);
+		}
+		for (int i = 0; i < warriorRightAttackMotion.length; i++) {
+			getPlayerRightAttackMotionImg()[i] = new ImageIcon(warriorRightAttackMotion[i]);
+		}
+		for (int i = 0; i < warriorLeftSkillMotion.length; i++) {
+			getPlayerLeftSkillMotionImg()[i] = new ImageIcon(warriorLeftSkillMotion[i]);
+		}
+		for (int i = 0; i < warriorRightSkillMotion.length; i++) {
+			getPlayerRightSkillMotionImg()[i] = new ImageIcon(warriorRightSkillMotion[i]);
+		}
+	}
 
-   @Override
-   public void attack() {
+	@Override
+	public void attack() {
 
-      // Q눌렀을 때 공격 모션
-      // 모션 중 스킬이 나감
-      // 파이어볼 객체 구현
+		// Q눌렀을 때 공격 모션
+		// 모션 중 스킬이 나감
+		// 파이어볼 객체 구현
 
-      new Thread(() -> {
+		new Thread(() -> {
 
-         if (isLeft()) {
-            for (int i = 0; i < warriorLeftAttackMotion.length; i++) {
-               setIcon(getPlayerLeftAttackMotionImg()[i]);
-               try {
-                  Thread.sleep(300);
-               } catch (Exception e) {
-                  System.out.println("워리어 왼쪽 어택");
-               }
-               skillImpact = new Slash(this, getX(), getY(), 30, 50, 110, 89);
-            }
-         } else {
-            for (int i = 0; i < warriorRightAttackMotion.length; i++) {
-               setIcon(getPlayerRightAttackMotionImg()[i]);
-               try {
-                  Thread.sleep(300);
-               } catch (Exception e) {
-                  System.out.println("워리어 오른쪽 어택");
-               }
-               skillImpact = new Slash(this, getX(), getY(), 30, 50, 110, 89);
-            }
-         }
-      }).start();
-   }
+			if (isLeft()) {
+				for (int i = 0; i < warriorLeftAttackMotion.length; i++) {
+					setIcon(getPlayerLeftAttackMotionImg()[i]);
+					try {
+						Thread.sleep(300);
+					} catch (Exception e) {
+						System.out.println("워리어 왼쪽 어택");
+					}
+					skillImpact = new Slash(this, getX(), getY(), 30, 50, 110, 89);
+					groundContext.boss.beAttacked(skillImpact.getPower());
+				}
+			} else {
+				for (int i = 0; i < warriorRightAttackMotion.length; i++) {
+					setIcon(getPlayerRightAttackMotionImg()[i]);
+					try {
+						Thread.sleep(300);
+					} catch (Exception e) {
+						System.out.println("워리어 오른쪽 어택");
+					}
+					skillImpact = new Slash(this, getX(), getY(), 30, 50, 110, 89);
+					groundContext.boss.beAttacked(skillImpact.getPower());
+				}
+			}
+		}).start();
+	}
 
-   @Override
-   public void skill() {
+	@Override
+	public void skill() {
 
-      new Thread(() -> {
+		new Thread(() -> {
 
-         if (isLeft()) {
-            for (int i = 0; i < warriorLeftSkillMotion.length; i++) {
-               setIcon(getPlayerLeftSkillMotionImg()[i]);
-               try {
-                  Thread.sleep(300);
-               } catch (Exception e) {
-                  System.out.println("워리어 왼쪽 스킬");
-               }
-            }
-            skillImpact = new Megaslash(this, getX(), getY(), 50, 70, 110, 104);
-         } else {
-            for (int i = 0; i < warriorRightSkillMotion.length; i++) {
-               setIcon(getPlayerRightSkillMotionImg()[i]);
-               try {
-                  Thread.sleep(300);
-               } catch (Exception e) {
-                  System.out.println("워리어 오른쪽 스킬");
-               }
-            }
-            skillImpact = new Megaslash(this, getX(), getY(), 30, 50, 110, 104);
-         }
-      }).start();
-   }
+			if (isLeft()) {
+				for (int i = 0; i < warriorLeftSkillMotion.length; i++) {
+					setIcon(getPlayerLeftSkillMotionImg()[i]);
+					try {
+						Thread.sleep(300);
+					} catch (Exception e) {
+						System.out.println("워리어 왼쪽 스킬");
+					}
+				}
+				skillImpact = new Megaslash(this, getX(), getY(), 50, 70, 110, 104);
+			} else {
+				for (int i = 0; i < warriorRightSkillMotion.length; i++) {
+					setIcon(getPlayerRightSkillMotionImg()[i]);
+					try {
+						Thread.sleep(300);
+					} catch (Exception e) {
+						System.out.println("워리어 오른쪽 스킬");
+					}
+				}
+				skillImpact = new Megaslash(this, getX(), getY(), 30, 50, 110, 104);
+			}
+		}).start();
+	}
 }

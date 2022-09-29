@@ -36,15 +36,15 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	private PlayerWay pWay;
 
-	private ImageIcon[] playerLeftAttackMotionImg = new ImageIcon[2];
-	private ImageIcon[] playerRightAttackMotionImg = new ImageIcon[2];
+	protected ImageIcon[] playerLeftAttackMotionImg = new ImageIcon[2];
+	protected ImageIcon[] playerRightAttackMotionImg = new ImageIcon[2];
 
-	private ImageIcon[] playerLeftSkillMotionImg = new ImageIcon[2];
-	private ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
+	protected ImageIcon[] playerLeftSkillMotionImg = new ImageIcon[2];
+	protected ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
 
-	private SkillImpact[] skillImpacts = new SkillImpact[4];
+	protected SkillImpact[] skillImpacts = new SkillImpact[4];
 
-	private ImageIcon playerDieMotionImg;
+	protected ImageIcon playerDieMotionImg;
 
 	public Player(String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
 		this.name = name;

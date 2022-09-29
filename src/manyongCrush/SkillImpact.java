@@ -49,7 +49,6 @@ public class SkillImpact extends JLabel {
 
 		bossWidt = boss.getWidth();
 		bossHeight = boss.getHeight();
-
 	}
 
 	public void skillsFly() {
@@ -79,5 +78,5 @@ public class SkillImpact extends JLabel {
 			System.out.println("감지 되었어요 ~~");
 		}
 	}
-	
+
 }
