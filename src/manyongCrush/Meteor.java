@@ -27,7 +27,6 @@ public class Meteor extends JLabel {
 	private ChoiceLevel choiceLevel;
 
 	public Meteor() {
-		System.out.println("메테오 클래스");
 		initData();
 		setInitLayout();
 	}
@@ -51,7 +50,6 @@ public class Meteor extends JLabel {
 		new Thread(() -> {
 			int downSpeed = 2;
 			while (true) {
-//				System.out.println("메테오 떨어짐");
 				if (!lavaMeteorFalling || x >= -300) {
 					setIcon(lavaMeteorImage);
 					if (mode == 1 || mode == 2) {

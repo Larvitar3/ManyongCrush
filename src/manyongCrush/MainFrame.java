@@ -16,9 +16,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	JLabel backgroundNormalImage;
 	int modeCount;
 
-	private JLabel[] characterSkillCounts = new JLabel[5];
-	private String[] skillCounts = { " ● ", " ● ", " ● ", " ● ", " ● " };
-	private int skillCount;
+	JLabel[] characterSkillCounts = new JLabel[5];
+	String[] skillCounts = { " ● ", " ● ", " ● ", " ● ", " ● " };
+	int skillCount;
 
 	JLabel bossHpBox;
 	JLabel bossHpBgBox;
@@ -39,7 +39,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		this.modeCount = modeCount;
 		initData();
 		setInitLayout();
-		addEventLitenter();
+		addEventLitener();
 	}
 
 	private void initData() {
@@ -162,7 +162,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	}
 
-	private void addEventLitenter() {
+	private void addEventLitener() {
 
 	}
 

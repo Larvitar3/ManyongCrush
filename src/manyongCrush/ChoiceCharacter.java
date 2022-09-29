@@ -21,20 +21,20 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 
 	Ground gContext;
 
-	private JLabel backgroundImage;
-	private JLabel wizardLabel;
-	private JLabel warriorLabel;
+	JLabel backgroundImage;
+	JLabel wizardLabel;
+	JLabel warriorLabel;
 
-	private JButton choiceWizard;
-	private JButton choiceWarrior;
-	private LoginBgm bgm;
+	JButton choiceWizard;
+	JButton choiceWarrior;
+	LoginBgm bgm;
 
-	private int choiceCount;
+	int choiceCount;
 
 	public ChoiceCharacter( ) {
 		initData();
 		setInitLayout();
-		addEventListenter();
+		addEventListener();
 //		LoginBgm bgm = new LoginBgm();
 	}
 
@@ -95,7 +95,7 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 
 	}
 
-	private void addEventListenter() {
+	private void addEventListener() {
 
 		choiceWizard.addActionListener(this);
 		choiceWarrior.addActionListener(this);

@@ -16,20 +16,20 @@ import lombok.Setter;
 public class ChoiceLevel extends JFrame implements ActionListener {
 	
 
-	private JLabel backgroundImage;
+	JLabel backgroundImage;
 
-	private JButton choiceNormal;
-	private JButton choiceHell;
-	private ChoiceCharacter choiceCharacter;
-	private LoginBgm loginBgm;
-
-	private int charcterNumber;
+	JButton choiceNormal;
+	JButton choiceHell;
+	ChoiceCharacter choiceCharacter;
+	LoginBgm loginBgm;
+	
+	int charcterNumber;
 	int flagCount;
 
 	public ChoiceLevel() {
 		initData();
 		setInitLayout();
-		addEventListenter();
+		addEventListener();
 //		this.loginBgm = loginBgm;
 	}
 
@@ -83,7 +83,7 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 
 	}
 
-	private void addEventListenter() {
+	private void addEventListener() {
 		choiceNormal.addActionListener(this);
 		choiceHell.addActionListener(this);
 	}
@@ -95,15 +95,14 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 
 			setVisible(false);
 			flagCount = 1;
-			Ground ground = new Ground(flagCount, charcterNumber);
-			ground.modeCount = flagCount;
+			new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
 
 		} else if (e.getSource() == choiceNormal && charcterNumber == 2) {
 
 			setVisible(false);
 			flagCount = 2;
-			Ground ground = new Ground(flagCount, charcterNumber);
+			new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 전사 선택");
 
 		} else if (e.getSource() == choiceHell && charcterNumber == 1) {
@@ -111,8 +110,7 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 			setVisible(false);
 
 			flagCount = 3;
-			Ground ground = new Ground(flagCount, charcterNumber);
-			ground.modeCount = flagCount;
+			new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 헬 선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
 
 		} else if (e.getSource() == choiceHell && charcterNumber == 2) {
@@ -120,13 +118,11 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 			setVisible(false);
 
 			flagCount = 4;
-			Ground ground = new Ground(flagCount, charcterNumber);
-			ground.modeCount = flagCount;
+			new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 헬 선택" + "  번호 :  " + charcterNumber + " 전사 선택");
 		} else {
 			System.out.println("값 없음");
 		}
-
 //		loginBgm.clipStop(); // 선택후 음악끄기
 
 	}
