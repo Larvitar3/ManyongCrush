@@ -4,14 +4,19 @@ import javax.swing.ImageIcon;
 
 public class Fireball extends SkillImpact {
 
+   public Fireball(Player player, int x, int y, int power, int skillPower, int skillWidth, int skillHeight) {
+      super(player, x, y, power, skillPower, skillWidth, skillHeight);
 
-	public Fireball(int x, int y, int power, int skillPower, int skillWidth, int skillHeight, ImageIcon skillImpactImgL,
-			ImageIcon skillImpactImgR) {
-		super(x, y, power, skillPower, skillWidth, skillHeight, skillImpactImgL, skillImpactImgR);
-		System.out.println("음");
-		
-	}
+      initData();
 
-	// 날라가는거 구현
+      skillsFly();
 
+   }
+
+   public void initData() {
+
+      super.setSkillImageL(new ImageIcon("images/fireBallL.png"));
+      super.setSkillImageR(new ImageIcon("images/fireBallR.png"));
+
+   }
 }
