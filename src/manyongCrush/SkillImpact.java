@@ -5,22 +5,22 @@ import javax.swing.JLabel;
 
 public class SkillImpact extends JLabel {
 
-	private int x;
-	private int y;
-	private int power;
-	private int skillPower;
-	private int skillCount;
+	protected int x;
+	protected int y;
+	protected int power;
+	protected int skillPower;
+	protected int skillCount;
 
-	private int skillWidth;
-	private int skillHeight;
+	protected int skillWidth;
+	protected int skillHeight;
 
-	private int state;
+	protected int state;
 
-	private int bossX;
-	private int bossY;
+	protected int bossX;
+	protected int bossY;
 
-	private ImageIcon skillImpactImgL;
-	private ImageIcon skillImpactImgR;
+	protected ImageIcon skillImpactImgL;
+	protected ImageIcon skillImpactImgR;
 
 	public SkillImpact(int x, int y, int power, int skillPower, int skillWidth, int skillHeight,
 			ImageIcon skillImpactImgL, ImageIcon skillImpactImgR) {
