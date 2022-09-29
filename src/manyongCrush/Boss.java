@@ -3,54 +3,117 @@ package manyongCrush;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Boss extends JLabel {
 
 	private ImageIcon[] boss = new ImageIcon[4];
-	private String[] hellBossImage = {};
-	private String[] bossImage = { "images/boss1.png", "images/boss2.png", "images/boss3.png", "images/boss2.png" };
 
 	private ImageIcon[] bossAttack = new ImageIcon[19];
-	private String[] hellBossAttackImage = {};
-	private String[] bossAttackImage = { "images/bossMotion1.png", "images/bossMotion2.png", "images/bossMotion3.png",
-			"images/bossMotion4.png", "images/bossMotion5.png", "images/bossMotion6.png", "images/bossMotion7.png",
-			"images/bossMotion8.png", "images/bossMotion9.png", "images/bossMotion10.png", "images/bossMotion11.png",
-			"images/bossMotion12.png", "images/bossMotion13.png", "images/bossMotion14.png", "images/bossMotion15.png",
-			"images/bossMotion16.png", "images/bossMotion17.png", "images/bossMotion18.png",
-			"images/bossMotion19.png" };
 
-	private ImageIcon[] bossDie = new ImageIcon[3];
-	private String[] bossDieImage = { "" };
+	private ImageIcon[] bossDie = new ImageIcon[9];
 
 	private final int BOSS_WIDTH = 293;
 	private final int BOSS_HEIGHT = 590;
 
+	private final int X = 650;
+	private final int Y = 55;
+
 	private int hp;
 	private int power;
-	private int x;
-	private int y;
-	private int playerWidth;
-	private int playerHeight;
-	private int state = 0;
+
+	private int state;
+
+	private int count;
 
 	private boolean waiting;
 	private boolean attacking;
 	private boolean beAttacked;
-	private boolean hellMode;
 
-	public Boss() {
-		if (!hellMode) {
-			normalBoss();
-		} else {
-			hellBoss();
+	public Boss(int hp, int power) {
+		this.hp = hp;
+		this.power = power;
+	
+		setInitLayout();
+	}
+
+	public void setInitLayout() {
+		setIcon(boss[0]);
+		setSize(BOSS_WIDTH, BOSS_HEIGHT);
+		setLocation(X, Y);
+	}
+
+	public void waiting() {
+		new Thread(() -> {
+
+			while (waiting) {
+
+				for (int i = 0; i < boss.length; i++) {
+					try {
+						setIcon(boss[i]);
+						Thread.sleep(130);
+					} catch (InterruptedException e) {
+						System.err.println("보스에서 웨이팅에서 에러남");
+					}
+				}
+				count++;
+				if (count % 10 == 0) {
+					waiting = false;
+					attack();
+				}
+			}
+		}).start();
+	}
+
+	public void attack() {
+		new Thread(() -> {
+
+			if (!waiting && state == 0) {
+
+				for (int i = 0; i < bossAttack.length; i++) {
+					try {
+						setIcon(bossAttack[i]);
+						Thread.sleep(150);
+					} catch (InterruptedException e) {
+						System.err.println("보스 어택에서 에러");
+					}
+					if (bossAttack[i] == bossAttack[13]) {
+						attacking = true;
+					}
+				}
+				attacking = false;
+				waiting = true;
+				waiting();
+			}
+		}).start();
+	}
+
+	public void die() {
+		state = 1;
+		for (int i = 0; i < bossDie.length; i++) {
+			setIcon(bossDie[i]);
 		}
 	}
 
-	public void normalBoss() {
+	public void beAttacked(int damage) {
 
+		new Thread(() -> {
+
+			hp -= damage;
+			beAttacked = true;
+			if (hp <= 0) {
+				die();
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				System.err.println("보스 비어택드");
+			}
+			beAttacked = false;
+		}).start();
 	}
-
-	public void hellBoss() {
-
-	}
-
 }
