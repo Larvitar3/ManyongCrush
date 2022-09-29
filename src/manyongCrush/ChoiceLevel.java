@@ -14,12 +14,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ChoiceLevel extends JFrame implements ActionListener {
+	
 
 	private JLabel backgroundImage;
 
 	private JButton choiceNormal;
 	private JButton choiceHell;
 	private ChoiceCharacter choiceCharacter;
+	private LoginBgm loginBgm;
 
 	private int charcterNumber;
 	int flagCount;
@@ -28,6 +30,7 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 		initData();
 		setInitLayout();
 		addEventListenter();
+//		this.loginBgm = loginBgm;
 	}
 
 	private void initData() {
@@ -92,15 +95,15 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 
 			setVisible(false);
 			flagCount = 1;
-			MainFrame mainFrame = new MainFrame(flagCount);
-			mainFrame.modeCount = flagCount;
+			Ground ground = new Ground(flagCount, charcterNumber);
+			ground.modeCount = flagCount;
 			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
 
 		} else if (e.getSource() == choiceNormal && charcterNumber == 2) {
 
 			setVisible(false);
 			flagCount = 2;
-			MainFrame mainFrame = new MainFrame(flagCount);
+			Ground ground = new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 전사 선택");
 
 		} else if (e.getSource() == choiceHell && charcterNumber == 1) {
@@ -108,8 +111,8 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 			setVisible(false);
 
 			flagCount = 3;
-			MainFrame mainFrame = new MainFrame(flagCount);
-			mainFrame.modeCount = flagCount;
+			Ground ground = new Ground(flagCount, charcterNumber);
+			ground.modeCount = flagCount;
 			System.out.println("선택 : 헬 선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
 
 		} else if (e.getSource() == choiceHell && charcterNumber == 2) {
@@ -117,12 +120,14 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 			setVisible(false);
 
 			flagCount = 4;
-			MainFrame mainFrame = new MainFrame(flagCount);
-			mainFrame.modeCount = flagCount;
+			Ground ground = new Ground(flagCount, charcterNumber);
+			ground.modeCount = flagCount;
 			System.out.println("선택 : 헬 선택" + "  번호 :  " + charcterNumber + " 전사 선택");
 		} else {
 			System.out.println("값 없음");
 		}
+
+//		loginBgm.clipStop(); // 선택후 음악끄기
 
 	}
 

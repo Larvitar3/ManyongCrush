@@ -2,12 +2,10 @@ package manyongCrush;
 
 public interface Attack {
 
-	public abstract void fireballAttack();
+	public abstract void attack();
 
-	public abstract void chainFireballAttack();
+	public abstract void skill();
 
-	public abstract void slashAttack();
 
-	public abstract void megaSlashAttack();
 
 }

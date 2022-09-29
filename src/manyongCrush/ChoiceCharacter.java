@@ -1,5 +1,6 @@
 package manyongCrush;
 
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,43 +19,46 @@ import lombok.Setter;
 @Setter
 public class ChoiceCharacter extends JFrame implements ActionListener {
 
+	Ground gContext;
+
 	private JLabel backgroundImage;
 	private JLabel wizardLabel;
 	private JLabel warriorLabel;
 
 	private JButton choiceWizard;
 	private JButton choiceWarrior;
+	private LoginBgm bgm;
 
 	private int choiceCount;
 
-	public ChoiceCharacter() {
+	public ChoiceCharacter( ) {
 		initData();
 		setInitLayout();
 		addEventListenter();
+//		LoginBgm bgm = new LoginBgm();
 	}
 
 	private void initData() {
 		setSize(1000, 700);
 		setTitle("캐릭터 선택창");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
-		backgroundImage = new JLabel(new ImageIcon("Images/choiceBackground.png"));
+
+		backgroundImage = new JLabel(new ImageIcon("images/choiceBackground.png"));
 		setContentPane(backgroundImage);
 
-		ImageIcon wizardImg = new ImageIcon("Images/wizardChoiceImage.png");
+		ImageIcon wizardImg = new ImageIcon("images/wizardChoiceImage.png");
 		wizardLabel = new JLabel(wizardImg);
 
-		ImageIcon warriordImg = new ImageIcon("Images/warriorChoiceImage.png");
+		ImageIcon warriordImg = new ImageIcon("images/warriorChoiceImage.png");
 		warriorLabel = new JLabel(warriordImg);
 
-		ImageIcon choiceWizardBtn = new ImageIcon("Images/choiceWizard.png");
+		ImageIcon choiceWizardBtn = new ImageIcon("images/choiceWizard.png");
 		choiceWizard = new JButton(choiceWizardBtn);
 
-		ImageIcon choiceWarriorBtn = new ImageIcon("Images/choiceWarrior.png");
+		ImageIcon choiceWarriorBtn = new ImageIcon("images/choiceWarrior.png");
 		choiceWarrior = new JButton(choiceWarriorBtn);
 
-		ImageIcon startBtnImg = new ImageIcon("Images/startBtn.png");
+		ImageIcon startBtnImg = new ImageIcon("images/startBtn.png");
 
 		choiceWizard.setRolloverIcon(startBtnImg);
 		choiceWarrior.setRolloverIcon(startBtnImg);
@@ -102,23 +106,28 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == choiceWizard) {
 			setVisible(false);
-			choiceCount =1 ;
+			choiceCount = 1;
+
+//			LoginBgm loginBgm = new LoginBgm();
 			ChoiceLevel choiceLevel = new ChoiceLevel();
+			System.out.println("생성위치: " + choiceLevel.hashCode());
 			choiceLevel.setCharcterNumber(choiceCount);
 			System.out.println("마법사 선택 ");
 			// wizard 선택
-			
+
 		} else {
 			choiceCount = 2;
 			setVisible(false);
+//			LoginBgm loginBgm = new LoginBgm();
 			ChoiceLevel choiceLevel = new ChoiceLevel();
 			choiceLevel.setCharcterNumber(choiceCount);
 			System.out.println("전사 선택");
 			// warrior 선택
+
 		}
-		
+//		bgm.clipStop();
 		System.out.println(choiceCount);
-		
+
 	}
 
 	public static void main(String[] args) {
