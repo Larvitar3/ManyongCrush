@@ -76,7 +76,6 @@ public class Ground extends JFrame implements ActionListener {
 	}
 
 	private void initData() {
-
 		setSize(1000, 700);
 		setTitle("ManyongCrush");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

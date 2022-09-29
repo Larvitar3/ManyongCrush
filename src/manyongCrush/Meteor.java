@@ -13,6 +13,7 @@ public class Meteor extends JLabel {
 	private int x;
 	private int y;
 	private int power = 20;
+	
 
 	private final int LAVA_METEOR_WIDTH = 57;
 	private final int LAVA_METEOR_HEIGHT = 123;

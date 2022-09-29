@@ -107,6 +107,7 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 		if (e.getSource() == choiceWizard) {
 			setVisible(false);
 			choiceCount = 1;
+			
 
 //			LoginBgm loginBgm = new LoginBgm();
 			ChoiceLevel choiceLevel = new ChoiceLevel();
