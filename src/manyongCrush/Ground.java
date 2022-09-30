@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import BGM.GroundBGM;
 import BackgroundService.BackgroundService;
 import BackgroundService.BackgroundServiceHell;
 import BackgroundService.BackgroundServiceNormal;
@@ -56,6 +57,8 @@ public class Ground extends JFrame {
 	JLabel manualKeyLR;
 	JLabel manualKeyAtaack;
 	
+	GroundBGM groundBGM;
+	
 	int bossHpWidth;
 	int characterHpWidth;
 
@@ -65,6 +68,7 @@ public class Ground extends JFrame {
 		this.modeCount = modeCount;
 		this.charcterNumber = charcterNumber;
 		this.player = groundContext.player;
+		groundBGM = new GroundBGM();
 
 		if (modeCount == 1) {
 
@@ -94,8 +98,6 @@ public class Ground extends JFrame {
 			boss = new HellBoss(groundContext, 1600, 100);
 			modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
 			
-		}else {
-			System.out.println("오류!@!@!");
 		}
 		initData();
 		setInitLayout();
