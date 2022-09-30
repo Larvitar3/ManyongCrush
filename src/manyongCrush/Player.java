@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 public class Player extends JLabel implements Attack, Moveable {
 	
-	
 	protected String name;
 	protected int hp;
 	protected int power;

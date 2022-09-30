@@ -11,11 +11,13 @@ import lombok.Setter;
 @Setter
 public class Boss extends JLabel {
 
+	Wrath wrath;
+
 	protected ImageIcon[] boss = new ImageIcon[4];
 
 	protected ImageIcon[] bossAttack = new ImageIcon[19];
 
-	protected ImageIcon[] bossDie = new ImageIcon[9];
+	protected ImageIcon[] bossDie = new ImageIcon[10];
 
 	private final int BOSS_WIDTH = 293;
 	private final int BOSS_HEIGHT = 590;
@@ -37,6 +39,7 @@ public class Boss extends JLabel {
 	public Boss(int hp, int power) {
 		this.hp = hp;
 		this.power = power;
+		wrath = new Wrath(this);
 
 		setInitLayout();
 	}
@@ -51,7 +54,7 @@ public class Boss extends JLabel {
 	public void waiting() {
 		new Thread(() -> {
 			waiting = true;
-			while (waiting) {
+			while (waiting && state == 0) {
 
 				for (int i = 0; i < boss.length; i++) {
 					try {
@@ -95,8 +98,15 @@ public class Boss extends JLabel {
 
 	public void die() {
 		state = 1;
+
 		for (int i = 0; i < bossDie.length; i++) {
 			setIcon(bossDie[i]);
+			System.out.println(hp);
+			try {
+				Thread.sleep(150);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -104,15 +114,19 @@ public class Boss extends JLabel {
 
 		new Thread(() -> {
 
-			hp -= damage;
-			beAttacked = true;
-			if (hp <= 0) {
-				die();
-			}
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				System.err.println("보스 비어택드");
+			if (state == 0) {
+				System.out.println(hp);
+				hp -= damage;
+				beAttacked = true;
+				if (hp <= 0) {
+					hp = 0;
+					die();
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					System.err.println("보스 비어택드");
+				}
 			}
 			beAttacked = false;
 		}).start();
