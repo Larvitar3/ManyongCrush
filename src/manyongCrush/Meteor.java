@@ -14,11 +14,8 @@ public class Meteor extends JLabel {
 	private int x;
 	private int y;
 	private int power = 20;
-<<<<<<< HEAD
 	
 	
-=======
->>>>>>> ae83982292e2798259b487f765585ed518a8e14a
 
 	private final int LAVA_METEOR_WIDTH = 57;
 	private final int LAVA_METEOR_HEIGHT = 123;
@@ -93,7 +90,6 @@ public class Meteor extends JLabel {
 		}).start();
 
 	}
-<<<<<<< HEAD
 
 
 	public void attack() {
@@ -116,11 +112,8 @@ public class Meteor extends JLabel {
 			
 			}
 		}
-	}
-	}
 
-
-=======
+	}
 }
 
 //	public void attack() {
@@ -145,4 +138,3 @@ public class Meteor extends JLabel {
 //			}
 //		}
 //	}
->>>>>>> ae83982292e2798259b487f765585ed518a8e14a
