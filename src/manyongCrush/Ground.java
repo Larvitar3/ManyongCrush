@@ -60,12 +60,9 @@ public class Ground extends JFrame implements ActionListener {
 		this.charcterNumber = charcterNumber;
 
 		if (charcterNumber == 1 && modeCount == 1) {
-<<<<<<< HEAD
 			
 
-=======
 			player = new Wizard(groundContext, "마법사", 200, 30, 116, 92, 116, 92);
->>>>>>> ebee0d741cdfd7f9085e5f1a0bb5d0c631a0f4b6
 			boss = new NormalBoss(800, 100);
 		}
 		
@@ -91,13 +88,13 @@ public class Ground extends JFrame implements ActionListener {
 			System.out.println("스타트 후");
 			meteorList = new ArrayList<Meteor>();
 			for (int i = 0; i < 5; i++) {
-				meteorList.add(new Meteor());
+				meteorList.add(new Meteor(groundContext));
 			}
 			meteorStart(modeCount);
 		} else {
 			meteorList = new ArrayList<Meteor>();
 			for (int i = 0; i < 10; i++) {
-				meteorList.add(new Meteor());
+				meteorList.add(new Meteor(groundContext));
 			}
 			meteorStart(modeCount);
 		}
