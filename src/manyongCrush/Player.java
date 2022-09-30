@@ -9,8 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Player extends JLabel implements Attack, Moveable {
-
-	private MainFrame mContext;
 	
 	
 	protected String name;

@@ -2,9 +2,9 @@ package manyongCrush;
 
 import javax.swing.ImageIcon;
 
-public class Megaslash extends SkillImpact {
+public class MegaSlash extends SkillImpact {
 
-	public Megaslash(Ground groundContext, Player player, int x, int y, int power, int skillPower, int skillWidth,
+	public MegaSlash(Ground groundContext, Player player, int x, int y, int power, int skillPower, int skillWidth,
 			int skillHeight) {
 		super(groundContext, player, x, y, power, skillPower, skillWidth, skillHeight);
 
