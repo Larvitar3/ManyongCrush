@@ -37,6 +37,8 @@ public class Boss extends JLabel {
 	private boolean waiting;
 	private boolean attacking;
 	private boolean beAttacked;
+	
+	private int damage;
 
 	public Boss(int hp, int power) {
 		this.hp = hp;
@@ -113,6 +115,7 @@ public class Boss extends JLabel {
 	}
 
 	public void beAttacked(int damage) {
+		this.damage = damage;
 		new Thread(() -> {
 			if (state == 0) {
 				hp -= damage;
@@ -127,8 +130,7 @@ public class Boss extends JLabel {
 				} catch (InterruptedException e) {
 				}
 			}
-
-			groundContext.bossInfo();
+//			groundContext.bossInfo();
 			beAttacked = false;
 		}).start();
 	}
