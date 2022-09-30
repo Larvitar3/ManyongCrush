@@ -171,6 +171,7 @@ public class Player extends JLabel implements Attack, Moveable {
 	public void die() {
 		state = 1;
 		setIcon(playerDieMotionImg); // 죽는모션으로 변경
+		new GameState(state);
 	}
 
 	@Override

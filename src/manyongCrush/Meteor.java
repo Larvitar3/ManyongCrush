@@ -82,13 +82,11 @@ public class Meteor extends JLabel {
 		}).start();
 
 	}
-}
 
 //	public void attack() {
 //		if (!player.isBeAttacked()) {
 //
-//			if ((Math.abs(x - player.getX()) - 20 < 70
-//					&& Math.abs(y - player.getY() + 60) < 40)) {
+//			if ((Math.abs(x - player.getX()) - 20 < 70 && Math.abs(y - player.getY() + 60) < 40)) {
 //				try {
 //					setSize(148, 125);
 //					setIcon(lavaBoomMeteorImage);
@@ -102,7 +100,8 @@ public class Meteor extends JLabel {
 //				player.setHp(player.getHp() - power);
 //				System.out.println(player.getHp());
 //				player.beAttacked();
-//			
+//
 //			}
 //		}
 //	}
+}

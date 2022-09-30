@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public class Boss extends JLabel {
 
+	Ground groundContext;
+
 	Wrath wrath;
 
 	protected ImageIcon[] boss = new ImageIcon[4];
@@ -25,7 +27,7 @@ public class Boss extends JLabel {
 	private final int X = 650;
 	private final int Y = 55;
 
-	private int hp;
+	private int hp = 600;
 	private int power;
 
 	private int state;
@@ -101,23 +103,21 @@ public class Boss extends JLabel {
 
 		for (int i = 0; i < bossDie.length; i++) {
 			setIcon(bossDie[i]);
-			System.out.println(hp);
 			try {
 				Thread.sleep(150);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+		new GameState(state);
 	}
 
 	public void beAttacked(int damage) {
-
 		new Thread(() -> {
-
 			if (state == 0) {
-				System.out.println(hp);
 				hp -= damage;
 				beAttacked = true;
+				System.out.println("보스 HP : " + hp);
 				if (hp <= 0) {
 					hp = 0;
 					die();
@@ -125,9 +125,10 @@ public class Boss extends JLabel {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					System.err.println("보스 비어택드");
 				}
 			}
+
+			groundContext.bossInfo();
 			beAttacked = false;
 		}).start();
 	}
