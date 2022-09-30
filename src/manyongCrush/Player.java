@@ -88,7 +88,7 @@ public class Player extends JLabel implements Attack, Moveable {
 			@Override
 			public void run() {
 
-				while (right) {
+				while (right && state == 0) {
 					setIcon(playerRightAttackMotionImg[1]);
 					x += SPEED;
 					setLocation(x, y);
@@ -112,7 +112,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 			@Override
 			public void run() {
-				while (left) {
+				while (left && state == 0) {
 					setIcon(playerLeftAttackMotionImg[1]);
 					x -= SPEED;
 					setLocation(x, y);
@@ -134,7 +134,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 			@Override
 			public void run() {
-				while (down) {
+				while (down && state == 0) {
 					y += DOWNSPEED;
 					setLocation(x, y);
 					try {
@@ -174,17 +174,18 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	@Override
 	public void die() {
-		state = 1;
-		setIcon(playerDieMotionImg); // 죽는모션으로 변경
-		groundContext.player.left = false;
-		try {
-			Thread.sleep(2500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		new GameState(state);
-		groundContext.setVisible(false);
+		new Thread(() -> {
+			state = 1;
+			setIcon(playerDieMotionImg);
+			try {
+				Thread.sleep(2500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			new GameState(state - 1);
+			groundContext.setVisible(false);
+		}).start();
+
 	}
 
 	@Override
@@ -199,7 +200,6 @@ public class Player extends JLabel implements Attack, Moveable {
 					die();
 				}
 			}
-			
 			try {
 //				setIcon(playerDieMotionImg); // 깜빡깜빡으로 바꿔야함
 				Thread.sleep(1000);
@@ -207,7 +207,7 @@ public class Player extends JLabel implements Attack, Moveable {
 				e.printStackTrace();
 			}
 			beAttacked = false;
-			
+
 		}).start();
 	}
 

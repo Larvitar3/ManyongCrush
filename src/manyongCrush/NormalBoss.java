@@ -21,10 +21,11 @@ public class NormalBoss extends Boss {
 		initData();
 		setInitLayout();
 		waiting();
+		
 	}
 
 	public void initData() {
-		System.out.println("ㅠㅠ");
+		System.out.println("보스이미지 생성");
 		for (int i = 0; i < bossImg.length; i++) {
 			boss[i] = new ImageIcon(bossImg[i]);
 		}

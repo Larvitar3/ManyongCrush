@@ -40,9 +40,6 @@ public class Warrior extends Player {
 	@Override
 	public void attack() {
 
-		// Q눌렀을 때 공격 모션
-		// 모션 중 스킬이 나감
-		// 파이어볼 객체 구현
 
 		new Thread(() -> {
 
@@ -50,7 +47,7 @@ public class Warrior extends Player {
 				for (int i = 0; i < warriorLeftAttackMotion.length; i++) {
 					setIcon(getPlayerLeftAttackMotionImg()[i]);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(100);
 					} catch (Exception e) {
 						System.out.println("워리어 왼쪽 어택");
 					}
@@ -61,7 +58,7 @@ public class Warrior extends Player {
 				for (int i = 0; i < warriorRightAttackMotion.length; i++) {
 					setIcon(getPlayerRightAttackMotionImg()[i]);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(100);
 					} catch (Exception e) {
 						System.out.println("워리어 오른쪽 어택");
 					}

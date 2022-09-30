@@ -166,7 +166,7 @@ public class SkillImpact extends JLabel {
 
 			if (Math.abs((rightX + skillWidth + 30) - bossX) < 1
 					&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 295) {
-				checkBoss = true;
+				checkBoss = true; 
 				System.out.println("여기 가동 되나");
 				groundContext.boss.beAttacked(power);
 				try {
