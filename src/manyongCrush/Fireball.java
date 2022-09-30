@@ -8,7 +8,6 @@ public class Fireball extends SkillImpact {
 			int skillHeight) {
 		super(groundContext, player, x, y, power, skillPower, skillWidth, skillHeight);
 
-		System.out.println("fire");
 		initData();
 		setInitLayout();
 	}
@@ -18,10 +17,7 @@ public class Fireball extends SkillImpact {
 		try {
 			super.skillImageL = new ImageIcon("images/fireBallL.png");
 			super.skillImageR = new ImageIcon("images/fireBallR.png");
-			System.err.println("흠흠");
 		} catch (Exception e) {
-			
 		}
-
 	}
 }

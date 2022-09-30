@@ -9,7 +9,7 @@ public class ChainFireball extends SkillImpact {
 		super(groundContext, player, x, y, power, skillPower, skillWidth, skillHeight);
 
 		initData();
-
+		setInitLayout();
 	}
 
 	public void initData() {

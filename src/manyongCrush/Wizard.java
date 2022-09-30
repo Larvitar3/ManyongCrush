@@ -17,10 +17,10 @@ public class Wizard extends Player {
 		super(groundContext,name, hp, power, x, y, playerWidth, playerHeight);
 		this.groundContext = groundContext;
 		System.out.println("위자드 생성");
-		
+
 		initData();
 		setInitLayout();
-		
+
 	}
 
 	public void initData() {
@@ -58,10 +58,8 @@ public class Wizard extends Player {
 						System.out.println("위자드 왼쪽 어택");
 					}
 				}
-				skillImpact = new Fireball(groundContext, this, getX(), getY(), 30, 50, 74, 45);
+				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 74, 45);
 				skillImpact.skillsLeftFly();
-				groundContext.boss.beAttacked(skillImpact.getPower());
-				System.out.println("sssafd");
 			} else {
 				for (int i = 0; i < wizardRightAttackMotion.length; i++) {
 					setIcon(getPlayerRightAttackMotionImg()[i]);
@@ -71,9 +69,8 @@ public class Wizard extends Player {
 						System.out.println("위자드 오른쪽 어택");
 					}
 				}
-				skillImpact = new Fireball(groundContext, this, getX(), getY(), 30, 50, 74, 45); // 스킬 다른걸로 바꿔야함
+				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 74, 45); // 스킬 다른걸로 바꿔야함
 				skillImpact.skillsRightFly();
-				groundContext.boss.beAttacked(skillImpact.getPower());
 			}
 		}).start();
 	}
@@ -83,25 +80,28 @@ public class Wizard extends Player {
 
 		new Thread(() -> {
 
-			if (isLeft()) {
+			if (getPWay() == PlayerWay.LEFT) {
 				for (int i = 0; i < wizardLeftSkillMotion.length; i++) {
 					setIcon(getPlayerLeftSkillMotionImg()[i]);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(100);
 					} catch (Exception e) {
 						System.out.println("위자드 왼쪽 스킬");
 					}
 				}
+				skillImpact = new ChainFireball(groundContext, this, x, y, 50, 100, 100, 100);
+				skillImpact.skillsLeftFly();
 			} else {
 				for (int i = 0; i < wizardRightSkillMotion.length; i++) {
 					setIcon(getPlayerRightSkillMotionImg()[i]);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(100);
 					} catch (Exception e) {
 						System.out.println("위자드 오른쪽 스킬");
 					}
 				}
 				skillImpact = new ChainFireball(groundContext, this, getX(), getY(), 30, 50, 74, 45);
+				skillImpact.skillsRightFly();
 			}
 		}).start();
 	}
