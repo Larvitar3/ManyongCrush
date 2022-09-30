@@ -59,30 +59,28 @@ public class Ground extends JFrame {
 
 		if (modeCount == 1) {
 
-			player = new Wizard(groundContext, "마법사 노말", 200, 30, 116, 92, 116, 92);
+			player = new Wizard(groundContext, "위자드", 200, 30, 116, 92, 116, 92);
+			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext,800, 100);
-			System.out.println("법사 노말");
 		}
 
 		if (modeCount == 2) {
-			player = new Warrior(groundContext, "전사 노말", 300, 30, 116, 92, 116, 92);
+			player = new Warrior(groundContext, "워리어", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
-			System.out.println("전사 노말");
 			
 		}else if( modeCount == 3) {
 			
-			player = new Wizard(groundContext, "마법사2 헬", 300, 30, 116, 92, 116, 92);
+			player = new Wizard(groundContext, "위자드", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new HellBoss(groundContext, 800, 100);
-			System.out.println("법사 헬");
 			
 		}else if(modeCount == 4) {
 			
-			player = new Warrior(groundContext, "전사2 헬", 300, 30, 116, 92, 116, 92);
+			player = new Warrior(groundContext, "위자드", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new HellBoss(groundContext, 1600, 100);
-			System.out.println("전사 헬");
+			
 			
 		}else {
 			System.out.println("오류!@!@!");
