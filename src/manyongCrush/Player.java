@@ -64,6 +64,7 @@ public class Player extends JLabel implements Attack, Moveable {
 	}
 
 	protected void setInitLayout() {
+		playerDieMotionImg = new ImageIcon("images/characterDie.png");
 		setIcon(playerLeftAttackMotionImg[1]);
 		setSize(playerWidth, playerHeight);
 		setLocation(x, y);
@@ -175,18 +176,30 @@ public class Player extends JLabel implements Attack, Moveable {
 	public void die() {
 		state = 1;
 		setIcon(playerDieMotionImg); // 죽는모션으로 변경
+		groundContext.player.left = false;
+		try {
+			Thread.sleep(2500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		new GameState(state);
+		groundContext.setVisible(false);
 	}
 
 	@Override
 	public void beAttacked() {
 		new Thread(() -> {
 
-			beAttacked = true;
-			if (hp <= 0) {
-				hp = 0;
-				die();
+			if (state == 0) {
+				beAttacked = true;
+				groundContext.unitHpInfo();
+				if (hp <= 0) {
+					hp = 0;
+					die();
+				}
 			}
-			groundContext.unitHpInfo();
+			
 			try {
 //				setIcon(playerDieMotionImg); // 깜빡깜빡으로 바꿔야함
 				Thread.sleep(1000);
@@ -194,6 +207,7 @@ public class Player extends JLabel implements Attack, Moveable {
 				e.printStackTrace();
 			}
 			beAttacked = false;
+			
 		}).start();
 	}
 

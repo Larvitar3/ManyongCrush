@@ -69,7 +69,9 @@ public class Wizard extends Player {
 						System.out.println("위자드 오른쪽 어택");
 					}
 				}
+
 				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 74, 45); // 스킬 다른걸로 바꿔야함
+
 				skillImpact.skillsRightFly();
 			}
 		}).start();
