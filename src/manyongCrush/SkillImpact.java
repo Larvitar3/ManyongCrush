@@ -74,6 +74,7 @@ public class SkillImpact extends JLabel {
 				try {
 					setIcon(skillImageL[i]);
 					setLocation(leftX, y);
+					checkBoss();
 					Thread.sleep(40);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -105,7 +106,7 @@ public class SkillImpact extends JLabel {
 						}
 					}
 				}
-				for (int i = 9; i > 17; i++) {
+				for (int i = 9; i < 17; i++) {
 					setIcon(skillImageL[i]);
 				}
 			}
@@ -120,6 +121,7 @@ public class SkillImpact extends JLabel {
 				try {
 					setIcon(skillImageR[i]);
 					setLocation(rightX, y);
+					checkBoss();
 					Thread.sleep(40);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -127,7 +129,6 @@ public class SkillImpact extends JLabel {
 			}
 			while (true) {
 				while (!checkBoss) {
-
 					int changeMotion = 9;
 					for (changeMotion = 9; changeMotion > 4; changeMotion--) {
 						try {
@@ -153,7 +154,6 @@ public class SkillImpact extends JLabel {
 					}
 				}
 				for (int i = 9; i < 17; i++) {
-					System.out.println("여기는 되나요");
 					setIcon(skillImageR[i]);
 				}
 			}
