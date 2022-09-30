@@ -30,12 +30,12 @@ public class GameState extends JFrame implements ActionListener {
 		setTitle("마뇽크러쉬 엔딩");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		if (stateCount == 0) {
+		if (stateCount == 1) {
 			// 보스가 죽었을 경우
 			backgroundClearImage = new JLabel(new ImageIcon("images/gameClearBackground.jpg"));
 			setContentPane(backgroundClearImage);
 
-		} else if (stateCount == 1) {
+		} else if (stateCount == 0) {
 			// 플레이어가 죽었을경우
 			backgroundOverImage = new JLabel(new ImageIcon("images/gameOverBackground.jpg"));
 			setContentPane(backgroundOverImage);
@@ -88,7 +88,7 @@ public class GameState extends JFrame implements ActionListener {
 			setVisible(false);
 			new ChoiceCharacter();
 		}else if(e.getSource() == noBtn) {
-			setVisible(false);
+			System.exit(0);
 		}
 	}
 

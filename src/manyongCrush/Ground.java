@@ -17,12 +17,12 @@ import javax.swing.JPanel;
 import BackgroundService.BackgroundService;
 import BackgroundService.BackgroundServiceNormal;
 
-public class Ground extends JFrame implements ActionListener {
+public class Ground extends JFrame{
 
 	Ground groundContext = this;
 	// todoTestCode
+	
 	Boss boss;
-
 	Player player;
 
 
@@ -52,16 +52,18 @@ public class Ground extends JFrame implements ActionListener {
 	int bossHpWidth;
 	int characterHpWidth;
 
-	// private String name = "▶ ▷ " + player.getName + " ◁ ◀";
-	String name = "▶ ▷ 마법사 ◁ ◀"; // 테스트용 임시값 ▲ 값 넣고 삭제
+	String name;
+
+
 
 	public Ground(int modeCount, int charcterNumber) {
 		this.modeCount = modeCount;
 		this.charcterNumber = charcterNumber;
 
 		if (charcterNumber == 1 && modeCount == 1) {
-			player = new Wizard(groundContext, "마법사", 200, 30, 116, 92, 116, 92);
-			boss = new NormalBoss(800, 100);
+			player = new Wizard(groundContext, "마법사", 300, 30, 116, 92, 116, 92);
+			name = "▶ ▷ " + player.getName() + " ◁ ◀";
+			boss = new NormalBoss(groundContext, 800, 100);
 		}
 		
 		initData();
@@ -169,7 +171,7 @@ public class Ground extends JFrame implements ActionListener {
 		bossHpBgBox.setBackground(Color.LIGHT_GRAY);
 
 //		bossHpWidth = boss.getHp(); 
-		bossHpWidth = 800; // 테스트용 임시값 ▲ 값 넣고 삭제
+		bossHpWidth = boss.getHp(); // 테스트용 임시값 ▲ 값 넣고 삭제
 		bossHpBox.setSize(bossHpWidth, 40);
 		bossHpBox.setLocation(100, 50);
 		bossHpBox.setOpaque(true);
@@ -207,8 +209,8 @@ public class Ground extends JFrame implements ActionListener {
 			characterSkillCounts[i].setForeground(Color.WHITE);
 		}
 
-//		characterHpWidth = wizard.getHp();
-		characterHpWidth = 300; // 테스트용 임시값 ▲ 값 넣고 삭제
+	characterHpWidth = player.getHp();
+	//	characterHpWidth = 300; // 테스트용 임시값 ▲ 값 넣고 삭제
 		characterHp.setSize(characterHpWidth / 2, 20);
 		characterHp.setOpaque(true);
 		characterHp.setBackground(bloodRed);
@@ -256,11 +258,6 @@ public class Ground extends JFrame implements ActionListener {
 
 	} // end of addEventListenter
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-	}
-
 	private void meteorStart(int mode) {
 
 		new Thread(new Runnable() {
@@ -279,6 +276,29 @@ public class Ground extends JFrame implements ActionListener {
 			}
 		}).start();
 	}
+	public void unitHpInfo() {
+		if (player.isBeAttacked()) {
+			characterHpWidth = player.getHp();
+			characterHp.setSize(characterHpWidth / 2, 20);
+		}
+	}
+
+	public void unitSkillCountInfo() {
+		if (skillCount >= 0) {
+			remove(characterSkillCounts[skillCount]);
+			repaint();
+		}
+	}
+
+	public void bossInfo() {
+		if (boss.isBeAttacked()) {
+			bossHpWidth = boss.getHp();
+			bossHpBox.setSize(bossHpWidth, 40);
+		}
+	}
+		
+		
+	}
 
 //	public static void main(String[] args) {
 //		// 테스트용 메인창
@@ -286,4 +306,4 @@ public class Ground extends JFrame implements ActionListener {
 //
 //	}
 
-}
+

@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public class Boss extends JLabel {
 
+	Ground groundContext;
+
 	Wrath wrath;
 
 	protected ImageIcon[] boss = new ImageIcon[4];
@@ -25,7 +27,7 @@ public class Boss extends JLabel {
 	private final int X = 650;
 	private final int Y = 55;
 
-	private int hp;
+	private int hp = 600;
 	private int power;
 
 	private int state;
@@ -36,7 +38,10 @@ public class Boss extends JLabel {
 	private boolean attacking;
 	private boolean beAttacked;
 
-	public Boss(int hp, int power) {
+	private int damage;
+
+	public Boss(Ground groundContext, int hp, int power) {
+		this.groundContext = groundContext;
 		this.hp = hp;
 		this.power = power;
 		wrath = new Wrath(this);
@@ -98,29 +103,41 @@ public class Boss extends JLabel {
 
 	public void die() {
 		state = 1;
-
 		for (int i = 0; i < bossDie.length; i++) {
 			setIcon(bossDie[i]);
-			System.out.println(hp);
 			try {
 				Thread.sleep(150);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
+		}		
+
+		new GameState(state);
+		groundContext.setVisible(false);
 	}
 
 	public void beAttacked(int damage) {
 		
-		System.out.println("이게 1초마다 나와야함");
+		new Thread(() -> {
+			if (state == 0) {
+				hp -= damage;
+				beAttacked = true;
+				System.out.println("보스 HP : " + hp);
+	
+				groundContext.bossInfo();
+				
+				if (hp <= 0) {
+					hp = 0;
+					die();
+				}
 
-		if (state == 0) {
-			hp -= damage;
-			System.out.println(hp);
-			if (hp <= 0) {
-				hp = 0;
-				die();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+				}
 			}
-		}
+//			groundContext.bossInfo();
+			beAttacked = false;
+		}).start();
 	}
 }
