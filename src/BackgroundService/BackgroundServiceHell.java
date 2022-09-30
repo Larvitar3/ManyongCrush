@@ -16,15 +16,9 @@ public class BackgroundServiceHell extends BackgroundService {
 		super(player);
 		
 		try {
-<<<<<<< HEAD
-			playerService = ImageIO.read(new File("bossBackgroundMapServiceHell.jpg"));
-		} catch (IOException e) {
-			System.err.println("이미지 경로 에러 ");
-=======
 			playerService = ImageIO.read(new File("images/bossBackgroundMapServiceHell.jpg"));
 		} catch (IOException e) {
 			System.out.println("헬 이미지 경로 에러 ");
->>>>>>> dev
 		}
 		
 	}

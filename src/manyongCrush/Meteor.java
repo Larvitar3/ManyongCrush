@@ -50,7 +50,6 @@ public class Meteor extends JLabel {
 	}
 
 	public void down(int mode) {
-		System.out.println("다운");
 
 		System.out.println(groundContext.player.isBeAttacked());
 		new Thread(() -> {
@@ -95,10 +94,7 @@ public class Meteor extends JLabel {
 			if ((Math.abs(x - player.getX()) - 20 < 70 // 플레이어 좌표 감지
 					&& Math.abs(y - player.getY() + 60) < 40)) {
 				try {
-<<<<<<< HEAD
-=======
 					setSize(148, 125);
->>>>>>> dev
 					setIcon(lavaBoomMeteorImage);
 					setLocation(x - 50, y);
 					setSize(148, 125);

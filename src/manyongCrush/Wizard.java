@@ -49,18 +49,17 @@ public class Wizard extends Player {
 		new Thread(() -> {
 
 			if (getPWay() == PlayerWay.LEFT) {
-				System.out.println("qerd");
 				for (int i = 0; i < wizardLeftAttackMotion.length; i++) {
 					setIcon(getPlayerLeftAttackMotionImg()[i]);
+					System.out.println("위자드 왼쪽 어택");
 					try {
 						Thread.sleep(100);
 					} catch (Exception e) {
-						System.out.println("위자드 왼쪽 어택");
 					}
 				}
 				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 74, 45);
 				skillImpact.skillsLeftFly();
-			} else {
+			} else if(getPWay() == PlayerWay.RIGHT){
 				for (int i = 0; i < wizardRightAttackMotion.length; i++) {
 					setIcon(getPlayerRightAttackMotionImg()[i]);
 					try {

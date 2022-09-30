@@ -57,14 +57,12 @@ public class Ground extends JFrame {
 		this.charcterNumber = charcterNumber;
 		this.player = groundContext.player;
 
-<<<<<<< HEAD
 		if (charcterNumber == 1 && modeCount == 1) {
 
 			player = new Wizard(groundContext, "마법사", 200, 30, 116, 92, 116, 92);
-			boss = new NormalBoss(800, 100);
+			boss = new NormalBoss(groundContext,800, 100);
 		}
 
-=======
 		if (modeCount == 1) {
 			player = new Wizard(groundContext, "마법사", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
@@ -72,7 +70,7 @@ public class Ground extends JFrame {
 			
 		}else if(modeCount == 2) {
 			
-			player = new Wizard(groundContext, "전사1", 300, 30, 116, 92, 116, 92);
+			player = new Warrior(groundContext, "전사1", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
 			
@@ -84,14 +82,13 @@ public class Ground extends JFrame {
 			
 		}else if(modeCount == 4) {
 			
-			player = new Wizard(groundContext, "전사2", 300, 30, 116, 92, 116, 92);
+			player = new Warrior(groundContext, "전사2", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
 			
 		}else {
 			System.out.println("오류!@!@!");
 		}
->>>>>>> dev
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -186,7 +183,6 @@ public class Ground extends JFrame {
 		setLocationRelativeTo(null);
 
 		meteorList.forEach((m) -> {
-			System.out.println("메테오 추가");
 			add(m);
 		});
 
@@ -241,13 +237,10 @@ public class Ground extends JFrame {
 		}
 
 		characterHpWidth = player.getHp();
-<<<<<<< HEAD
 //			System.out.println("플레이어 체력 " + player.getHp()); 
 
 //		characterHpWidth = 300; // 테스트용 임시값 ▲ 값 넣고 삭제
-=======
 
->>>>>>> dev
 		characterHp.setSize(characterHpWidth / 2, 20);
 		characterHp.setOpaque(true);
 		characterHp.setBackground(bloodRed);

@@ -19,6 +19,7 @@ public class Warrior extends Player {
 		super(groundContext, name, hp, power, x, y, playerWidth, playerHeight);
 		this.groundContext = groundContext;
 		initData();
+		setInitLayout();
 	}
 
 	public void initData() {
@@ -45,7 +46,7 @@ public class Warrior extends Player {
 
 		new Thread(() -> {
 
-			if (isLeft()) {
+			if (getPWay() == PlayerWay.LEFT) {
 				for (int i = 0; i < warriorLeftAttackMotion.length; i++) {
 					setIcon(getPlayerLeftAttackMotionImg()[i]);
 					try {
@@ -56,7 +57,7 @@ public class Warrior extends Player {
 					skillImpact = new Slash(groundContext, this, getX(), getY(), 30, 50, 110, 89);
 					groundContext.boss.beAttacked(skillImpact.getPower());
 				}
-			} else {
+			} else if(getPWay() == PlayerWay.RIGHT){
 				for (int i = 0; i < warriorRightAttackMotion.length; i++) {
 					setIcon(getPlayerRightAttackMotionImg()[i]);
 					try {

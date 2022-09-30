@@ -97,7 +97,6 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 			flagCount = 1;
 			new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
-			System.out.println("노말 마법사 선택" + "모드" + flag );
 
 			// 전사 노말 선택
 		} else if (e.getSource() == choiceNormal && charcterNumber == 2) {
