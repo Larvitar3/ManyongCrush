@@ -17,9 +17,10 @@ public class Wizard extends Player {
 		super(name, hp, power, x, y, playerWidth, playerHeight);
 		this.groundContext = groundContext;
 		System.out.println("위자드 생성");
-
+		
 		initData();
 		setInitLayout();
+		
 	}
 
 	public void initData() {

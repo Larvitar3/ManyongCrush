@@ -20,6 +20,7 @@ public class Fireball extends SkillImpact {
 			super.skillImageR = new ImageIcon("images/fireBallR.png");
 			System.err.println("흠흠");
 		} catch (Exception e) {
+			
 		}
 
 	}

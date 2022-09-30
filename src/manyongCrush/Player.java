@@ -10,31 +10,34 @@ import lombok.Setter;
 @Setter
 public class Player extends JLabel implements Attack, Moveable {
 
-	private String name;
-	private int hp;
-	private int power;
-	private int x;
-	private int y;
-	private int playerWidth;
-	private int playerHeight;
-	private int state = 0;
-	private int skillCount;
+	private MainFrame mContext;
+	
+	
+	protected String name;
+	protected int hp;
+	protected int power;
+	protected int x;
+	protected int y;
+	protected int playerWidth;
+	protected int playerHeight;
+	protected int state = 0;
+	protected int skillCount;
 
-	private boolean left;
-	private boolean right;
-	private boolean jump;
-	private boolean down;
+	protected boolean left;
+	protected boolean right;
+	protected boolean jump;
+	protected boolean down;
 
-	private boolean crashWallL;
-	private boolean crashWallR;
+	protected boolean crashWallL;
+	protected boolean crashWallR;
 
-	private boolean beAttacked;
+	protected boolean beAttacked;
 
-	private final int SPEED = 4;
-	private final int JUMPSPEED = 2;
-	private final int DOWNSPEED = 4;
+	protected final int SPEED = 4;
+	protected final int JUMPSPEED = 2;
+	protected final int DOWNSPEED = 4;
 
-	private PlayerWay pWay;
+	protected PlayerWay pWay;
 
 	protected ImageIcon[] playerLeftAttackMotionImg = new ImageIcon[2];
 	protected ImageIcon[] playerRightAttackMotionImg = new ImageIcon[2];
@@ -43,6 +46,8 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
 
 	protected ImageIcon playerDieMotionImg;
+
+	protected SkillImpact[] skillImpacts = new SkillImpact[4];
 
 	public Player(String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
 		this.name = name;

@@ -4,37 +4,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import BackgroundService.BackgroundService;
-import BackgroundService.BackgroundServiceNormal;
-
-public class Ground extends JFrame implements ActionListener {
-
-	Ground groundContext = this;
-	// todoTestCode
-	Boss boss;
-
-	Player player;
-
+public class MainFrame extends JFrame implements ActionListener {
 
 	JLabel backgroundHellImage;
 	JLabel backgroundNormalImage;
-	BackgroundService backgroundService;
 	int modeCount;
-	int charcterNumber;
-
-	List<Meteor> meteorList;
-
-	boolean flag;
 
 	JLabel[] characterSkillCounts = new JLabel[5];
 	String[] skillCounts = { " ● ", " ● ", " ● ", " ● ", " ● " };
@@ -49,35 +29,17 @@ public class Ground extends JFrame implements ActionListener {
 	JLabel characterHp;
 	JLabel characterName;
 
-	int bossHpWidth;
-	int characterHpWidth;
+	private int bossHpWidth;
+	private int characterHpWidth;
 
-	// private String name = "▶ ▷ " + player.getName + " ◁ ◀";
-	String name = "▶ ▷ 마법사 ◁ ◀"; // 테스트용 임시값 ▲ 값 넣고 삭제
+// private String name = "▶ ▷ " + player.getName + " ◁ ◀";
+	private String name = "▶ ▷ 마법사 ◁ ◀"; // 테스트용 임시값 ▲ 값 넣고 삭제
 
-	public Ground(int modeCount, int charcterNumber) {
+	public MainFrame(int modeCount) {
 		this.modeCount = modeCount;
-		this.charcterNumber = charcterNumber;
-
-		if (charcterNumber == 1 && modeCount == 1) {
-<<<<<<< HEAD
-			
-
-=======
-			player = new Wizard(groundContext, "마법사", 200, 30, 116, 92, 116, 92);
->>>>>>> ebee0d741cdfd7f9085e5f1a0bb5d0c631a0f4b6
-			boss = new NormalBoss(800, 100);
-		}
-		
 		initData();
 		setInitLayout();
-		addEventListener();
-
-//		else {
-//			player = new Wizard(getName(), modeCount, modeCount,
-//					modeCount, modeCount, modeCount, modeCount);
-//		}
-
+		addEventLitener();
 	}
 
 	private void initData() {
@@ -85,32 +47,11 @@ public class Ground extends JFrame implements ActionListener {
 		setTitle("ManyongCrush");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		if (modeCount == 1 || modeCount == 2) {
-			System.out.println("스타트 전");
-			new Thread(backgroundService = new BackgroundServiceNormal(player)).start();
-			System.out.println("스타트 후");
-			meteorList = new ArrayList<Meteor>();
-			for (int i = 0; i < 5; i++) {
-				meteorList.add(new Meteor());
-			}
-			meteorStart(modeCount);
-		} else {
-			meteorList = new ArrayList<Meteor>();
-			for (int i = 0; i < 10; i++) {
-				meteorList.add(new Meteor());
-			}
-			meteorStart(modeCount);
-		}
-
-		System.out.println("모드 카운터 값 : " + modeCount);
-
 		if (modeCount == 1) {
 			// 마법사 / 노말
 			backgroundNormalImage = new JLabel(new ImageIcon("images/bossBackgroundMap.jpg"));
 			setContentPane(backgroundNormalImage);
 			System.out.println("마법사 / 노말");
-			add(player);
-			add(boss);
 
 		} else if (modeCount == 2) {
 			// 전사 / 노말
@@ -149,18 +90,13 @@ public class Ground extends JFrame implements ActionListener {
 			characterSkillCounts[i] = new JLabel(skillCounts[i]);
 		}
 
-	} // end of initData
+	}
 
 	private void setInitLayout() {
 		setVisible(true);
 		setLayout(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
-
-		meteorList.forEach((m) -> {
-			System.out.println("메테오 추가");
-			add(m);
-		});
 
 		Color blackOp = new Color(0, 0, 0, 200);
 		Color bloodRed = new Color(157, 0, 0);
@@ -224,71 +160,21 @@ public class Ground extends JFrame implements ActionListener {
 		characterInfoBox.setLocation(20, 540);
 		characterInfoBox.setBackground(blackOp);
 
-	} // end of setInitLayout
+	}
 
-	protected void addEventListener() {
-		if (player.getState() == 0) {
+	private void addEventLitener() {
 
-			this.addKeyListener(new KeyAdapter() {
-
-				@Override
-				public void keyPressed(KeyEvent e) {
-					int keyCode = e.getKeyCode();
-					if (!player.isCrashWallL() && !player.isLeft() && keyCode == KeyEvent.VK_LEFT) {
-						player.left();
-					} else if (!player.isCrashWallR() && !player.isRight() && keyCode == KeyEvent.VK_RIGHT) {
-						player.right();
-					} else if (!player.isDown() && !player.isJump() && keyCode == KeyEvent.VK_UP) {
-						player.jump();
-					} else if (keyCode == KeyEvent.VK_Q) {
-						player.attack();
-					} else if (keyCode == KeyEvent.VK_W) {
-						player.skill();
-					}
-				}
-
-				@Override
-				public void keyReleased(KeyEvent e) {
-					int keyCode = e.getKeyCode();
-					if (keyCode == KeyEvent.VK_LEFT) {
-						player.setLeft(false);
-					} else if (keyCode == KeyEvent.VK_RIGHT) {
-						player.setRight(false);
-					}
-				}
-			});
-		}
-
-	} // end of addEventListenter
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 	}
 
-	private void meteorStart(int mode) {
+	public static void main(String[] args) {
+		// 테스트용 메인창
+		new MainFrame(1);
 
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-
-				for (int i = 0; i < meteorList.size(); i++) {
-					meteorList.get(i).down(mode);
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}).start();
 	}
-
-//	public static void main(String[] args) {
-//		// 테스트용 메인창
-//		new Ground(1, 1);
-//
-//	}
 
 }
