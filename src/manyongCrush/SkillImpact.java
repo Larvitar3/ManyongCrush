@@ -67,7 +67,6 @@ public class SkillImpact extends JLabel {
 
 			// 만약 플레이어가 왼쪽을 보고 있다면?
 			while (true) {
-//				System.out.println("asdfiojlk");
 				try {
 					setIcon(skillImageL);
 					x--;

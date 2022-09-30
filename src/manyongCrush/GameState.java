@@ -16,7 +16,7 @@ public class GameState extends JFrame implements ActionListener {
 	JButton yesBtn;
 	JButton noBtn;
 
-	int stateCount = 1;
+	int stateCount;
 
 	public GameState(int stateCount) {
 		this.stateCount = stateCount;

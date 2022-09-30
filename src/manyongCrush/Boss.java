@@ -130,13 +130,11 @@ public class Boss extends JLabel {
 					hp = 0;
 					die();
 				}
-
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 				}
 			}
-//			groundContext.bossInfo();
 			beAttacked = false;
 		}).start();
 	}

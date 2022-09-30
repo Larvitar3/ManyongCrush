@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Player extends JLabel implements Attack, Moveable {
-	
+
 	protected String name;
 	protected int hp;
 	protected int power;
@@ -46,7 +46,10 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	protected SkillImpact[] skillImpacts = new SkillImpact[4];
 
-	public Player(String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
+	protected Ground groundContext;
+
+	public Player(Ground groundContext, String name, int hp, int power, int x, int y, int playerWidth,
+			int playerHeight) {
 		this.name = name;
 		this.hp = hp;
 		this.power = power;
@@ -54,12 +57,14 @@ public class Player extends JLabel implements Attack, Moveable {
 		this.y = y;
 		this.playerWidth = playerWidth;
 		this.playerHeight = playerHeight;
+		this.groundContext = groundContext;
 
 		down = false;
 //		new Thread(new BackgroundService(this)).start();
 	}
 
 	protected void setInitLayout() {
+		playerDieMotionImg = new ImageIcon("images/characterDie.png");
 		setIcon(playerLeftAttackMotionImg[1]);
 		setSize(playerWidth, playerHeight);
 		setLocation(x, y);
@@ -171,25 +176,38 @@ public class Player extends JLabel implements Attack, Moveable {
 	public void die() {
 		state = 1;
 		setIcon(playerDieMotionImg); // 죽는모션으로 변경
+		groundContext.player.left = false;
+		try {
+			Thread.sleep(2500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		new GameState(state);
+		groundContext.setVisible(false);
 	}
 
 	@Override
 	public void beAttacked() {
 		new Thread(() -> {
 
-			beAttacked = true;
-			if (hp <= 0) {
-				hp = 0;
-				die();
+			if (state == 0) {
+				beAttacked = true;
+				groundContext.unitHpInfo();
+				if (hp <= 0) {
+					hp = 0;
+					die();
+				}
 			}
+			
 			try {
-				setIcon(playerDieMotionImg); // 깜빡깜빡으로 바꿔야함
+//				setIcon(playerDieMotionImg); // 깜빡깜빡으로 바꿔야함
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			beAttacked = false;
+			
 		}).start();
 	}
 

@@ -2,8 +2,6 @@ package manyongCrush;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -15,16 +13,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import BackgroundService.BackgroundService;
+import BackgroundService.BackgroundServiceHell;
 import BackgroundService.BackgroundServiceNormal;
 
-public class Ground extends JFrame{
+public class Ground extends JFrame {
 
 	Ground groundContext = this;
 	// todoTestCode
-	
+
 	Boss boss;
 	Player player;
-
 
 	JLabel backgroundHellImage;
 	JLabel backgroundNormalImage;
@@ -54,26 +52,40 @@ public class Ground extends JFrame{
 
 	String name;
 
-
-
 	public Ground(int modeCount, int charcterNumber) {
 		this.modeCount = modeCount;
 		this.charcterNumber = charcterNumber;
+		this.player = groundContext.player;
 
-		if (charcterNumber == 1 && modeCount == 1) {
+		if (modeCount == 1) {
 			player = new Wizard(groundContext, "마법사", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
+			
+		}else if(modeCount == 2) {
+			
+			player = new Wizard(groundContext, "전사1", 300, 30, 116, 92, 116, 92);
+			name = "▶ ▷ " + player.getName() + " ◁ ◀";
+			boss = new NormalBoss(groundContext, 800, 100);
+			
+		}else if(modeCount == 3) {
+			
+			player = new Wizard(groundContext, "마법사2", 300, 30, 116, 92, 116, 92);
+			name = "▶ ▷ " + player.getName() + " ◁ ◀";
+			boss = new NormalBoss(groundContext, 800, 100);
+			
+		}else if(modeCount == 4) {
+			
+			player = new Wizard(groundContext, "전사2", 300, 30, 116, 92, 116, 92);
+			name = "▶ ▷ " + player.getName() + " ◁ ◀";
+			boss = new NormalBoss(groundContext, 800, 100);
+			
+		}else {
+			System.out.println("오류!@!@!");
 		}
-		
 		initData();
 		setInitLayout();
 		addEventListener();
-
-//		else {
-//			player = new Wizard(getName(), modeCount, modeCount,
-//					modeCount, modeCount, modeCount, modeCount);
-//		}
 
 	}
 
@@ -83,18 +95,19 @@ public class Ground extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		if (modeCount == 1 || modeCount == 2) {
-			System.out.println("스타트 전");
+			
 			new Thread(backgroundService = new BackgroundServiceNormal(player)).start();
-			System.out.println("스타트 후");
 			meteorList = new ArrayList<Meteor>();
 			for (int i = 0; i < 5; i++) {
-				meteorList.add(new Meteor());
+				meteorList.add(new Meteor(groundContext));
 			}
 			meteorStart(modeCount);
+			
 		} else {
+			new Thread(backgroundService = new BackgroundServiceHell(player)).start();
 			meteorList = new ArrayList<Meteor>();
 			for (int i = 0; i < 10; i++) {
-				meteorList.add(new Meteor());
+				meteorList.add(new Meteor(groundContext));
 			}
 			meteorStart(modeCount);
 		}
@@ -114,18 +127,27 @@ public class Ground extends JFrame{
 			backgroundNormalImage = new JLabel(new ImageIcon("images/bossBackgroundMap.jpg"));
 			setContentPane(backgroundNormalImage);
 			System.out.println("전사 / 노말");
+			add(player);
+			add(boss);
+
 
 		} else if (modeCount == 3) {
 			// 마법사 / 헬
 			backgroundHellImage = new JLabel(new ImageIcon("images/bossBackgroundMapHell.jpg"));
 			setContentPane(backgroundHellImage);
 			System.out.println("마법사 / 헬");
+			add(player);
+			add(boss);
+
 
 		} else if (modeCount == 4) {
 			// 전사 / 헬
 			backgroundHellImage = new JLabel(new ImageIcon("images/bossBackgroundMapHell.jpg"));
 			setContentPane(backgroundHellImage);
 			System.out.println("전사 / 헬");
+			add(player);
+			add(boss);
+
 
 		} else {
 			System.out.println("테스트용 메인 카운트값 확인 바람");
@@ -209,8 +231,8 @@ public class Ground extends JFrame{
 			characterSkillCounts[i].setForeground(Color.WHITE);
 		}
 
-	characterHpWidth = player.getHp();
-	//	characterHpWidth = 300; // 테스트용 임시값 ▲ 값 넣고 삭제
+		characterHpWidth = player.getHp();
+
 		characterHp.setSize(characterHpWidth / 2, 20);
 		characterHp.setOpaque(true);
 		characterHp.setBackground(bloodRed);
@@ -231,15 +253,20 @@ public class Ground extends JFrame{
 				@Override
 				public void keyPressed(KeyEvent e) {
 					int keyCode = e.getKeyCode();
-					if (!player.isCrashWallL() && !player.isLeft() && keyCode == KeyEvent.VK_LEFT) {
+					if (!player.isCrashWallL() && !player.isLeft() && keyCode == KeyEvent.VK_LEFT 
+							&& player.getState() == 0) {
 						player.left();
-					} else if (!player.isCrashWallR() && !player.isRight() && keyCode == KeyEvent.VK_RIGHT) {
+					} else if (!player.isCrashWallR() && !player.isRight() && keyCode == KeyEvent.VK_RIGHT
+							&& player.getState() == 0) {
 						player.right();
-					} else if (!player.isDown() && !player.isJump() && keyCode == KeyEvent.VK_UP) {
+					} else if (!player.isDown() && !player.isJump() && keyCode == KeyEvent.VK_UP
+							&& player.getState() == 0) {
 						player.jump();
-					} else if (keyCode == KeyEvent.VK_Q) {
+					} else if (keyCode == KeyEvent.VK_Q
+							&& player.getState() == 0) {
 						player.attack();
-					} else if (keyCode == KeyEvent.VK_W) {
+					} else if (keyCode == KeyEvent.VK_W
+							&& player.getState() == 0) {
 						player.skill();
 					}
 				}
@@ -276,6 +303,7 @@ public class Ground extends JFrame{
 			}
 		}).start();
 	}
+
 	public void unitHpInfo() {
 		if (player.isBeAttacked()) {
 			characterHpWidth = player.getHp();
@@ -296,14 +324,11 @@ public class Ground extends JFrame{
 			bossHpBox.setSize(bossHpWidth, 40);
 		}
 	}
-		
-		
-	}
+
+}
 
 //	public static void main(String[] args) {
 //		// 테스트용 메인창
 //		new Ground(1, 1);
 //
 //	}
-
-
