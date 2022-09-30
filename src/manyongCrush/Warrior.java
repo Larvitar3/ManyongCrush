@@ -16,7 +16,7 @@ public class Warrior extends Player {
 
 	public Warrior(Ground groundContext, String name, int hp, int power, int x, int y, int playerWidth,
 			int playerHeight) {
-		super(name, hp, power, x, y, playerWidth, playerHeight);
+		super(groundContext,name, hp, power, x, y, playerWidth, playerHeight);
 		this.groundContext = groundContext;
 		initData();
 	}

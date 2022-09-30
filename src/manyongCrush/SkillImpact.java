@@ -79,34 +79,35 @@ public class SkillImpact extends JLabel {
 					e.printStackTrace();
 				}
 			}
-			while (!checkBoss) {
-				int changeMotion = 9;
-				for (changeMotion = 9; changeMotion > 4; changeMotion--) {
-					try {
-						setIcon(skillImageL[changeMotion]);
-						leftX--;
-						setLocation(leftX, y);
-						checkBoss();
-						Thread.sleep(5);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+			while (true) {
+				while (!checkBoss) {
+					int changeMotion = 9;
+					for (changeMotion = 9; changeMotion > 4; changeMotion--) {
+						try {
+							setIcon(skillImageL[changeMotion]);
+							leftX--;
+							setLocation(leftX, y);
+							checkBoss();
+							Thread.sleep(5);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					for (changeMotion = 5; changeMotion < 10; changeMotion++) {
+						try {
+							setIcon(skillImageL[changeMotion]);
+							leftX--;
+							setLocation(leftX, y);
+							checkBoss();
+							Thread.sleep(5);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
 				}
-				for (changeMotion = 5; changeMotion < 10; changeMotion++) {
-					try {
-						setIcon(skillImageL[changeMotion]);
-						leftX--;
-						setLocation(leftX, y);
-						checkBoss();
-						Thread.sleep(5);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+				for (int i = 9; i > 17; i++) {
+					setIcon(skillImageL[i]);
 				}
-			}
-			for (int i = 9; i > 17; i++) {
-				setIcon(skillImageL[i]);
-
 			}
 		}).start();
 	}

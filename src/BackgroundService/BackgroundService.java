@@ -1,4 +1,4 @@
-package BackgroundService;
+ package BackgroundService;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

@@ -1,7 +1,5 @@
 package BackgroundService;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -11,7 +9,6 @@ import manyongCrush.Player;
 
 public class BackgroundServiceHell extends BackgroundService {
 
-	private BufferedImage playerServiceHell;
 
 	private Player player;
 
@@ -19,9 +16,9 @@ public class BackgroundServiceHell extends BackgroundService {
 		super(player);
 		
 		try {
-			playerServiceHell = ImageIO.read(new File("bossBackgroundMapServiceHell.jpg"));
+			playerService = ImageIO.read(new File("images/bossBackgroundMapServiceHell.jpg"));
 		} catch (IOException e) {
-			System.out.println("이미지 경로 에러 ");
+			System.out.println("헬 이미지 경로 에러 ");
 		}
 		
 	}

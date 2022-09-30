@@ -15,8 +15,8 @@ public class NormalBoss extends Boss {
 			"images/bossDie4.png", "images/bossDie5.png", "images/bossDie6.png", "images/bossDie7.png",
 			"images/bossDie8.png", "images/bossDie9.png", "images/bossDie10.png" };
 
-	public NormalBoss(int hp, int power) {
-		super(hp, power);
+	public NormalBoss(Ground groundContext, int hp, int power) {
+		super(groundContext, hp, power);
 
 		initData();
 		setInitLayout();

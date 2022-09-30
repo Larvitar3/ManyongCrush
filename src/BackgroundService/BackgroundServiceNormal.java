@@ -20,7 +20,7 @@ public class BackgroundServiceNormal extends BackgroundService {
 		try {
 			playerService = ImageIO.read(new File("images/bossBackgroundMapService.jpg"));
 		} catch (Exception e) {
-			System.out.println("이미지 경로 에러 ");
+			System.out.println("노말 이미지 경로 에러 ");
 		}
 
 	}

@@ -9,6 +9,7 @@ public class Meteor extends JLabel {
 	private Random random = new Random();
 
 	Player player;
+	Ground groundContext;
 
 	private int x;
 	private int y;
@@ -26,7 +27,10 @@ public class Meteor extends JLabel {
 	private ImageIcon lavaBoomMeteorImage;
 	private ChoiceLevel choiceLevel;
 
-	public Meteor() {
+	public Meteor(Ground groundConText) {
+		this.groundContext = groundConText;
+		this.player = groundConText.player;
+
 		initData();
 		setInitLayout();
 	}
@@ -46,7 +50,9 @@ public class Meteor extends JLabel {
 	}
 
 	public void down(int mode) {
+		System.out.println("다운");
 
+		System.out.println(groundContext.player.isBeAttacked());
 		new Thread(() -> {
 			int downSpeed = 2;
 			while (true) {
@@ -57,10 +63,10 @@ public class Meteor extends JLabel {
 					} else {
 						downSpeed = 4;
 					}
-
 					y += downSpeed;
 					setLocation(x, y);
-//					attack(); 
+					attack();
+
 				}
 				try {
 					Thread.sleep(random.nextInt(8) + 5);
@@ -82,27 +88,27 @@ public class Meteor extends JLabel {
 		}).start();
 
 	}
-}
 
-//	public void attack() {
-//		if (!player.isBeAttacked()) {
-//
-//			if ((Math.abs(x - player.getX()) - 20 < 70
-//					&& Math.abs(y - player.getY() + 60) < 40)) {
-//				try {
-//					setSize(148, 125);
-//					setIcon(lavaBoomMeteorImage);
-//					Thread.sleep(500);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//				y = -200;
-//				setLocation(x, y);
-//				System.out.println("메테오가 터집니다.");
-//				player.setHp(player.getHp() - power);
-//				System.out.println(player.getHp());
-//				player.beAttacked();
-//			
-//			}
-//		}
-//	}
+	public void attack() {
+
+		if (!player.isBeAttacked()) { // 안맞았을때
+			if ((Math.abs(x - player.getX()) - 20 < 70 // 플레이어 좌표 감지
+					&& Math.abs(y - player.getY() + 60) < 40)) {
+				try {
+					setSize(148, 125);
+					setIcon(lavaBoomMeteorImage);
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				y = -200;
+				setLocation(x, y);
+				player.setHp(player.getHp() - power);
+				System.out.println(player.getHp());
+				player.beAttacked();
+
+			}
+		}
+
+	}
+}
