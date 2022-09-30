@@ -106,7 +106,11 @@ public class SkillImpact extends JLabel {
 						}
 					}
 				}
+<<<<<<< HEAD
 				for (int i = 9; i < 17; i++) {
+=======
+				for (int i = 9; i < 17; i++) { // 연산자 오타 
+>>>>>>> 36d54c6c53007f207a89b9ea764fbb9b7b564eb3
 					setIcon(skillImageL[i]);
 				}
 			}
