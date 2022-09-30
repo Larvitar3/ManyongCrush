@@ -10,6 +10,8 @@ import lombok.Setter;
 @Setter
 public class SkillImpact extends JLabel {
 
+	protected Ground groundContext;
+	protected Player player;
 
 	protected int x;
 	protected int y;
@@ -22,21 +24,14 @@ public class SkillImpact extends JLabel {
 
 	protected int state;
 
-	protected Boss boss;
-
-	protected Ground groundContext;
-
-	protected Player player;
-
 	protected int bossX;
 	protected int bossY;
 
-	protected ImageIcon skillImpactImgL;
-	protected ImageIcon skillImpactImgR;
-
-
 	protected int bossWidt;
 	protected int bossHeight;
+
+	protected ImageIcon skillImpactImgL;
+	protected ImageIcon skillImpactImgR;
 
 	protected ImageIcon skillImageL;
 	protected ImageIcon skillImageR;
@@ -50,6 +45,7 @@ public class SkillImpact extends JLabel {
 		this.skillWidth = skillWidth;
 		this.skillHeight = skillHeight;
 		this.player = player;
+		this.groundContext = groundContext;
 
 		bossX = groundContext.boss.getX();
 		bossY = groundContext.boss.getY();
@@ -77,7 +73,7 @@ public class SkillImpact extends JLabel {
 					x--;
 					setLocation(x, y);
 					checkBoss();
-					Thread.sleep(1);
+					Thread.sleep(2);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -92,11 +88,10 @@ public class SkillImpact extends JLabel {
 
 				try {
 					setIcon(skillImageR);
-
 					x++;
 					setLocation(x, y);
 					checkBoss();
-					Thread.sleep(1);
+					Thread.sleep(2);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -106,10 +101,17 @@ public class SkillImpact extends JLabel {
 
 	public void checkBoss() {
 
-		if (Math.abs((x + skillWidth) - bossX) < 30
-				&& Math.abs((y + (skillHeight / 2)) - bossY + (bossHeight / 2)) < 295) {
-			System.out.println("감지 되었어요 ~~");
-		}
-	}
+		new Thread(() -> {
 
+			if (Math.abs((x + skillWidth) - bossX) < 1
+					&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 295) {
+				groundContext.boss.beAttacked(power);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
 }
