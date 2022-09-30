@@ -156,6 +156,7 @@ public class SkillImpact extends JLabel {
 				for (int i = 9; i < 17; i++) {
 					setIcon(skillImageR[i]);
 				}
+				setLocation(2000, 0);
 			}
 		}).start();
 	}
