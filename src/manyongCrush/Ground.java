@@ -25,7 +25,6 @@ public class Ground extends JFrame implements ActionListener {
 
 	Player player;
 
-
 	JLabel backgroundHellImage;
 	JLabel backgroundNormalImage;
 	BackgroundService backgroundService;
@@ -61,12 +60,11 @@ public class Ground extends JFrame implements ActionListener {
 		this.player = groundContext.player;
 
 		if (charcterNumber == 1 && modeCount == 1) {
-			
 
 			player = new Wizard(groundContext, "마법사", 200, 30, 116, 92, 116, 92);
 			boss = new NormalBoss(800, 100);
 		}
-		
+
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -212,7 +210,7 @@ public class Ground extends JFrame implements ActionListener {
 
 		characterHpWidth = player.getHp();
 //			System.out.println("플레이어 체력 " + player.getHp()); 
-			
+
 //		characterHpWidth = 300; // 테스트용 임시값 ▲ 값 넣고 삭제
 		characterHp.setSize(characterHpWidth / 2, 20);
 		characterHp.setOpaque(true);
@@ -284,7 +282,7 @@ public class Ground extends JFrame implements ActionListener {
 			}
 		}).start();
 	}
-	
+
 	public void unitHpInfo() {
 		if (player.isBeAttacked()) {
 			characterHpWidth = player.getHp();

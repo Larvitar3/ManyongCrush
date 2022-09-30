@@ -110,7 +110,6 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 
 //			LoginBgm loginBgm = new LoginBgm();
 			ChoiceLevel choiceLevel = new ChoiceLevel();
-			System.out.println("생성위치: " + choiceLevel.hashCode());
 			choiceLevel.setCharcterNumber(choiceCount);
 			System.out.println("마법사 선택 ");
 			// wizard 선택

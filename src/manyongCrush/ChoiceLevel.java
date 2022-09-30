@@ -14,7 +14,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ChoiceLevel extends JFrame implements ActionListener {
-	
 
 	JLabel backgroundImage;
 
@@ -22,7 +21,7 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 	JButton choiceHell;
 	ChoiceCharacter choiceCharacter;
 	LoginBgm loginBgm;
-	
+
 	int charcterNumber;
 	int flagCount;
 
@@ -93,19 +92,23 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 
 		if (e.getSource() == choiceNormal && charcterNumber == 1) {
 
+			// 마법사 노말 선택
 			setVisible(false);
 			flagCount = 1;
 			new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
+			System.out.println("노말 마법사 선택" + "모드" + flag );
 
+			// 전사 노말 선택
 		} else if (e.getSource() == choiceNormal && charcterNumber == 2) {
 
 			setVisible(false);
 			flagCount = 2;
-			
+
 			new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 전사 선택");
 
+			// 마법사 헬 선택
 		} else if (e.getSource() == choiceHell && charcterNumber == 1) {
 
 			setVisible(false);
@@ -114,6 +117,7 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 			new Ground(flagCount, charcterNumber);
 			System.out.println("선택 : 헬 선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
 
+			// 전사 헬 선택
 		} else if (e.getSource() == choiceHell && charcterNumber == 2) {
 
 			setVisible(false);

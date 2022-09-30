@@ -10,12 +10,10 @@ public class Meteor extends JLabel {
 
 	Player player;
 	Ground groundContext;
-	
+
 	private int x;
 	private int y;
 	private int power = 20;
-	
-	
 
 	private final int LAVA_METEOR_WIDTH = 57;
 	private final int LAVA_METEOR_HEIGHT = 123;
@@ -32,7 +30,7 @@ public class Meteor extends JLabel {
 	public Meteor(Ground groundConText) {
 		this.groundContext = groundConText;
 		this.player = groundConText.player;
-		
+
 		initData();
 		setInitLayout();
 	}
@@ -67,8 +65,8 @@ public class Meteor extends JLabel {
 					}
 					y += downSpeed;
 					setLocation(x, y);
-						attack(); 
-						
+					attack();
+
 				}
 				try {
 					Thread.sleep(random.nextInt(8) + 5);
@@ -91,15 +89,15 @@ public class Meteor extends JLabel {
 
 	}
 
-
 	public void attack() {
-		
+
 		if (!player.isBeAttacked()) { // 안맞았을때
 			if ((Math.abs(x - player.getX()) - 20 < 70 // 플레이어 좌표 감지
 					&& Math.abs(y - player.getY() + 60) < 40)) {
 				try {
-					setSize(148, 125); 
 					setIcon(lavaBoomMeteorImage);
+					setLocation(x - 50, y);
+					setSize(148, 125);
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -109,10 +107,9 @@ public class Meteor extends JLabel {
 				player.setHp(player.getHp() - power);
 				System.out.println(player.getHp());
 				player.beAttacked();
-			
+
 			}
 		}
 
 	}
 }
-
