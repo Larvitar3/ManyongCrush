@@ -111,24 +111,16 @@ public class Boss extends JLabel {
 	}
 
 	public void beAttacked(int damage) {
+		
+		System.out.println("이게 1초마다 나와야함");
 
-		new Thread(() -> {
-
-			if (state == 0) {
-				System.out.println(hp);
-				hp -= damage;
-				beAttacked = true;
-				if (hp <= 0) {
-					hp = 0;
-					die();
-				}
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					System.err.println("보스 비어택드");
-				}
+		if (state == 0) {
+			hp -= damage;
+			System.out.println(hp);
+			if (hp <= 0) {
+				hp = 0;
+				die();
 			}
-			beAttacked = false;
-		}).start();
+		}
 	}
 }
