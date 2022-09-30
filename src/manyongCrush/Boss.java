@@ -110,22 +110,22 @@ public class Boss extends JLabel {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}		
+		}
 
 		new GameState(state);
 		groundContext.setVisible(false);
 	}
 
 	public void beAttacked(int damage) {
-		
+
 		new Thread(() -> {
 			if (state == 0) {
 				hp -= damage;
 				beAttacked = true;
 				System.out.println("보스 HP : " + hp);
-	
+
 				groundContext.bossInfo();
-				
+
 				if (hp <= 0) {
 					hp = 0;
 					die();
@@ -136,6 +136,7 @@ public class Boss extends JLabel {
 				}
 			}
 			beAttacked = false;
+
 		}).start();
 	}
 }

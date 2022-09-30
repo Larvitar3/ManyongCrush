@@ -90,7 +90,7 @@ public class Wizard extends Player {
 						System.out.println("위자드 왼쪽 스킬");
 					}
 				}
-				skillImpact = new ChainFireball(groundContext, this, x, y, 50, 100, 100, 100);
+				skillImpact = new ChainFireball(groundContext, this, x, y, 50, 100, 200, 170);
 				skillImpact.skillsLeftFly();
 			} else {
 				for (int i = 0; i < wizardRightSkillMotion.length; i++) {
@@ -101,7 +101,7 @@ public class Wizard extends Player {
 						System.out.println("위자드 오른쪽 스킬");
 					}
 				}
-				skillImpact = new ChainFireball(groundContext, this, getX(), getY(), 30, 50, 74, 45);
+				skillImpact = new ChainFireball(groundContext, this, x, y, 30, 50, 200, 170);
 				skillImpact.skillsRightFly();
 			}
 		}).start();

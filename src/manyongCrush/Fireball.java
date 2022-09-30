@@ -14,10 +14,6 @@ public class Fireball extends SkillImpact {
 
 	public void initData() {
 
-		try {
-			super.skillImageL = new ImageIcon("images/fireBallL.png");
-			super.skillImageR = new ImageIcon("images/fireBallR.png");
-		} catch (Exception e) {
-		}
+		skillImageR[0] = new ImageIcon("images/fireBallR.png");
 	}
 }
