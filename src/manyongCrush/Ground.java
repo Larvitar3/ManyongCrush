@@ -36,6 +36,7 @@ public class Ground extends JFrame implements ActionListener {
 		this.charcterNumber = charcterNumber;
 
 		if (charcterNumber == 1 && modeCount == 1) {
+			
 
 			boss = new NormalBoss(800, 100);
 			player = new Wizard(groundContext, "vjhgjm", 200, 30, 116, 92, 116, 92);
