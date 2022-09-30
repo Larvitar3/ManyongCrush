@@ -39,7 +39,10 @@ public class Ground extends JFrame {
 	int skillCount;
 
 	JLabel bossHpBox;
+	JLabel bossHpText;
 	JLabel bossHpBgBox;
+	
+	JLabel modeLevel;
 
 	JLabel hpTitle;
 	JLabel skillTitle;
@@ -47,6 +50,12 @@ public class Ground extends JFrame {
 	JLabel characterHp;
 	JLabel characterName;
 
+	JPanel manualBox;
+	JLabel manualKeyInfo;
+	JLabel manualKeyU;
+	JLabel manualKeyLR;
+	JLabel manualKeyAtaack;
+	
 	int bossHpWidth;
 	int characterHpWidth;
 
@@ -61,24 +70,28 @@ public class Ground extends JFrame {
 			player = new Wizard(groundContext, "마법사", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
+			modeLevel = new JLabel("◆  N O R M A L  ◆");
 			
 		}else if(modeCount == 2) {
 			
-			player = new Wizard(groundContext, "전사1", 300, 30, 116, 92, 116, 92);
+			player = new Warrior(groundContext, "전사", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
+			modeLevel = new JLabel("◆  N O R M A L  ◆");
 			
 		}else if(modeCount == 3) {
 			
-			player = new Wizard(groundContext, "마법사2", 300, 30, 116, 92, 116, 92);
+			player = new Wizard(groundContext, "마법사", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
+			modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
 			
 		}else if(modeCount == 4) {
 			
-			player = new Wizard(groundContext, "전사2", 300, 30, 116, 92, 116, 92);
+			player = new Warrior(groundContext, "전사", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
+			modeLevel = new JLabel("HELL");
 			
 		}else {
 			System.out.println("오류!@!@!");
@@ -153,14 +166,21 @@ public class Ground extends JFrame {
 			System.out.println("테스트용 메인 카운트값 확인 바람");
 		}
 
-		bossHpBgBox = new JLabel("");
-		bossHpBox = new JLabel("");
-
+		bossHpBgBox = new JLabel();
+		bossHpBox = new JLabel();
+		
 		characterInfoBox = new JPanel();
+		manualBox = new JPanel();
 		characterHp = new JLabel("");
 		characterName = new JLabel(name);
 		hpTitle = new JLabel("HP");
 		skillTitle = new JLabel("스킬");
+		
+		manualKeyInfo = new JLabel("● ◎  조작 방법  ◎ ●");
+		manualKeyU = new JLabel("『↑ : 점프 ");
+		manualKeyLR = new JLabel("←  → : 좌우 이동  ");
+		manualKeyAtaack = new JLabel("     Q : 일반 공격, W : 스킬 』");
+		
 
 //		skillCount = wizard.getSkillCount();
 		skillCount = 5; // 테스트용 임시값 ▲ 값 넣고 삭제
@@ -186,14 +206,22 @@ public class Ground extends JFrame {
 
 		add(bossHpBox);
 		add(bossHpBgBox);
+		add(modeLevel);
 
+		modeLevel.setSize(200 , 40);
+		modeLevel.setLocation(100, 0);
+		modeLevel.setOpaque(true);
+		modeLevel.setBackground(blackOp);
+		modeLevel.setForeground(bloodRed);
+		modeLevel.setFont(new Font("SanSerif", Font.BOLD, 20));
+		modeLevel.setHorizontalAlignment(JLabel.CENTER);
+		
 		bossHpBgBox.setSize(800, 40);
 		bossHpBgBox.setLocation(100, 50);
 		bossHpBgBox.setOpaque(true);
 		bossHpBgBox.setBackground(Color.LIGHT_GRAY);
 
-//		bossHpWidth = boss.getHp(); 
-		bossHpWidth = boss.getHp(); // 테스트용 임시값 ▲ 값 넣고 삭제
+		bossHpWidth = boss.getHp(); 
 		bossHpBox.setSize(bossHpWidth, 40);
 		bossHpBox.setLocation(100, 50);
 		bossHpBox.setOpaque(true);
@@ -242,6 +270,35 @@ public class Ground extends JFrame {
 		characterInfoBox.setSize(200, 100);
 		characterInfoBox.setLocation(20, 540);
 		characterInfoBox.setBackground(blackOp);
+		
+		add(manualKeyInfo);
+		add(manualKeyU);
+		add(manualKeyLR);
+		add(manualKeyAtaack);
+		manualKeyInfo.setSize(180, 50);
+		manualKeyInfo.setLocation(750, 540);
+		manualKeyInfo.setFont(new Font("SanSerif", Font.BOLD, 18));
+		manualKeyInfo.setForeground(Color.WHITE);
+		
+		manualKeyU.setSize(180, 20);
+		manualKeyU.setLocation(730, 580);
+		manualKeyU.setFont(new Font("SanSerif", Font.BOLD, 16));
+		manualKeyU.setForeground(Color.WHITE);
+		
+		manualKeyLR.setSize(180, 20);
+		manualKeyLR.setLocation(805, 580);
+		manualKeyLR.setFont(new Font("SanSerif", Font.BOLD, 16));
+		manualKeyLR.setForeground(Color.WHITE);
+		
+		manualKeyAtaack.setSize(230, 20);
+		manualKeyAtaack.setLocation(730, 605);
+		manualKeyAtaack.setFont(new Font("SanSerif", Font.BOLD, 16));
+		manualKeyAtaack.setForeground(Color.WHITE);
+		
+		add(manualBox);
+		manualBox.setSize(250, 100);
+		manualBox.setLocation(710, 540);
+		manualBox.setBackground(blackOp);
 
 	} // end of setInitLayout
 
@@ -326,9 +383,3 @@ public class Ground extends JFrame {
 	}
 
 }
-
-//	public static void main(String[] args) {
-//		// 테스트용 메인창
-//		new Ground(1, 1);
-//
-//	}

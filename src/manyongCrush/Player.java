@@ -183,7 +183,7 @@ public class Player extends JLabel implements Attack, Moveable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new GameState(state);
+		new GameState(state-1);
 		groundContext.setVisible(false);
 	}
 

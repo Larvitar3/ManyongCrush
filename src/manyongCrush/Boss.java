@@ -111,7 +111,11 @@ public class Boss extends JLabel {
 				e.printStackTrace();
 			}
 		}		
-
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		new GameState(state);
 		groundContext.setVisible(false);
 	}
