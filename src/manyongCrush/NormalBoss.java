@@ -13,7 +13,7 @@ public class NormalBoss extends Boss {
 			"images/bossMotion19.png" };
 	private String[] bossDieImg = { "images/bossDie1.png", "images/bossDie2.png", "images/bossDie3.png",
 			"images/bossDie4.png", "images/bossDie5.png", "images/bossDie6.png", "images/bossDie7.png",
-			"images/bossDie1.png", "images/bossDie9.png" };
+			"images/bossDie8.png", "images/bossDie9.png", "images/bossDie10.png" };
 
 	public NormalBoss(int hp, int power) {
 		super(hp, power);

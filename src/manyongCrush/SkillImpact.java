@@ -43,7 +43,6 @@ public class SkillImpact extends JLabel {
 
 	public SkillImpact(Ground groundContext, Player player, int x, int y, int power, int skillPower, int skillWidth,
 			int skillHeight) {
-		this.groundContext = groundContext;
 		this.x = x;
 		this.y = y;
 		this.power = power;
