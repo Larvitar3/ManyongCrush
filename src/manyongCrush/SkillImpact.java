@@ -13,8 +13,11 @@ public class SkillImpact extends JLabel {
 	protected Ground groundContext;
 	protected Player player;
 
-	protected int x;
+	protected int leftX;
+	protected int rightX;
+
 	protected int y;
+
 	protected int power;
 	protected int skillPower;
 	protected int skillCount;
@@ -30,16 +33,19 @@ public class SkillImpact extends JLabel {
 	protected int bossWidt;
 	protected int bossHeight;
 
-	protected ImageIcon skillImpactImgL;
-	protected ImageIcon skillImpactImgR;
+	private boolean checkBoss;
 
-	protected ImageIcon skillImageL;
-	protected ImageIcon skillImageR;
+	protected ImageIcon[] skillImpactImgL;
+	protected ImageIcon[] skillImpactImgR;
+
+	protected ImageIcon[] skillImageL = new ImageIcon[16];
+	protected ImageIcon[] skillImageR = new ImageIcon[16];
 
 	public SkillImpact(Ground groundContext, Player player, int x, int y, int power, int skillPower, int skillWidth,
 			int skillHeight) {
-		this.x = x;
-		this.y = y;
+		this.leftX = x - 150;
+		this.rightX = x + 150;
+		this.y += y - 50;
 		this.power = power;
 		this.skillPower = skillPower;
 		this.skillWidth = skillWidth;
@@ -58,42 +64,96 @@ public class SkillImpact extends JLabel {
 
 	public void setInitLayout() {
 		setSize(skillWidth, skillHeight);
-		setLocation(x, y);
 	}
 
 	public void skillsLeftFly() {
 
 		new Thread(() -> {
 
-			// 만약 플레이어가 왼쪽을 보고 있다면?
-			while (true) {
-//				System.out.println("asdfiojlk");
+			for (int i = 0; i < 10; i++) {
 				try {
-					setIcon(skillImageL);
-					x--;
-					setLocation(x, y);
-					checkBoss();
-					Thread.sleep(2);
+					setIcon(skillImageL[i]);
+					setLocation(leftX, y);
+					Thread.sleep(40);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+			}
+			while (!checkBoss) {
+				int changeMotion = 9;
+				for (changeMotion = 9; changeMotion > 4; changeMotion--) {
+					try {
+						setIcon(skillImageL[changeMotion]);
+						leftX--;
+						setLocation(leftX, y);
+						checkBoss();
+						Thread.sleep(5);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				for (changeMotion = 5; changeMotion < 10; changeMotion++) {
+					try {
+						setIcon(skillImageL[changeMotion]);
+						leftX--;
+						setLocation(leftX, y);
+						checkBoss();
+						Thread.sleep(5);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			for (int i = 9; i > 17; i++) {
+				setIcon(skillImageL[i]);
+
 			}
 		}).start();
 	}
 
 	public void skillsRightFly() {
+
 		new Thread(() -> {
 
-			while (true) {
-
+			for (int i = 0; i < 10; i++) {
 				try {
-					setIcon(skillImageR);
-					x++;
-					setLocation(x, y);
-					checkBoss();
-					Thread.sleep(2);
+					setIcon(skillImageR[i]);
+					setLocation(rightX, y);
+					Thread.sleep(40);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
+				}
+			}
+			while (true) {
+				while (!checkBoss) {
+
+					int changeMotion = 9;
+					for (changeMotion = 9; changeMotion > 4; changeMotion--) {
+						try {
+							setIcon(skillImageR[changeMotion]);
+							rightX++;
+							setLocation(rightX, y);
+							checkBoss();
+							Thread.sleep(5);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					for (changeMotion = 5; changeMotion < 10; changeMotion++) {
+						try {
+							setIcon(skillImageR[changeMotion]);
+							rightX++;
+							setLocation(rightX, y);
+							checkBoss();
+							Thread.sleep(5);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				for (int i = 9; i < 17; i++) {
+					System.out.println("여기는 되나요");
+					setIcon(skillImageR[i]);
 				}
 			}
 		}).start();
@@ -103,8 +163,10 @@ public class SkillImpact extends JLabel {
 
 		new Thread(() -> {
 
-			if (Math.abs((x + skillWidth) - bossX) < 1
+			if (Math.abs((rightX + skillWidth + 30) - bossX) < 1
 					&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 295) {
+				checkBoss = true;
+				System.out.println("여기 가동 되나");
 				groundContext.boss.beAttacked(power);
 				try {
 					Thread.sleep(1000);
@@ -112,6 +174,7 @@ public class SkillImpact extends JLabel {
 					e.printStackTrace();
 				}
 			}
+			checkBoss = false;
 		}).start();
 	}
 }

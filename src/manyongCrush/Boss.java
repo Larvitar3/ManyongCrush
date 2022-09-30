@@ -111,8 +111,6 @@ public class Boss extends JLabel {
 	}
 
 	public void beAttacked(int damage) {
-		
-		System.out.println("이게 1초마다 나와야함");
 
 		if (state == 0) {
 			hp -= damage;

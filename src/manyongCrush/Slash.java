@@ -14,8 +14,8 @@ public class Slash extends SkillImpact {
 
 	public void initData() {
 
-		super.setSkillImageL(new ImageIcon("images/swordSwingL.png"));
-		super.setSkillImageR(new ImageIcon("images/swordSwingL.png"));
+		skillImageL[0] = (new ImageIcon("images/swordSwingL.png"));
+		skillImageR[0] = (new ImageIcon("images/swordSwingR.png"));
 
 	}
 
