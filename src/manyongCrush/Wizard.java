@@ -14,7 +14,7 @@ public class Wizard extends Player {
 
 	public Wizard(Ground groundContext, String name, int hp, int power, int x, int y, int playerWidth,
 			int playerHeight) {
-		super(name, hp, power, x, y, playerWidth, playerHeight);
+		super(groundContext,name, hp, power, x, y, playerWidth, playerHeight);
 		this.groundContext = groundContext;
 		System.out.println("위자드 생성");
 		

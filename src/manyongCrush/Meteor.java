@@ -116,25 +116,3 @@ public class Meteor extends JLabel {
 	}
 }
 
-//	public void attack() {
-//		if (!player.isBeAttacked()) {
-//
-//			if ((Math.abs(x - player.getX()) - 20 < 70
-//					&& Math.abs(y - player.getY() + 60) < 40)) {
-//				try {
-//					setSize(148, 125);
-//					setIcon(lavaBoomMeteorImage);
-//					Thread.sleep(500);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//				y = -200;
-//				setLocation(x, y);
-//				System.out.println("메테오가 터집니다.");
-//				player.setHp(player.getHp() - power);
-//				System.out.println(player.getHp());
-//				player.beAttacked();
-//			
-//			}
-//		}
-//	}

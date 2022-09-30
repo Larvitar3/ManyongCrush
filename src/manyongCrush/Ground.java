@@ -58,6 +58,7 @@ public class Ground extends JFrame implements ActionListener {
 	public Ground(int modeCount, int charcterNumber) {
 		this.modeCount = modeCount;
 		this.charcterNumber = charcterNumber;
+		this.player = groundContext.player;
 
 		if (charcterNumber == 1 && modeCount == 1) {
 			
@@ -209,8 +210,10 @@ public class Ground extends JFrame implements ActionListener {
 			characterSkillCounts[i].setForeground(Color.WHITE);
 		}
 
-//		characterHpWidth = wizard.getHp();
-		characterHpWidth = 300; // 테스트용 임시값 ▲ 값 넣고 삭제
+		characterHpWidth = player.getHp();
+//			System.out.println("플레이어 체력 " + player.getHp()); 
+			
+//		characterHpWidth = 300; // 테스트용 임시값 ▲ 값 넣고 삭제
 		characterHp.setSize(characterHpWidth / 2, 20);
 		characterHp.setOpaque(true);
 		characterHp.setBackground(bloodRed);
@@ -280,6 +283,13 @@ public class Ground extends JFrame implements ActionListener {
 				}
 			}
 		}).start();
+	}
+	
+	public void unitHpInfo() {
+		if (player.isBeAttacked()) {
+			characterHpWidth = player.getHp();
+			characterHp.setSize(characterHpWidth / 2, 20);
+		}
 	}
 
 //	public static void main(String[] args) {

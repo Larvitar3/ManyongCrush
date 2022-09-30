@@ -45,8 +45,10 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected ImageIcon playerDieMotionImg;
 
 	protected SkillImpact[] skillImpacts = new SkillImpact[4];
+	
+	protected Ground groundContext;
 
-	public Player(String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
+	public Player(Ground groundContext, String name, int hp, int power, int x, int y, int playerWidth, int playerHeight) {
 		this.name = name;
 		this.hp = hp;
 		this.power = power;
@@ -54,6 +56,7 @@ public class Player extends JLabel implements Attack, Moveable {
 		this.y = y;
 		this.playerWidth = playerWidth;
 		this.playerHeight = playerHeight;
+		this.groundContext = groundContext;
 
 		down = false;
 //		new Thread(new BackgroundService(this)).start();
@@ -182,8 +185,9 @@ public class Player extends JLabel implements Attack, Moveable {
 				hp = 0;
 				die();
 			}
+			groundContext.unitHpInfo();
 			try {
-				setIcon(playerDieMotionImg); // 깜빡깜빡으로 바꿔야함
+//				setIcon(playerDieMotionImg); // 깜빡깜빡으로 바꿔야함
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
