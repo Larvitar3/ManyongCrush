@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import BGM.LoginBgm;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,8 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 		initData();
 		setInitLayout();
 		addEventListener();
+		bgm = new LoginBgm();
+//		LoginBgm bgm =  new LoginBgm();
 //		LoginBgm bgm = new LoginBgm();
 	}
 
@@ -92,7 +95,6 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 	}
 
 	private void addEventListener() {
-
 		choiceWizard.addActionListener(this);
 		choiceWarrior.addActionListener(this);
 
@@ -108,7 +110,8 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 			ChoiceLevel choiceLevel = new ChoiceLevel();
 			choiceLevel.setCharcterNumber(choiceCount);
 			System.out.println("마법사 선택 ");
-			// wizard 선택
+			// wizard 
+//			bgm.clipStop();
 
 		} else {
 			choiceCount = 2;
@@ -118,9 +121,8 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 			choiceLevel.setCharcterNumber(choiceCount);
 			System.out.println("전사 선택");
 			// warrior 선택
-
 		}
-//		bgm.clipStop();
+		bgm.clipStop();
 		System.out.println(choiceCount);
 
 	}

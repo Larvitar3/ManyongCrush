@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import BGM.GroundBGM;
 import BackgroundService.BackgroundService;
 import BackgroundService.BackgroundServiceHell;
 import BackgroundService.BackgroundServiceNormal;
@@ -55,6 +56,8 @@ public class Ground extends JFrame {
 	JLabel manualKeyU;
 	JLabel manualKeyLR;
 	JLabel manualKeyAtaack;
+F
+	GroundBGM groundBGM;
 
 	int bossHpWidth;
 	int characterHpWidth;
@@ -65,6 +68,7 @@ public class Ground extends JFrame {
 		this.modeCount = modeCount;
 		this.charcterNumber = charcterNumber;
 		this.player = groundContext.player;
+		groundBGM = new GroundBGM();
 
 		if (modeCount == 1) {
 

@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import BGM.SelectBGM;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,16 +21,16 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 	JButton choiceNormal;
 	JButton choiceHell;
 	ChoiceCharacter choiceCharacter;
-	LoginBgm loginBgm;
+	SelectBGM selectBGM;
 
 	int charcterNumber;
 	int flagCount;
 
-	public ChoiceLevel() {
+	public ChoiceLevel( ) {
 		initData();
 		setInitLayout();
 		addEventListener();
-//		this.loginBgm = loginBgm;
+		selectBGM = new SelectBGM();
 	}
 
 	private void initData() {
@@ -37,8 +38,8 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 		setTitle("던전 선택");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		choiceCharacter = new ChoiceCharacter();
-		choiceCharacter.setVisible(false);
+//		choiceCharacter = new ChoiceCharacter(); // 이거 누가?
+//		choiceCharacter.setVisible(false);
 
 		backgroundImage = new JLabel(new ImageIcon("Images/choiceLevelBakcground.jpg"));
 		setContentPane(backgroundImage);
@@ -127,8 +128,9 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 		} else {
 			System.out.println("값 없음");
 		}
-//		loginBgm.clipStop(); // 선택후 음악끄기
 
+		selectBGM.clipStop(); // 선택후 음악끄기
 	}
+	
 
 }

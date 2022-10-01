@@ -33,19 +33,24 @@ public class SkillImpact extends JLabel {
 	protected int bossWidt;
 	protected int bossHeight;
 
+	protected int skillBeforeFly;
+	protected int skillBeforeDisappear;
+	protected int skillDisappear;
+
+	protected int sight;
+
+	private int changeMotion;
+
 	private boolean checkBoss;
 
-	protected ImageIcon[] skillImpactImgL;
-	protected ImageIcon[] skillImpactImgR;
-
-	protected ImageIcon[] skillImageL = new ImageIcon[16];
-	protected ImageIcon[] skillImageR = new ImageIcon[16];
+	protected ImageIcon[] skillLeftImpact = new ImageIcon[16];
+	protected ImageIcon[] skillRightImpact = new ImageIcon[16];
 
 	public SkillImpact(Ground groundContext, Player player, int x, int y, int power, int skillPower, int skillWidth,
 			int skillHeight) {
-		this.leftX = x - 150;
-		this.rightX = x + 150;
-		this.y += y - 50;
+		this.leftX = x - 100;
+		this.rightX = x + 100;
+		this.y -= 25 - y;
 		this.power = power;
 		this.skillPower = skillPower;
 		this.skillWidth = skillWidth;
@@ -59,6 +64,8 @@ public class SkillImpact extends JLabel {
 		bossWidt = groundContext.boss.getWidth();
 		bossHeight = groundContext.boss.getHeight();
 
+//		changeMotion = skillLeftImpact.length;
+
 		groundContext.add(this);
 	}
 
@@ -70,46 +77,45 @@ public class SkillImpact extends JLabel {
 
 		new Thread(() -> {
 
-			for (int i = 0; i < 10; i++) {
+			for (changeMotion = 0; changeMotion < skillBeforeFly; changeMotion++) {
 				try {
-					setIcon(skillImageL[i]);
+					setIcon(skillLeftImpact[changeMotion]);
 					setLocation(leftX, y);
 					checkBoss();
-					Thread.sleep(40);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			while (true) {
+
+			for (int i = 0; i < sight; i++) {
+
 				while (!checkBoss) {
-					int changeMotion = 9;
-					for (changeMotion = 9; changeMotion > 4; changeMotion--) {
+					for (changeMotion = skillBeforeDisappear; changeMotion > skillBeforeFly; changeMotion--) {
 						try {
-							setIcon(skillImageL[changeMotion]);
+							setIcon(skillLeftImpact[changeMotion]);
 							leftX--;
 							setLocation(leftX, y);
 							checkBoss();
-							Thread.sleep(5);
+							Thread.sleep(2);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
-					for (changeMotion = 5; changeMotion < 10; changeMotion++) {
+					for (changeMotion = skillBeforeFly; changeMotion < skillBeforeDisappear; changeMotion++) {
 						try {
-							setIcon(skillImageL[changeMotion]);
+							setIcon(skillLeftImpact[changeMotion]);
 							leftX--;
 							setLocation(leftX, y);
 							checkBoss();
-							Thread.sleep(5);
+							Thread.sleep(2);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
-				}
-				for (int i = 9; i < 17; i++) {
-					setIcon(skillImageL[i]);
 				}
 			}
+			skillsDisappear();
 		}).start();
 	}
 
@@ -117,46 +123,42 @@ public class SkillImpact extends JLabel {
 
 		new Thread(() -> {
 
-			for (int i = 0; i < 10; i++) {
+			for (changeMotion = 0; changeMotion < skillBeforeFly; changeMotion++) {
 				try {
-					setIcon(skillImageR[i]);
+					setIcon(skillRightImpact[changeMotion]);
 					setLocation(rightX, y);
 					checkBoss();
-					Thread.sleep(40);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			while (true) {
-				while (!checkBoss) {
-					int changeMotion = 9;
-					for (changeMotion = 9; changeMotion > 4; changeMotion--) {
-						try {
-							setIcon(skillImageR[changeMotion]);
-							rightX++;
-							setLocation(rightX, y);
-							checkBoss();
-							Thread.sleep(5);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					for (changeMotion = 5; changeMotion < 10; changeMotion++) {
-						try {
-							setIcon(skillImageR[changeMotion]);
-							rightX++;
-							setLocation(rightX, y);
-							checkBoss();
-							Thread.sleep(5);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+			for (int i = 0; i < sight && !checkBoss; i++) {
+
+				for (changeMotion = skillBeforeDisappear; changeMotion > skillBeforeFly; changeMotion--) {
+					try {
+						setIcon(skillRightImpact[changeMotion]);
+						rightX++;
+						setLocation(rightX, y);
+						checkBoss();
+						Thread.sleep(7);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
 				}
-				for (int i = 9; i < 17; i++) {
-					setIcon(skillImageR[i]);
+				for (changeMotion = skillBeforeFly; changeMotion < skillBeforeDisappear; changeMotion++) {
+					try {
+						setIcon(skillRightImpact[changeMotion]);
+						rightX++;
+						setLocation(rightX, y);
+						checkBoss();
+						Thread.sleep(7);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
+			skillsDisappear();
 		}).start();
 	}
 
@@ -164,18 +166,35 @@ public class SkillImpact extends JLabel {
 
 		new Thread(() -> {
 
-			if (Math.abs((rightX + skillWidth + 30) - bossX) < 1
-					&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 295) {
+			if (Math.abs((rightX + (skillWidth / 2)) - bossX) < 1 || Math.abs((rightX + skillWidth) - bossX) < 1
+					|| Math.abs(rightX - bossX) < 1
+							&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 280) {
+				if (Math.abs((leftX + (skillWidth / 2)) - bossX) < 1 || Math.abs((leftX + skillWidth) - bossX) < 1
+						|| Math.abs(leftX - bossX) < 1
+								&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 280) {
+				}
 				checkBoss = true;
-				System.out.println("여기 가동 되나");
 				groundContext.boss.beAttacked(power);
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				checkBoss = false;
 			}
-			checkBoss = false;
 		}).start();
+	}
+
+	public void skillsDisappear() {
+
+		for (changeMotion = skillBeforeDisappear; changeMotion < skillDisappear; changeMotion++) {
+			try {
+				setIcon(skillRightImpact[changeMotion]);
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		setLocation(2000, 0);
 	}
 }
