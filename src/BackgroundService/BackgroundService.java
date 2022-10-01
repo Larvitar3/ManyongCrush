@@ -1,4 +1,4 @@
- package BackgroundService;
+package BackgroundService;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -43,7 +43,6 @@ public class BackgroundService implements Runnable {
 
 			// 마법사
 			// 충돌 감지 조건
-
 			if (playerBottomLeftColor.getRed() == 254 && playerBottomLeftColor.getGreen() == 0
 					&& playerBottomLeftColor.getBlue() == 0) {
 				player.setCrashWallL(true);
@@ -62,14 +61,11 @@ public class BackgroundService implements Runnable {
 				player.setCrashWallL(false);
 				player.setCrashWallR(false);
 			}
-
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 }
