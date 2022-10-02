@@ -83,7 +83,7 @@ public class Ground extends JFrame {
 
 		if (modeCount == 2) {
 			boss = new NormalBoss(groundContext, 800, 50);
-			player = new Warrior(groundContext, "워리어", 500, 116, 92, 135, 92);
+			player = new Warrior(groundContext, "워리어", 300, 116, 92, 135, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			modeLevel = new JLabel("◆  N O R M A L  ◆");
 
@@ -97,7 +97,7 @@ public class Ground extends JFrame {
 		} else if (modeCount == 4) {
 
 			boss = new HellBoss(groundContext, 800, 100);
-			player = new Warrior(groundContext, "전사", 500, 116, 92, 135, 92);
+			player = new Warrior(groundContext, "전사", 300, 116, 92, 135, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
 		}
