@@ -378,7 +378,7 @@ public class Ground extends JFrame {
 		if (boss.isBeAttacked()) {
 			bossHpWidth = boss.getHp();
 			bossHpBox.setSize(bossHpWidth, 40);
-			if(boss.getHp() <= 0) {
+			if (boss.getHp() <= 0) {
 				groundBGM.clipStop();
 			}
 		}

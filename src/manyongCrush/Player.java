@@ -29,6 +29,7 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected boolean crashWallR;
 
 	protected boolean beAttacked;
+	protected boolean attacking;
 
 	protected final int SPEED = 4;
 	protected final int JUMPSPEED = 2;
