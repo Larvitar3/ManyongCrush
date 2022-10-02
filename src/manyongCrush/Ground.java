@@ -20,16 +20,14 @@ import BackgroundService.BackgroundServiceNormal;
 public class Ground extends JFrame {
 
 	Ground groundContext = this;
-	// todoTestCode
 
 	Boss boss;
 	Player player;
+	SkillImpact skillImpact;
 
 	JLabel backgroundHellImage;
 	JLabel backgroundNormalImage;
 	BackgroundService backgroundService;
-	int modeCount;
-	int charcterNumber;
 
 	List<Meteor> meteorList;
 
@@ -37,7 +35,6 @@ public class Ground extends JFrame {
 
 	JLabel[] characterSkillCounts = new JLabel[5];
 	String[] skillCounts = { " ● ", " ● ", " ● ", " ● ", " ● " };
-	int skillCount;
 
 	JLabel bossHpBox;
 	JLabel bossHpText;
@@ -56,11 +53,17 @@ public class Ground extends JFrame {
 	JLabel manualKeyU;
 	JLabel manualKeyLR;
 	JLabel manualKeyAtaack;
-F
+
 	GroundBGM groundBGM;
+
+	boolean attacking;
+	boolean skillIng;
 
 	int bossHpWidth;
 	int characterHpWidth;
+	int modeCount;
+	int charcterNumber;
+	int skillCount;
 
 	String name;
 
@@ -68,38 +71,35 @@ F
 		this.modeCount = modeCount;
 		this.charcterNumber = charcterNumber;
 		this.player = groundContext.player;
-		groundBGM = new GroundBGM();
+		this.groundBGM = new GroundBGM();
 
 		if (modeCount == 1) {
 
-			player = new Wizard(groundContext, "위자드", 200, 30, 116, 92, 116, 92);
+			boss = new NormalBoss(groundContext, 800, 50);
+			player = new Wizard(groundContext, "위자드", 300, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
-			boss = new NormalBoss(groundContext, 800, 100);
 			modeLevel = new JLabel("◆  N O R M A L  ◆");
 		}
 
 		if (modeCount == 2) {
-			player = new Warrior(groundContext, "워리어", 300, 30, 116, 92, 116, 92);
+			boss = new NormalBoss(groundContext, 800, 50);
+			player = new Warrior(groundContext, "워리어", 500, 116, 92, 135, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
-			boss = new NormalBoss(groundContext, 800, 100);
 			modeLevel = new JLabel("◆  N O R M A L  ◆");
 
 		} else if (modeCount == 3) {
 
-			player = new Wizard(groundContext, "위자드", 300, 30, 116, 92, 116, 92);
-			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new HellBoss(groundContext, 800, 100);
+			player = new Wizard(groundContext, "위자드", 300, 116, 92, 116, 92);
+			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
 
 		} else if (modeCount == 4) {
 
-			player = new Warrior(groundContext, "전사", 300, 30, 116, 92, 116, 92);
+			boss = new HellBoss(groundContext, 800, 100);
+			player = new Warrior(groundContext, "전사", 500, 116, 92, 135, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
-			boss = new HellBoss(groundContext, 1600, 100);
 			modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
-
-		} else {
-			System.out.println("오류!@!@!");
 		}
 		initData();
 		setInitLayout();
@@ -183,8 +183,6 @@ F
 		manualKeyLR = new JLabel("←  → : 좌우 이동  ");
 		manualKeyAtaack = new JLabel("     Q : 일반 공격, W : 스킬 』");
 
-//		skillCount = wizard.getSkillCount();
-		skillCount = 5; // 테스트용 임시값 ▲ 값 넣고 삭제
 		for (int i = 0; i < characterSkillCounts.length; i++) {
 			characterSkillCounts[i] = new JLabel(skillCounts[i]);
 		}
@@ -248,10 +246,9 @@ F
 		characterName.setForeground(Color.WHITE);
 		characterName.setFont(new Font("SanSerif", Font.BOLD, 18));
 
-		for (int i = 0; i < skillCount; i++) {
+		for (int i = 0; i < 5; i++) {
 			add(characterSkillCounts[i]);
 		}
-
 		for (int i = 0; i < characterSkillCounts.length; i++) {
 			characterSkillCounts[i].setSize(200 / 2, 20);
 			characterSkillCounts[i].setLocation(60 + (i * 20), 605);
@@ -260,10 +257,6 @@ F
 		}
 
 		characterHpWidth = player.getHp();
-//			System.out.println("플레이어 체력 " + player.getHp()); 
-
-//		characterHpWidth = 300; // 테스트용 임시값 ▲ 값 넣고 삭제
-
 		characterHp.setSize(characterHpWidth / 2, 20);
 		characterHp.setOpaque(true);
 		characterHp.setBackground(bloodRed);
@@ -311,26 +304,26 @@ F
 			this.addKeyListener(new KeyAdapter() {
 
 				@Override
-				public void keyPressed(KeyEvent e) {
+				public synchronized void keyPressed(KeyEvent e) {
 					int keyCode = e.getKeyCode();
 					if (!player.isCrashWallL() && !player.isLeft() && keyCode == KeyEvent.VK_LEFT
-							&& player.getState() == 0) {
+							&& player.getState() == 0 && !player.isBeAttacked()) {
 						player.left();
 					} else if (!player.isCrashWallR() && !player.isRight() && keyCode == KeyEvent.VK_RIGHT
-							&& player.getState() == 0) {
+							&& player.getState() == 0 && !player.isBeAttacked()) {
 						player.right();
 					} else if (!player.isDown() && !player.isJump() && keyCode == KeyEvent.VK_UP
-							&& player.getState() == 0) {
+							&& player.getState() == 0 && !player.isBeAttacked()) {
 						player.jump();
-					} else if (keyCode == KeyEvent.VK_Q && player.getState() == 0) {
+					} else if (keyCode == KeyEvent.VK_Q && player.getState() == 0 && !player.isBeAttacked()) {
 						player.attack();
-					} else if (keyCode == KeyEvent.VK_W && player.getState() == 0) {
+					} else if (keyCode == KeyEvent.VK_W && player.getState() == 0 && !player.isBeAttacked()) {
 						player.skill();
 					}
 				}
 
 				@Override
-				public void keyReleased(KeyEvent e) {
+				public synchronized void keyReleased(KeyEvent e) {
 					int keyCode = e.getKeyCode();
 					if (keyCode == KeyEvent.VK_LEFT) {
 						player.setLeft(false);
@@ -370,6 +363,7 @@ F
 	}
 
 	public void unitSkillCountInfo() {
+		skillCount = player.skillCount;
 		if (skillCount >= 0) {
 			remove(characterSkillCounts[skillCount]);
 			repaint();
