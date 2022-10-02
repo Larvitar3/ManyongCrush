@@ -317,6 +317,7 @@ public class Ground extends JFrame {
 						player.jump();
 					} else if (keyCode == KeyEvent.VK_Q && player.getState() == 0 && !player.isBeAttacked()) {
 						player.attack();
+						System.out.println("공격");
 					} else if (keyCode == KeyEvent.VK_W && player.getState() == 0 && !player.isBeAttacked()) {
 						player.skill();
 					}

@@ -55,34 +55,6 @@ public class Wizard extends Player {
 	@Override
 	public void attack() {
 
-		// Q눌렀을 때 공격 모션
-		// 모션 중 스킬이 나감
-		// 파이어볼 객체 구현
-		setAttacking(true);
-		new Thread(() -> {
-			if (getPWay() == PlayerWay.LEFT) {
-				for (int i = 0; i < wizardLeftAttackMotion.length; i++) {
-					setIcon(getPlayerLeftAttackMotionImg()[i]);
-					try {
-						Thread.sleep(200);
-					} catch (Exception e) {
-					}
-				}
-				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 100, 100);
-				skillImpact.skillsLeftFly();
-			} else if (getPWay() == PlayerWay.RIGHT) {
-				for (int i = 0; i < wizardRightAttackMotion.length; i++) {
-					setIcon(getPlayerRightAttackMotionImg()[i]);
-					try {
-						Thread.sleep(200);
-					} catch (Exception e) {
-					}
-				}
-				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 100, 100); // 스킬 다른걸로 바꿔야함
-				skillImpact.skillsRightFly();
-			}
-		}).start();
-		setAttacking(false);
 		if (!attackCoolTime) {
 
 			new Thread(() -> {
