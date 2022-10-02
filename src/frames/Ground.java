@@ -1,4 +1,4 @@
-package manyongCrush;
+package frames;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,59 +13,71 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import BGM.GroundBGM;
+import BackgroundService.HellMode.BackgroundServiceHell;
+import BackgroundService.NormalMode.BackgroundServiceNormal;
 import BackgroundService.BackgroundService;
-import BackgroundService.BackgroundServiceHell;
-import BackgroundService.BackgroundServiceNormal;
+import boss.Boss;
+import boss.hellBoss.HellBoss;
+import boss.nomalBoss.NormalBoss;
+import lombok.Getter;
+import lombok.Setter;
+import meteor.Meteor;
+import player.Player;
+import player.warrior.Warrior;
+import player.wizard.Wizard;
+import skill.SkillImpact;
 
+@Getter
+@Setter
 public class Ground extends JFrame {
 
-	Ground groundContext = this;
+	private Ground groundContext = this;
 
-	Boss boss;
-	Player player;
-	SkillImpact skillImpact;
+	private Boss boss;
+	private Player player;
+	private SkillImpact skillImpact;
 
-	JLabel backgroundHellImage;
-	JLabel backgroundNormalImage;
-	BackgroundService backgroundService;
+	private JLabel backgroundHellImage;
+	private JLabel backgroundNormalImage;
+	private BackgroundService backgroundService;
 
-	List<Meteor> meteorList;
+	private List<Meteor> meteorList;
 
-	boolean flag;
+	private boolean flag;
 
-	JLabel[] characterSkillCounts = new JLabel[5];
-	String[] skillCounts = { " ● ", " ● ", " ● ", " ● ", " ● " };
+	private JLabel[] characterSkillCounts = new JLabel[5];
+	private String[] skillCounts = { " ● ", " ● ", " ● ", " ● ", " ● " };
 
-	JLabel bossHpBox;
-	JLabel bossHpText;
-	JLabel bossHpBgBox;
+	private JLabel bossHpBox;
+	private JLabel bossHpText;
+	private JLabel bossHpBgBox;
 
-	JLabel modeLevel;
+	private JLabel modeLevel;
 
-	JLabel hpTitle;
-	JLabel skillTitle;
-	JPanel characterInfoBox;
-	JLabel characterHp;
-	JLabel characterName;
+	private JLabel hpTitle;
+	private JLabel skillTitle;
+	private JPanel characterInfoBox;
+	private JLabel characterHp;
+	private JLabel characterName;
 
-	JPanel manualBox;
-	JLabel manualKeyInfo;
-	JLabel manualKeyU;
-	JLabel manualKeyLR;
-	JLabel manualKeyAtaack;
+	private JPanel manualBox;
+	private JLabel manualKeyInfo;
+	private JLabel manualKeyU;
+	private JLabel manualKeyLR;
+	private JLabel manualKeyAtaack;
 
-	GroundBGM groundBGM;
+	private GroundBGM groundBGM;
 
-	boolean attacking;
-	boolean skillIng;
+	private boolean attacking;
+	private boolean skillIng;
 
-	int bossHpWidth;
-	int characterHpWidth;
-	int modeCount;
-	int charcterNumber;
-	int skillCount;
+	private int bossHpWidth;
+	private int characterHpWidth;
+	private int modeCount;
+	private int charcterNumber;
+	private int skillCount;
 
-	String name;
+	private String name;
 
 	public Ground(int modeCount, int charcterNumber) {
 		this.modeCount = modeCount;
@@ -363,7 +375,7 @@ public class Ground extends JFrame {
 	}
 
 	public void unitSkillCountInfo() {
-		skillCount = player.skillCount;
+		skillCount = player.getSkillCount();
 		if (skillCount >= 0) {
 			remove(characterSkillCounts[skillCount]);
 			repaint();

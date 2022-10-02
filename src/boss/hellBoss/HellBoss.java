@@ -1,6 +1,9 @@
-package manyongCrush;
+package boss.hellBoss;
 
 import javax.swing.ImageIcon;
+
+import boss.Boss;
+import frames.Ground;
 
 public class HellBoss extends Boss {
 

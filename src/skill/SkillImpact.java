@@ -1,10 +1,12 @@
-package manyongCrush;
+package skill;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import frames.Ground;
 import lombok.Getter;
 import lombok.Setter;
+import player.Player;
 
 @Getter
 @Setter
@@ -59,11 +61,11 @@ public class SkillImpact extends JLabel {
 		this.player = player;
 		this.groundContext = groundContext;
 
-		bossX = groundContext.boss.getX();
-		bossY = groundContext.boss.getY();
+		bossX = groundContext.getBoss().getX();
+		bossY = groundContext.getBoss().getY();
 
-		bossWidt = groundContext.boss.getWidth();
-		bossHeight = groundContext.boss.getHeight();
+		bossWidt = groundContext.getBoss().getWidth();
+		bossHeight = groundContext.getBoss().getHeight();
 
 		groundContext.add(this);
 
@@ -169,7 +171,7 @@ public class SkillImpact extends JLabel {
 								&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 280) {
 				}
 				checkBoss = true;
-				groundContext.boss.beAttacked(power);
+				groundContext.getBoss().beAttacked(power);
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {

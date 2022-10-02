@@ -1,10 +1,16 @@
-package manyongCrush;
+package player;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import enums.PlayerWay;
+import frames.GameState;
+import frames.Ground;
+import interfaces.Attack;
+import interfaces.Moveable;
 import lombok.Getter;
 import lombok.Setter;
+import skill.SkillImpact;
 
 @Getter
 @Setter
@@ -74,7 +80,6 @@ public class Player extends JLabel implements Attack, Moveable {
 
 		skillCount = 5;
 		down = false;
-//		new Thread(new BackgroundService(this)).start();
 	}
 
 	protected void setInitLayout() {
@@ -83,11 +88,11 @@ public class Player extends JLabel implements Attack, Moveable {
 		setSize(playerWidth, playerHeight);
 		setLocation(x, y);
 
-		bossX = groundContext.boss.getX();
-		bossY = groundContext.boss.getY();
+		bossX = groundContext.getBoss().getX();
+		bossY = groundContext.getBoss().getY();
 
-		bossWidth = groundContext.boss.getWidth();
-		bossHeight = groundContext.boss.getHeight();
+		bossWidth = groundContext.getBoss().getWidth();
+		bossHeight = groundContext.getBoss().getHeight();
 	}
 
 	@Override

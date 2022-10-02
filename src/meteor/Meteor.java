@@ -1,10 +1,18 @@
-package manyongCrush;
+package meteor;
 
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import frames.ChoiceLevel;
+import frames.Ground;
+import lombok.Getter;
+import lombok.Setter;
+import player.Player;
+
+@Getter
+@Setter
 public class Meteor extends JLabel {
 	private Random random = new Random();
 
@@ -29,7 +37,7 @@ public class Meteor extends JLabel {
 
 	public Meteor(Ground groundConText) {
 		this.groundContext = groundConText;
-		this.player = groundConText.player;
+		this.player = groundConText.getPlayer();
 
 		initData();
 		setInitLayout();
@@ -51,7 +59,6 @@ public class Meteor extends JLabel {
 
 	public void down(int mode) {
 
-		System.out.println(groundContext.player.isBeAttacked());
 		new Thread(() -> {
 			int downSpeed = 2;
 			while (true) {

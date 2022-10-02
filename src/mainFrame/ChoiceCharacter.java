@@ -1,4 +1,4 @@
-package manyongCrush;
+package mainFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import BGM.LoginBgm;
+import frames.ChoiceLevel;
+import frames.Ground;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,8 +35,6 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 		setInitLayout();
 		addEventListener();
 		bgm = new LoginBgm();
-//		LoginBgm bgm =  new LoginBgm();
-//		LoginBgm bgm = new LoginBgm();
 	}
 
 	private void initData() {
@@ -110,7 +110,7 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 			ChoiceLevel choiceLevel = new ChoiceLevel();
 			choiceLevel.setCharcterNumber(choiceCount);
 			System.out.println("마법사 선택 ");
-			// wizard 
+			// wizard
 //			bgm.clipStop();
 
 		} else {

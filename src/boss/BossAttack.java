@@ -1,11 +1,13 @@
-package manyongCrush;
+package boss;
 
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Wrath extends JLabel {
+import player.Player;
+
+public class BossAttack extends JLabel {
 
 	Random random = new Random();
 
@@ -26,7 +28,7 @@ public class Wrath extends JLabel {
 
 	private boolean wrathFlying;
 
-	public Wrath(Boss boss) {
+	public BossAttack(Boss boss) {
 		this.boss = boss;
 
 		initData();

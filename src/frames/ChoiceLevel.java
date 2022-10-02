@@ -1,4 +1,4 @@
-package manyongCrush;
+package frames;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import BGM.SelectBGM;
 import lombok.Getter;
 import lombok.Setter;
+import mainFrame.ChoiceCharacter;
 
 @Getter
 @Setter

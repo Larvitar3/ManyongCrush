@@ -1,9 +1,10 @@
-package manyongCrush;
+package boss;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import lombok.Data;
+import frames.GameState;
+import frames.Ground;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,7 @@ public class Boss extends JLabel {
 
 	Ground groundContext;
 
-	Wrath wrath;
+	BossAttack wrath;
 
 	protected ImageIcon[] boss = new ImageIcon[4];
 
@@ -44,7 +45,7 @@ public class Boss extends JLabel {
 		this.groundContext = groundContext;
 		this.hp = hp;
 		this.power = power;
-		wrath = new Wrath(this);
+		wrath = new BossAttack(this);
 
 		setInitLayout();
 	}

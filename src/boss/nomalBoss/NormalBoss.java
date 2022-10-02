@@ -1,6 +1,9 @@
-package manyongCrush;
+package boss.nomalBoss;
 
 import javax.swing.ImageIcon;
+
+import boss.Boss;
+import frames.Ground;
 
 public class NormalBoss extends Boss {
 

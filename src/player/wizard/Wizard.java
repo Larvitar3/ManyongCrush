@@ -1,6 +1,12 @@
-package manyongCrush;
+package player.wizard;
 
 import javax.swing.ImageIcon;
+
+import enums.PlayerWay;
+import frames.Ground;
+import player.Player;
+import skill.attack.Fireball;
+import skill.skill.ChainFireball;
 
 public class Wizard extends Player {
 

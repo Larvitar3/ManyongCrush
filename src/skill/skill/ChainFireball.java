@@ -1,6 +1,10 @@
-package manyongCrush;
+package skill.skill;
 
 import javax.swing.ImageIcon;
+
+import frames.Ground;
+import player.Player;
+import skill.SkillImpact;
 
 public class ChainFireball extends SkillImpact {
 

@@ -1,14 +1,11 @@
-package BackgroundService;
+package BackgroundService.NormalMode;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
-import manyongCrush.Player;
+import BackgroundService.BackgroundService;
+import player.Player;
 
 public class BackgroundServiceNormal extends BackgroundService {
 

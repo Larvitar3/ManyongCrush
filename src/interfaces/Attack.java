@@ -1,4 +1,4 @@
-package manyongCrush;
+package interfaces;
 
 public interface Attack {
 
