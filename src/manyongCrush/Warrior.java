@@ -40,31 +40,30 @@ public class Warrior extends Player {
 	@Override
 	public void attack() {
 
-
 		new Thread(() -> {
 
 			if (getPWay() == PlayerWay.LEFT) {
 				for (int i = 0; i < warriorLeftAttackMotion.length; i++) {
 					setIcon(getPlayerLeftAttackMotionImg()[i]);
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (Exception e) {
 						System.out.println("워리어 왼쪽 어택");
 					}
-					skillImpact = new Slash(groundContext, this, getX(), getY(), 30, 50, 110, 89);
-					groundContext.boss.beAttacked(skillImpact.getPower());
 				}
-			} else if(getPWay() == PlayerWay.RIGHT){
+				skillImpact = new Slash(groundContext, this, getX(), getY(), 30, 50, 150, 150);
+				skillImpact.skillsLeftFly();
+			} else if (getPWay() == PlayerWay.RIGHT) {
 				for (int i = 0; i < warriorRightAttackMotion.length; i++) {
 					setIcon(getPlayerRightAttackMotionImg()[i]);
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (Exception e) {
 						System.out.println("워리어 오른쪽 어택");
 					}
-					skillImpact = new Slash(groundContext, this, getX(), getY(), 30, 50, 110, 89);
-					groundContext.boss.beAttacked(skillImpact.getPower());
 				}
+				skillImpact = new Slash(groundContext, this, getX(), getY(), 30, 50, 150, 150);
+				skillImpact.skillsRightFly();
 			}
 		}).start();
 	}
@@ -74,26 +73,28 @@ public class Warrior extends Player {
 
 		new Thread(() -> {
 
-			if (isLeft()) {
+			if (pWay == PlayerWay.LEFT) {
 				for (int i = 0; i < warriorLeftSkillMotion.length; i++) {
 					setIcon(getPlayerLeftSkillMotionImg()[i]);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(200);
 					} catch (Exception e) {
 						System.out.println("워리어 왼쪽 스킬");
 					}
 				}
-				skillImpact = new MegaSlash(groundContext, this, getX(), getY(), 50, 70, 110, 104);
+				skillImpact = new MegaSlash(groundContext, this, getX(), getY(), 50, 70, 150, 170);
+				skillImpact.skillsLeftFly();
 			} else {
 				for (int i = 0; i < warriorRightSkillMotion.length; i++) {
 					setIcon(getPlayerRightSkillMotionImg()[i]);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(200);
 					} catch (Exception e) {
 						System.out.println("워리어 오른쪽 스킬");
 					}
 				}
-				skillImpact = new MegaSlash(groundContext, this, getX(), getY(), 30, 50, 110, 104);
+				skillImpact = new MegaSlash(groundContext, this, getX(), getY(), 30, 50, 150, 170);
+				skillImpact.skillsRightFly();
 			}
 		}).start();
 	}

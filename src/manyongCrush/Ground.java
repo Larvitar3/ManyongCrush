@@ -42,7 +42,7 @@ public class Ground extends JFrame {
 	JLabel bossHpBox;
 	JLabel bossHpText;
 	JLabel bossHpBgBox;
-	
+
 	JLabel modeLevel;
 
 	JLabel hpTitle;
@@ -56,9 +56,9 @@ public class Ground extends JFrame {
 	JLabel manualKeyU;
 	JLabel manualKeyLR;
 	JLabel manualKeyAtaack;
-	
+
 	GroundBGM groundBGM;
-	
+
 	int bossHpWidth;
 	int characterHpWidth;
 
@@ -74,7 +74,7 @@ public class Ground extends JFrame {
 
 			player = new Wizard(groundContext, "위자드", 200, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
-			boss = new NormalBoss(groundContext,800, 100);
+			boss = new NormalBoss(groundContext, 800, 100);
 			modeLevel = new JLabel("◆  N O R M A L  ◆");
 		}
 
@@ -83,21 +83,21 @@ public class Ground extends JFrame {
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new NormalBoss(groundContext, 800, 100);
 			modeLevel = new JLabel("◆  N O R M A L  ◆");
-			
-		}else if( modeCount == 3) {
-			
+
+		} else if (modeCount == 3) {
+
 			player = new Wizard(groundContext, "위자드", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new HellBoss(groundContext, 800, 100);
 			modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
-			
-		}else if(modeCount == 4) {
-			
+
+		} else if (modeCount == 4) {
+
 			player = new Warrior(groundContext, "전사", 300, 30, 116, 92, 116, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			boss = new HellBoss(groundContext, 1600, 100);
 			modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
-			
+
 		}
 		initData();
 		setInitLayout();
@@ -111,14 +111,14 @@ public class Ground extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		if (modeCount == 1 || modeCount == 2) {
-			
+
 			new Thread(backgroundService = new BackgroundServiceNormal(player)).start();
 			meteorList = new ArrayList<Meteor>();
 			for (int i = 0; i < 5; i++) {
 				meteorList.add(new Meteor(groundContext));
 			}
 			meteorStart(modeCount);
-			
+
 		} else {
 			new Thread(backgroundService = new BackgroundServiceHell(player)).start();
 			meteorList = new ArrayList<Meteor>();
@@ -146,7 +146,6 @@ public class Ground extends JFrame {
 			add(player);
 			add(boss);
 
-
 		} else if (modeCount == 3) {
 			// 마법사 / 헬
 			backgroundHellImage = new JLabel(new ImageIcon("images/bossBackgroundMapHell.jpg"));
@@ -154,7 +153,6 @@ public class Ground extends JFrame {
 			System.out.println("마법사 / 헬");
 			add(player);
 			add(boss);
-
 
 		} else if (modeCount == 4) {
 			// 전사 / 헬
@@ -164,26 +162,24 @@ public class Ground extends JFrame {
 			add(player);
 			add(boss);
 
-
 		} else {
 			System.out.println("테스트용 메인 카운트값 확인 바람");
 		}
 
 		bossHpBgBox = new JLabel();
 		bossHpBox = new JLabel();
-		
+
 		characterInfoBox = new JPanel();
 		manualBox = new JPanel();
 		characterHp = new JLabel("");
 		characterName = new JLabel(name);
 		hpTitle = new JLabel("HP");
 		skillTitle = new JLabel("스킬");
-		
+
 		manualKeyInfo = new JLabel("● ◎  조작 방법  ◎ ●");
 		manualKeyU = new JLabel("『↑ : 점프 ");
 		manualKeyLR = new JLabel("←  → : 좌우 이동  ");
 		manualKeyAtaack = new JLabel("     Q : 일반 공격, W : 스킬 』");
-		
 
 //		skillCount = wizard.getSkillCount();
 		skillCount = 5; // 테스트용 임시값 ▲ 값 넣고 삭제
@@ -210,20 +206,20 @@ public class Ground extends JFrame {
 		add(bossHpBgBox);
 		add(modeLevel);
 
-		modeLevel.setSize(200 , 40);
+		modeLevel.setSize(200, 40);
 		modeLevel.setLocation(100, 0);
 		modeLevel.setOpaque(true);
 		modeLevel.setBackground(blackOp);
 		modeLevel.setForeground(bloodRed);
 		modeLevel.setFont(new Font("SanSerif", Font.BOLD, 20));
 		modeLevel.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		bossHpBgBox.setSize(800, 40);
 		bossHpBgBox.setLocation(100, 50);
 		bossHpBgBox.setOpaque(true);
 		bossHpBgBox.setBackground(Color.LIGHT_GRAY);
 
-		bossHpWidth = boss.getHp(); 
+		bossHpWidth = boss.getHp();
 		bossHpBox.setSize(bossHpWidth, 40);
 		bossHpBox.setLocation(100, 50);
 		bossHpBox.setOpaque(true);
@@ -275,7 +271,7 @@ public class Ground extends JFrame {
 		characterInfoBox.setSize(200, 100);
 		characterInfoBox.setLocation(20, 540);
 		characterInfoBox.setBackground(blackOp);
-		
+
 		add(manualKeyInfo);
 		add(manualKeyU);
 		add(manualKeyLR);
@@ -284,22 +280,22 @@ public class Ground extends JFrame {
 		manualKeyInfo.setLocation(750, 540);
 		manualKeyInfo.setFont(new Font("SanSerif", Font.BOLD, 18));
 		manualKeyInfo.setForeground(Color.WHITE);
-		
+
 		manualKeyU.setSize(180, 20);
 		manualKeyU.setLocation(730, 580);
 		manualKeyU.setFont(new Font("SanSerif", Font.BOLD, 16));
 		manualKeyU.setForeground(Color.WHITE);
-		
+
 		manualKeyLR.setSize(180, 20);
 		manualKeyLR.setLocation(805, 580);
 		manualKeyLR.setFont(new Font("SanSerif", Font.BOLD, 16));
 		manualKeyLR.setForeground(Color.WHITE);
-		
+
 		manualKeyAtaack.setSize(230, 20);
 		manualKeyAtaack.setLocation(730, 605);
 		manualKeyAtaack.setFont(new Font("SanSerif", Font.BOLD, 16));
 		manualKeyAtaack.setForeground(Color.WHITE);
-		
+
 		add(manualBox);
 		manualBox.setSize(250, 100);
 		manualBox.setLocation(710, 540);
@@ -315,7 +311,7 @@ public class Ground extends JFrame {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					int keyCode = e.getKeyCode();
-					if (!player.isCrashWallL() && !player.isLeft() && keyCode == KeyEvent.VK_LEFT 
+					if (!player.isCrashWallL() && !player.isLeft() && keyCode == KeyEvent.VK_LEFT
 							&& player.getState() == 0) {
 						player.left();
 					} else if (!player.isCrashWallR() && !player.isRight() && keyCode == KeyEvent.VK_RIGHT
@@ -324,11 +320,9 @@ public class Ground extends JFrame {
 					} else if (!player.isDown() && !player.isJump() && keyCode == KeyEvent.VK_UP
 							&& player.getState() == 0) {
 						player.jump();
-					} else if (keyCode == KeyEvent.VK_Q
-							&& player.getState() == 0) {
+					} else if (keyCode == KeyEvent.VK_Q && player.getState() == 0) {
 						player.attack();
-					} else if (keyCode == KeyEvent.VK_W
-							&& player.getState() == 0) {
+					} else if (keyCode == KeyEvent.VK_W && player.getState() == 0) {
 						player.skill();
 					}
 				}

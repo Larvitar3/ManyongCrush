@@ -51,26 +51,22 @@ public class Wizard extends Player {
 			if (getPWay() == PlayerWay.LEFT) {
 				for (int i = 0; i < wizardLeftAttackMotion.length; i++) {
 					setIcon(getPlayerLeftAttackMotionImg()[i]);
-					System.out.println("위자드 왼쪽 어택");
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (Exception e) {
 					}
 				}
-				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 74, 45);
+				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 100, 100);
 				skillImpact.skillsLeftFly();
-			} else if(getPWay() == PlayerWay.RIGHT){
+			} else if (getPWay() == PlayerWay.RIGHT) {
 				for (int i = 0; i < wizardRightAttackMotion.length; i++) {
 					setIcon(getPlayerRightAttackMotionImg()[i]);
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (Exception e) {
-						System.out.println("위자드 오른쪽 어택");
 					}
 				}
-
-				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 74, 45); // 스킬 다른걸로 바꿔야함
-
+				skillImpact = new Fireball(groundContext, this, x, y, 30, 50, 100, 100); // 스킬 다른걸로 바꿔야함
 				skillImpact.skillsRightFly();
 			}
 		}).start();
@@ -85,9 +81,8 @@ public class Wizard extends Player {
 				for (int i = 0; i < wizardLeftSkillMotion.length; i++) {
 					setIcon(getPlayerLeftSkillMotionImg()[i]);
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (Exception e) {
-						System.out.println("위자드 왼쪽 스킬");
 					}
 				}
 				skillImpact = new ChainFireball(groundContext, this, x, y, 50, 100, 200, 170);
@@ -96,9 +91,8 @@ public class Wizard extends Player {
 				for (int i = 0; i < wizardRightSkillMotion.length; i++) {
 					setIcon(getPlayerRightSkillMotionImg()[i]);
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (Exception e) {
-						System.out.println("위자드 오른쪽 스킬");
 					}
 				}
 				skillImpact = new ChainFireball(groundContext, this, x, y, 30, 50, 200, 170);
