@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 import lombok.Getter;
 import lombok.Setter;
-import manyongCrush.Player;
+import player.Player;
 
 @Getter
 @Setter
