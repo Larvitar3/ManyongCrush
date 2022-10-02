@@ -55,7 +55,6 @@ public class Wizard extends Player {
 	@Override
 	public void attack() {
 
-<<<<<<< HEAD
 		// Q눌렀을 때 공격 모션
 		// 모션 중 스킬이 나감
 		// 파이어볼 객체 구현
@@ -84,7 +83,6 @@ public class Wizard extends Player {
 			}
 		}).start();
 		setAttacking(false);
-=======
 		if (!attackCoolTime) {
 
 			new Thread(() -> {
@@ -119,7 +117,6 @@ public class Wizard extends Player {
 			}).start();
 
 		}
->>>>>>> dev
 	}
 
 	@Override
