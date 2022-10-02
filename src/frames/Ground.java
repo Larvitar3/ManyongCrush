@@ -19,6 +19,7 @@ import BackgroundService.BackgroundService;
 import boss.Boss;
 import boss.hellBoss.HellBoss;
 import boss.nomalBoss.NormalBoss;
+import bottomFire.BottomFire;
 import lombok.Getter;
 import lombok.Setter;
 import meteor.Meteor;
@@ -36,6 +37,7 @@ public class Ground extends JFrame {
 	private Boss boss;
 	private Player player;
 	private SkillImpact skillImpact;
+	private BottomFire bottomFire;
 
 	private JLabel backgroundHellImage;
 	private JLabel backgroundNormalImage;
@@ -199,6 +201,8 @@ public class Ground extends JFrame {
 			characterSkillCounts[i] = new JLabel(skillCounts[i]);
 		}
 
+		bottomFire = new BottomFire(groundContext);
+
 	} // end of initData
 
 	private void setInitLayout() {
@@ -238,7 +242,6 @@ public class Ground extends JFrame {
 		bossHpBox.setBackground(bloodRed);
 
 		add(characterHp);
-
 		add(characterName);
 		add(hpTitle);
 		add(skillTitle);
@@ -308,6 +311,7 @@ public class Ground extends JFrame {
 		manualBox.setLocation(710, 540);
 		manualBox.setBackground(blackOp);
 
+		add(bottomFire);
 	} // end of setInitLayout
 
 	protected void addEventListener() {

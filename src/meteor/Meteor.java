@@ -16,12 +16,12 @@ import player.Player;
 public class Meteor extends JLabel {
 	private Random random = new Random();
 
-	Player player;
-	Ground groundContext;
+	private Player player;
+	private Ground groundContext;
 
 	private int x;
 	private int y;
-	private int power = 20;
+	private final int POWER = 20;
 
 	private final int LAVA_METEOR_WIDTH = 57;
 	private final int LAVA_METEOR_HEIGHT = 123;
@@ -35,9 +35,9 @@ public class Meteor extends JLabel {
 	private ImageIcon lavaBoomMeteorImage;
 	private ChoiceLevel choiceLevel;
 
-	public Meteor(Ground groundConText) {
-		this.groundContext = groundConText;
-		this.player = groundConText.getPlayer();
+	public Meteor(Ground groundContext) {
+		this.groundContext = groundContext;
+		this.player = groundContext.getPlayer();
 
 		initData();
 		setInitLayout();
@@ -104,16 +104,14 @@ public class Meteor extends JLabel {
 					setIcon(lavaBoomMeteorImage);
 					setLocation(x - 50, y);
 					setSize(148, 125);
-					player.beAttacked(power);
+					player.beAttacked(POWER);
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				y = -200;
 				setLocation(x, y);
-
 			}
 		}
-
 	}
 }
