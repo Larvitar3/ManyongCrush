@@ -18,6 +18,6 @@ public interface Moveable {
 	public abstract void die();
 
 	// 피격
-	public abstract void beAttacked();
+	public abstract void beAttacked(int damage);
 
 }

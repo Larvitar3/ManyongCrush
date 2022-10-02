@@ -20,7 +20,7 @@ public class Slash extends SkillImpact {
 	}
 
 	public void initData() {
-		
+
 		sight = 15;
 
 		skillBeforeFly = 3;

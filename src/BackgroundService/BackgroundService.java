@@ -36,7 +36,7 @@ public class BackgroundService implements Runnable {
 			if (playerBottomLeft + playerBottomRIght != -2) {
 				player.setDown(false);
 			} else {
-				if (!player.isJump() && !player.isDown()) {
+				if (!player.isJump() && !player.isDown() && !player.isBeAttacked()) {
 					player.down();
 				}
 			}
