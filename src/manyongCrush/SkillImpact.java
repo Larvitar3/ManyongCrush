@@ -12,6 +12,7 @@ public class SkillImpact extends JLabel {
 
 	protected Ground groundContext;
 	protected Player player;
+	protected SkillImpact skillImpact;
 
 	protected int leftX;
 	protected int rightX;
@@ -64,9 +65,8 @@ public class SkillImpact extends JLabel {
 		bossWidt = groundContext.boss.getWidth();
 		bossHeight = groundContext.boss.getHeight();
 
-//		changeMotion = skillLeftImpact.length;
-
 		groundContext.add(this);
+
 	}
 
 	public void setInitLayout() {
@@ -87,31 +87,27 @@ public class SkillImpact extends JLabel {
 					e.printStackTrace();
 				}
 			}
-
 			for (int i = 0; i < sight; i++) {
-
-				while (!checkBoss) {
-					for (changeMotion = skillBeforeDisappear; changeMotion > skillBeforeFly; changeMotion--) {
-						try {
-							setIcon(skillLeftImpact[changeMotion]);
-							leftX--;
-							setLocation(leftX, y);
-							checkBoss();
-							Thread.sleep(2);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+				for (changeMotion = skillBeforeDisappear; changeMotion > skillBeforeFly; changeMotion--) {
+					try {
+						setIcon(skillLeftImpact[changeMotion]);
+						leftX--;
+						setLocation(leftX, y);
+						checkBoss();
+						Thread.sleep(2);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
-					for (changeMotion = skillBeforeFly; changeMotion < skillBeforeDisappear; changeMotion++) {
-						try {
-							setIcon(skillLeftImpact[changeMotion]);
-							leftX--;
-							setLocation(leftX, y);
-							checkBoss();
-							Thread.sleep(2);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+				}
+				for (changeMotion = skillBeforeFly; changeMotion < skillBeforeDisappear; changeMotion++) {
+					try {
+						setIcon(skillLeftImpact[changeMotion]);
+						leftX--;
+						setLocation(leftX, y);
+						checkBoss();
+						Thread.sleep(2);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
 				}
 			}
@@ -134,7 +130,6 @@ public class SkillImpact extends JLabel {
 				}
 			}
 			for (int i = 0; i < sight && !checkBoss; i++) {
-
 				for (changeMotion = skillBeforeDisappear; changeMotion > skillBeforeFly; changeMotion--) {
 					try {
 						setIcon(skillRightImpact[changeMotion]);

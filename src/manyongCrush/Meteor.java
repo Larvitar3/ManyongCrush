@@ -94,18 +94,16 @@ public class Meteor extends JLabel {
 			if ((Math.abs(x - player.getX()) - 20 < 70 // 플레이어 좌표 감지
 					&& Math.abs(y - player.getY() + 60) < 40)) {
 				try {
-					setSize(148, 125);
 					setIcon(lavaBoomMeteorImage);
 					setLocation(x - 50, y);
 					setSize(148, 125);
+					player.beAttacked(power);
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				y = -200;
 				setLocation(x, y);
-				player.setHp(player.getHp() - power);
-				player.beAttacked();
 
 			}
 		}

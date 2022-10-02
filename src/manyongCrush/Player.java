@@ -27,15 +27,29 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	protected boolean crashWallL;
 	protected boolean crashWallR;
+	protected boolean crashBoss;
 
 	protected boolean beAttacked;
 	protected boolean attacking;
+
+	protected boolean attackCoolTime;
+	protected boolean skillCoolTime;
 
 	protected final int SPEED = 4;
 	protected final int JUMPSPEED = 2;
 	protected final int DOWNSPEED = 4;
 
+	private int bossX;
+	private int bossY;
+
+	private int bossWidth;
+	private int bossHeight;
+
+	private final int BOSSCRASHDAMAGE = 10;
+
 	protected PlayerWay pWay;
+
+	protected SkillImpact skillImpact;
 
 	protected ImageIcon[] playerLeftAttackMotionImg = new ImageIcon[2];
 	protected ImageIcon[] playerRightAttackMotionImg = new ImageIcon[2];
@@ -43,23 +57,23 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected ImageIcon[] playerLeftSkillMotionImg = new ImageIcon[2];
 	protected ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
 
-	protected ImageIcon playerDieMotionImg;
+	protected ImageIcon[] playerLeftBeAttacked = new ImageIcon[7];
+	protected ImageIcon[] playerRightBeAttacked = new ImageIcon[7];
 
-	protected SkillImpact[] skillImpacts = new SkillImpact[4];
+	protected ImageIcon playerDieMotionImg;
 
 	protected Ground groundContext;
 
-	public Player(Ground groundContext, String name, int hp, int power, int x, int y, int playerWidth,
-			int playerHeight) {
+	public Player(Ground groundContext, String name, int hp, int x, int y, int playerWidth, int playerHeight) {
 		this.name = name;
 		this.hp = hp;
-		this.power = power;
 		this.x = x;
 		this.y = y;
 		this.playerWidth = playerWidth;
 		this.playerHeight = playerHeight;
 		this.groundContext = groundContext;
 
+		skillCount = 5;
 		down = false;
 //		new Thread(new BackgroundService(this)).start();
 	}
@@ -69,7 +83,12 @@ public class Player extends JLabel implements Attack, Moveable {
 		setIcon(playerLeftAttackMotionImg[1]);
 		setSize(playerWidth, playerHeight);
 		setLocation(x, y);
-		System.out.println("케릭터 생성");
+
+		bossX = groundContext.boss.getX();
+		bossY = groundContext.boss.getY();
+
+		bossWidth = groundContext.boss.getWidth();
+		bossHeight = groundContext.boss.getHeight();
 	}
 
 	@Override
@@ -93,6 +112,7 @@ public class Player extends JLabel implements Attack, Moveable {
 					setIcon(playerRightAttackMotionImg[1]);
 					x += SPEED;
 					setLocation(x, y);
+					crashBoss();
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -101,7 +121,6 @@ public class Player extends JLabel implements Attack, Moveable {
 				}
 			}
 		}).start();
-
 	}
 
 	@Override
@@ -138,6 +157,7 @@ public class Player extends JLabel implements Attack, Moveable {
 				while (down && state == 0) {
 					y += DOWNSPEED;
 					setLocation(x, y);
+					crashBoss();
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -160,6 +180,7 @@ public class Player extends JLabel implements Attack, Moveable {
 				for (int i = 0; i < 130 / JUMPSPEED; i++) {
 					y -= JUMPSPEED;
 					setLocation(x, y);
+					crashBoss();
 					try {
 						Thread.sleep(5);
 					} catch (InterruptedException e) {
@@ -190,7 +211,8 @@ public class Player extends JLabel implements Attack, Moveable {
 	}
 
 	@Override
-	public void beAttacked() {
+	public void beAttacked(int damage) {
+
 		new Thread(() -> {
 
 			if (state == 0) {
@@ -200,16 +222,43 @@ public class Player extends JLabel implements Attack, Moveable {
 					hp = 0;
 					die();
 				}
-			}
-			try {
-//				setIcon(playerDieMotionImg); // 깜빡깜빡으로 바꿔야함
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				hp -= damage;
+				for (int i = 0; i < playerLeftBeAttacked.length; i++) {
+					try {
+						if (pWay == PlayerWay.LEFT) {
+							setIcon(playerLeftBeAttacked[i]);
+							x += 2;
+							y -= 2;
+							setLocation(x, y);
+						} else {
+							setIcon(playerRightBeAttacked[i]);
+							x -= 2;
+							y -= 2;
+							setLocation(x, y);
+						}
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			beAttacked = false;
-
 		}).start();
 	}
 
+	public void crashBoss() {
+
+		if ((Math.abs((x + (WIDTH / 2)) - (bossX + (bossWidth / 2))) < 200
+				&& Math.abs((y + (HEIGHT / 2)) - ((bossY + bossHeight) / 2)) < 250)) {
+			crashBoss = true;
+			try {
+				beAttacked(BOSSCRASHDAMAGE);
+				Thread.sleep(500);
+				System.out.println("먹나요");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		crashBoss = false;
+	}
 }
