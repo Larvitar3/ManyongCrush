@@ -24,7 +24,7 @@ public class NormalBoss extends Boss {
 		initData();
 		setInitLayout();
 		waiting();
-		
+
 	}
 
 	public void initData() {
@@ -40,5 +40,7 @@ public class NormalBoss extends Boss {
 		for (int i = 0; i < bossDieImg.length; i++) {
 			bossDie[i] = new ImageIcon(bossDieImg[i]);
 		}
+
+		bossBeAttacked = new ImageIcon("images/bossBeattacked.png");
 	}
 }

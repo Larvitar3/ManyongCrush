@@ -380,10 +380,7 @@ public class Ground extends JFrame {
 	}
 
 	public void bossInfo() {
-		if (boss.isBeAttacked()) {
-			bossHpWidth = boss.getHp();
-			bossHpBox.setSize(bossHpWidth, 40);
-		}
+		bossHpWidth = boss.getHp();
+		bossHpBox.setSize(bossHpWidth, 40);
 	}
-
 }

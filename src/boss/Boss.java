@@ -20,6 +20,8 @@ public class Boss extends JLabel {
 
 	protected ImageIcon[] bossDie = new ImageIcon[10];
 
+	protected ImageIcon bossBeAttacked;
+
 	private final int BOSS_WIDTH = 293;
 	private final int BOSS_HEIGHT = 590;
 
@@ -37,6 +39,9 @@ public class Boss extends JLabel {
 	private boolean attacking;
 	private boolean beAttacked;
 
+	private boolean attack;
+	private boolean wait;
+
 	private int damage;
 
 	public Boss(Ground groundContext, int hp, int power) {
@@ -48,7 +53,6 @@ public class Boss extends JLabel {
 	}
 
 	public void setInitLayout() {
-		setIcon(boss[0]);
 		setSize(BOSS_WIDTH, BOSS_HEIGHT);
 		setLocation(X, Y);
 
@@ -56,7 +60,10 @@ public class Boss extends JLabel {
 
 	public void waiting() {
 		new Thread(() -> {
+
 			waiting = true;
+			wait = true;
+
 			while (waiting && state == 0) {
 
 				for (int i = 0; i < boss.length; i++) {
@@ -70,6 +77,7 @@ public class Boss extends JLabel {
 				count++;
 				if (count % 10 == 0) {
 					waiting = false;
+					attacking = true;
 					attack();
 				}
 			}
@@ -77,24 +85,54 @@ public class Boss extends JLabel {
 	}
 
 	public void attack() {
+
 		new Thread(() -> {
 
-			if (!waiting && state == 0) {
+			attack = true;
+			wait = false;
 
-				for (int i = 0; i < bossAttack.length; i++) {
+			while (attacking) {
+
+				for (int i = 0; i < bossAttack.length && attack && state == 0; i++) {
 					try {
 						setIcon(bossAttack[i]);
-						Thread.sleep(150);
+						Thread.sleep(130);
 					} catch (InterruptedException e) {
 						System.err.println("보스 어택에서 에러");
 					}
-					if (bossAttack[i] == bossAttack[13]) {
-						attacking = true;
-					}
 				}
 				attacking = false;
-				waiting = true;
-				waiting();
+			}
+			waiting = true;
+			attack = false;
+			waiting();
+		}).start();
+	}
+
+	public void beAttacked(int damage) {
+
+		new Thread(() -> {
+
+			attack = false;
+			waiting = false;
+
+			if (state == 0 && hp > 0) {
+				try {
+					setIcon(bossBeAttacked);
+					hp -= damage;
+					groundContext.bossInfo();
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					System.err.println("보스 비 어택드 에러");
+				}
+				if (wait) {
+					waiting();
+				} else {
+					attack();
+				}
+			} else {
+				hp = 0;
+				die();
 			}
 		}).start();
 	}
@@ -109,37 +147,7 @@ public class Boss extends JLabel {
 				e.printStackTrace();
 			}
 		}
-
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		new GameState(state);
 		groundContext.setVisible(false);
-	}
-
-	public void beAttacked(int damage) {
-
-		new Thread(() -> {
-			if (state == 0) {
-				hp -= damage;
-				beAttacked = true;
-				System.out.println("보스 HP : " + hp);
-
-				groundContext.bossInfo();
-
-				if (hp <= 0) {
-					hp = 0;
-					die();
-				}
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-				}
-			}
-			beAttacked = false;
-
-		}).start();
 	}
 }
