@@ -105,6 +105,9 @@ public class Meteor extends JLabel {
 					setLocation(x - 50, y);
 					setSize(148, 125);
 					player.beAttacked(POWER);
+					player.setJump(false);
+					player.setLeft(false);
+					player.setRight(false);
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

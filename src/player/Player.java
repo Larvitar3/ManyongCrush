@@ -201,6 +201,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	@Override
 	public void die() {
+		
 		new Thread(() -> {
 			state = 1;
 			setIcon(playerDieMotionImg);
@@ -219,13 +220,14 @@ public class Player extends JLabel implements Attack, Moveable {
 	public void beAttacked(int damage) {
 
 		new Thread(() -> {
-
+		
 			if (state == 0) {
 				beAttacked = true;
 				groundContext.unitHpInfo();
 				if (hp <= 0) {
 					hp = 0;
 					die();
+					return;
 				}
 				hp -= damage;
 				for (int i = 0; i < playerLeftBeAttacked.length; i++) {
@@ -269,8 +271,9 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	public void bottomFireCheck() {
 
+		
 		beAttacked = true;
-
+		
 		if (x > bottomFire.getX() && y > bottomFire.getY()) {
 			try {
 				beAttacked(bottomFire.getDAMAGE());

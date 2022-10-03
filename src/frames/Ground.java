@@ -211,8 +211,8 @@ public class Ground extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 
-		meteorList.forEach((m) -> {
-			add(m);
+		meteorList.forEach((meteor) -> {
+			add(meteor);
 		});
 
 		Color blackOp = new Color(0, 0, 0, 200);

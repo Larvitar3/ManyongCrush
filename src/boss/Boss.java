@@ -8,6 +8,7 @@ import frames.Ground;
 import lombok.Getter;
 import lombok.Setter;
 
+@SuppressWarnings("serial")
 @Getter
 @Setter
 public class Boss extends JLabel {
