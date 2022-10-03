@@ -5,8 +5,8 @@ import javax.swing.ImageIcon;
 import enums.PlayerWay;
 import frames.Ground;
 import player.Player;
-import skill.attack.Fireball;
-import skill.skill.ChainFireball;
+import playerAttackSkill.attack.Fireball;
+import playerAttackSkill.skill.ChainFireball;
 
 public class Wizard extends Player {
 

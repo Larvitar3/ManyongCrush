@@ -11,7 +11,8 @@ import interfaces.Attack;
 import interfaces.Moveable;
 import lombok.Getter;
 import lombok.Setter;
-import skill.SkillImpact;
+import meteor.Meteor;
+import playerAttackSkill.SkillImpact;
 
 @Getter
 @Setter
@@ -49,13 +50,22 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected final int JUMPSPEED = 2;
 	protected final int DOWNSPEED = 4;
 
+	private final int BOSSCRASHDAMAGE = 10;
+	private final int BOTTOMFIREDAMAGE = 10;
+
 	private int bossX;
 	private int bossY;
 
 	private int bossWidth;
 	private int bossHeight;
 
-	private final int BOSSCRASHDAMAGE = 10;
+	private int bressX;
+	private int bressY;
+
+	private int bressWidth;
+	private int bressHeight;
+
+	private int bressDamage;
 
 	protected PlayerWay pWay;
 
@@ -73,6 +83,7 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected ImageIcon playerDieMotionImg;
 
 	protected Ground groundContext;
+
 	protected BottomFire bottomFire;
 
 	public Player(Ground groundContext, String name, int hp, int x, int y, int playerWidth, int playerHeight) {
@@ -83,7 +94,7 @@ public class Player extends JLabel implements Attack, Moveable {
 		this.playerWidth = playerWidth;
 		this.playerHeight = playerHeight;
 		this.groundContext = groundContext;
-		this.bottomFire = new BottomFire(player);
+		this.bottomFire = new BottomFire(this);
 
 		skillCount = 5;
 		down = false;
@@ -100,6 +111,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 		bossWidth = groundContext.getBoss().getWidth();
 		bossHeight = groundContext.getBoss().getHeight();
+
 	}
 
 	@Override
@@ -111,11 +123,12 @@ public class Player extends JLabel implements Attack, Moveable {
 			@Override
 			public void run() {
 
-				while (right && state == 0) {
+				while (right) {
 					setIcon(playerRightAttackMotionImg[1]);
 					x += SPEED;
 					setLocation(x, y);
 					crashBoss();
+					bottomFireCheck();
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -135,10 +148,12 @@ public class Player extends JLabel implements Attack, Moveable {
 
 			@Override
 			public void run() {
-				while (left && state == 0) {
+				while (left) {
 					setIcon(playerLeftAttackMotionImg[1]);
 					x -= SPEED;
 					setLocation(x, y);
+					bottomFireCheck();
+					crashBoss();
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -157,7 +172,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 			@Override
 			public void run() {
-				while (down && state == 0) {
+				while (down) {
 					y += DOWNSPEED;
 					setLocation(x, y);
 					crashBoss();
@@ -220,9 +235,14 @@ public class Player extends JLabel implements Attack, Moveable {
 	public void beAttacked(int damage) {
 
 		new Thread(() -> {
+<<<<<<< HEAD
 		
 			if (state == 0) {
 				beAttacked = true;
+=======
+
+			if (state == 0 && beAttacked) {
+>>>>>>> 694479026e79b3cfe0abf7c8eaef007ddaf90a65
 				groundContext.unitHpInfo();
 				if (hp <= 0) {
 					hp = 0;
@@ -257,7 +277,7 @@ public class Player extends JLabel implements Attack, Moveable {
 
 		if ((Math.abs((x + (WIDTH / 2)) - (bossX + (bossWidth / 2))) < 200
 				&& Math.abs((y + (HEIGHT / 2)) - ((bossY + bossHeight) / 2)) < 250)) {
-			crashBoss = true;
+			beAttacked = true;
 			try {
 				beAttacked(BOSSCRASHDAMAGE);
 				Thread.sleep(500);
@@ -266,18 +286,23 @@ public class Player extends JLabel implements Attack, Moveable {
 				e.printStackTrace();
 			}
 		}
-		crashBoss = false;
+		beAttacked = false;
 	}
 
 	public void bottomFireCheck() {
 
+<<<<<<< HEAD
 		
 		beAttacked = true;
 		
 		if (x > bottomFire.getX() && y > bottomFire.getY()) {
+=======
+		if (x + WIDTH > bottomFire.getX() && y + (HEIGHT / 2) > bottomFire.getY()) {
+			beAttacked = true;
+>>>>>>> 694479026e79b3cfe0abf7c8eaef007ddaf90a65
 			try {
-				beAttacked(bottomFire.getDAMAGE());
-				Thread.sleep(3000);
+				beAttacked(BOTTOMFIREDAMAGE);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

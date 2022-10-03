@@ -15,8 +15,6 @@ public class Boss extends JLabel {
 
 	Ground groundContext;
 
-	BossAttack wrath;
-
 	protected ImageIcon[] boss = new ImageIcon[4];
 
 	protected ImageIcon[] bossAttack = new ImageIcon[19];
@@ -27,7 +25,7 @@ public class Boss extends JLabel {
 	private final int BOSS_HEIGHT = 590;
 
 	private final int X = 650;
-	private final int Y = 55;
+	private final int Y = 40;
 
 	private int hp = 600;
 	private int power;
@@ -46,7 +44,6 @@ public class Boss extends JLabel {
 		this.groundContext = groundContext;
 		this.hp = hp;
 		this.power = power;
-		wrath = new BossAttack(this);
 
 		setInitLayout();
 	}

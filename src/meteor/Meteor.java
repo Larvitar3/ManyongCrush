@@ -17,7 +17,6 @@ public class Meteor extends JLabel {
 	private Random random = new Random();
 
 	private Player player;
-	private Ground groundContext;
 
 	private int x;
 	private int y;
@@ -36,7 +35,6 @@ public class Meteor extends JLabel {
 	private ChoiceLevel choiceLevel;
 
 	public Meteor(Ground groundContext) {
-		this.groundContext = groundContext;
 		this.player = groundContext.getPlayer();
 
 		initData();
@@ -100,6 +98,7 @@ public class Meteor extends JLabel {
 		if (!player.isBeAttacked()) { // 안맞았을때
 			if ((Math.abs(x - player.getX()) - 20 < 70 // 플레이어 좌표 감지
 					&& Math.abs(y - player.getY() + 60) < 40)) {
+				player.setBeAttacked(true);
 				try {
 					setIcon(lavaBoomMeteorImage);
 					setLocation(x - 50, y);
@@ -115,6 +114,7 @@ public class Meteor extends JLabel {
 				y = -200;
 				setLocation(x, y);
 			}
+			player.setBeAttacked(false);
 		}
 	}
 }

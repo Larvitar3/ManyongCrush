@@ -5,9 +5,9 @@ import javax.swing.ImageIcon;
 import enums.PlayerWay;
 import frames.Ground;
 import player.Player;
-import skill.SkillImpact;
-import skill.attack.Slash;
-import skill.skill.MegaSlash;
+import playerAttackSkill.SkillImpact;
+import playerAttackSkill.attack.Slash;
+import playerAttackSkill.skill.MegaSlash;
 
 public class Warrior extends Player {
 

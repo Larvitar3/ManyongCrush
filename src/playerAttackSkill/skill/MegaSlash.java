@@ -1,10 +1,10 @@
-package skill.skill;
+package playerAttackSkill.skill;
 
 import javax.swing.ImageIcon;
 
 import frames.Ground;
 import player.Player;
-import skill.SkillImpact;
+import playerAttackSkill.SkillImpact;
 
 public class MegaSlash extends SkillImpact {
 
