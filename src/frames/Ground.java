@@ -201,7 +201,7 @@ public class Ground extends JFrame {
 			characterSkillCounts[i] = new JLabel(skillCounts[i]);
 		}
 
-		bottomFire = new BottomFire(groundContext);
+		bottomFire = new BottomFire(groundContext.player);
 
 	} // end of initData
 

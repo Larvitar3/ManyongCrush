@@ -3,6 +3,7 @@ package player;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import bottomFire.BottomFire;
 import enums.PlayerWay;
 import frames.GameState;
 import frames.Ground;
@@ -16,7 +17,10 @@ import skill.SkillImpact;
 @Setter
 public class Player extends JLabel implements Attack, Moveable {
 
+	private Player player = this;
+
 	protected String name;
+
 	protected int hp;
 	protected int power;
 	protected int x;
@@ -68,6 +72,7 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected ImageIcon playerDieMotionImg;
 
 	protected Ground groundContext;
+	protected BottomFire bottomFire;
 
 	public Player(Ground groundContext, String name, int hp, int x, int y, int playerWidth, int playerHeight) {
 		this.name = name;
@@ -77,6 +82,7 @@ public class Player extends JLabel implements Attack, Moveable {
 		this.playerWidth = playerWidth;
 		this.playerHeight = playerHeight;
 		this.groundContext = groundContext;
+		this.bottomFire = new BottomFire(player);
 
 		skillCount = 5;
 		down = false;
@@ -93,14 +99,6 @@ public class Player extends JLabel implements Attack, Moveable {
 
 		bossWidth = groundContext.getBoss().getWidth();
 		bossHeight = groundContext.getBoss().getHeight();
-	}
-
-	@Override
-	public void attack() {
-	}
-
-	@Override
-	public void skill() {
 	}
 
 	@Override
@@ -162,6 +160,7 @@ public class Player extends JLabel implements Attack, Moveable {
 					y += DOWNSPEED;
 					setLocation(x, y);
 					crashBoss();
+					bottomFireCheck();
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -185,6 +184,7 @@ public class Player extends JLabel implements Attack, Moveable {
 					y -= JUMPSPEED;
 					setLocation(x, y);
 					crashBoss();
+					bottomFireCheck();
 					try {
 						Thread.sleep(5);
 					} catch (InterruptedException e) {
@@ -264,5 +264,20 @@ public class Player extends JLabel implements Attack, Moveable {
 			}
 		}
 		crashBoss = false;
+	}
+
+	public void bottomFireCheck() {
+
+		beAttacked = true;
+
+		if (x > bottomFire.getX() && y > bottomFire.getY()) {
+			try {
+				beAttacked(bottomFire.getDAMAGE());
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		beAttacked = false;
 	}
 }
