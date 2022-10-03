@@ -41,8 +41,6 @@ public class BackgroundService implements Runnable {
 				}
 			}
 
-			// 마법사
-			// 충돌 감지 조건
 			if (playerBottomLeftColor.getRed() == 254 && playerBottomLeftColor.getGreen() == 0
 					&& playerBottomLeftColor.getBlue() == 0) {
 				player.setCrashWallL(true);

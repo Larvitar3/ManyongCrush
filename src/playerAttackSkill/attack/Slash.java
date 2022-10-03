@@ -1,10 +1,10 @@
-package skill.attack;
+package playerAttackSkill.attack;
 
 import javax.swing.ImageIcon;
 
 import frames.Ground;
 import player.Player;
-import skill.SkillImpact;
+import playerAttackSkill.SkillImpact;
 
 public class Slash extends SkillImpact {
 

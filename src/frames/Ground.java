@@ -13,9 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import BGM.GroundBGM;
+import BackgroundService.BackgroundService;
 import BackgroundService.HellMode.BackgroundServiceHell;
 import BackgroundService.NormalMode.BackgroundServiceNormal;
-import BackgroundService.BackgroundService;
 import boss.Boss;
 import boss.hellBoss.HellBoss;
 import boss.nomalBoss.NormalBoss;
@@ -26,7 +26,6 @@ import meteor.Meteor;
 import player.Player;
 import player.warrior.Warrior;
 import player.wizard.Wizard;
-import skill.SkillImpact;
 
 @Getter
 @Setter
@@ -36,7 +35,6 @@ public class Ground extends JFrame {
 
 	private Boss boss;
 	private Player player;
-	private SkillImpact skillImpact;
 	private BottomFire bottomFire;
 
 	private JLabel backgroundHellImage;
@@ -84,7 +82,6 @@ public class Ground extends JFrame {
 	public Ground(int modeCount, int charcterNumber) {
 		this.modeCount = modeCount;
 		this.charcterNumber = charcterNumber;
-		this.player = groundContext.player;
 		this.groundBGM = new GroundBGM();
 
 		if (modeCount == 1) {
@@ -315,41 +312,37 @@ public class Ground extends JFrame {
 	} // end of setInitLayout
 
 	protected void addEventListener() {
-		if (player.getState() == 0) {
 
-			this.addKeyListener(new KeyAdapter() {
+		this.addKeyListener(new KeyAdapter() {
 
-				@Override
-				public synchronized void keyPressed(KeyEvent e) {
-					int keyCode = e.getKeyCode();
-					if (!player.isCrashWallL() && !player.isLeft() && keyCode == KeyEvent.VK_LEFT
-							&& player.getState() == 0 && !player.isBeAttacked()) {
+			@Override
+			public synchronized void keyPressed(KeyEvent e) {
+				int keyCode = e.getKeyCode();
+				if (player.getState() == 0 && !player.isBeAttacked()) {
+					if (!player.isCrashWallL() && !player.isLeft() && keyCode == KeyEvent.VK_LEFT) {
 						player.left();
-					} else if (!player.isCrashWallR() && !player.isRight() && keyCode == KeyEvent.VK_RIGHT
-							&& player.getState() == 0 && !player.isBeAttacked()) {
+					} else if (!player.isCrashWallR() && !player.isRight() && keyCode == KeyEvent.VK_RIGHT) {
 						player.right();
-					} else if (!player.isDown() && !player.isJump() && keyCode == KeyEvent.VK_UP
-							&& player.getState() == 0 && !player.isBeAttacked()) {
+					} else if (!player.isDown() && !player.isJump() && keyCode == KeyEvent.VK_UP) {
 						player.jump();
-					} else if (keyCode == KeyEvent.VK_Q && player.getState() == 0 && !player.isBeAttacked()) {
+					} else if (keyCode == KeyEvent.VK_Q && !player.isBeAttacked()) {
 						player.attack();
-					} else if (keyCode == KeyEvent.VK_W && player.getState() == 0 && !player.isBeAttacked()) {
+					} else if (keyCode == KeyEvent.VK_W) {
 						player.skill();
 					}
 				}
+			}
 
-				@Override
-				public synchronized void keyReleased(KeyEvent e) {
-					int keyCode = e.getKeyCode();
-					if (keyCode == KeyEvent.VK_LEFT) {
-						player.setLeft(false);
-					} else if (keyCode == KeyEvent.VK_RIGHT) {
-						player.setRight(false);
-					}
+			@Override
+			public synchronized void keyReleased(KeyEvent e) {
+				int keyCode = e.getKeyCode();
+				if (keyCode == KeyEvent.VK_LEFT) {
+					player.setLeft(false);
+				} else if (keyCode == KeyEvent.VK_RIGHT) {
+					player.setRight(false);
 				}
-			});
-		}
-
+			}
+		});
 	} // end of addEventListenter
 
 	private void meteorStart(int mode) {
