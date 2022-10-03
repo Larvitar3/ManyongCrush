@@ -40,6 +40,7 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected boolean crashBoss;
 
 	protected boolean beAttacked;
+	protected boolean attacking;
 
 	protected boolean attackCoolTime;
 	protected boolean skillCoolTime;
