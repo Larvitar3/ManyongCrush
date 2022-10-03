@@ -2,8 +2,10 @@ package interfaces;
 
 public interface Attack {
 
-	public abstract void attack();
+	default void attack() {
+	}
 
-	public abstract void skill();
+	default void skill() {
+	}
 
 }
