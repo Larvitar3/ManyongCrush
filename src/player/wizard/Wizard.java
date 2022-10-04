@@ -29,6 +29,7 @@ public class Wizard extends Player {
 	public Wizard(Ground groundContext, String name, int hp, int x, int y, int playerWidth, int playerHeight) {
 		super(groundContext, name, hp, x, y, playerWidth, playerHeight);
 		this.groundContext = groundContext;
+		System.out.println("위자드 생성");
 
 		initData();
 		setInitLayout();
@@ -38,6 +39,7 @@ public class Wizard extends Player {
 	public void initData() {
 		for (int i = 0; i < wizardLeftAttackMotion.length; i++) {
 			playerLeftAttackMotionImg[i] = new ImageIcon(wizardLeftAttackMotion[i]);
+			System.out.println("사진 넣음");
 		}
 		for (int i = 0; i < wizardRightAttackMotion.length; i++) {
 			playerRightAttackMotionImg[i] = new ImageIcon(wizardRightAttackMotion[i]);

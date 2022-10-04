@@ -108,7 +108,7 @@ public class Ground extends JFrame {
 		} else if (modeCount == 4) {
 
 			boss = new HellBoss(groundContext, 800, 100);
-			player = new Warrior(groundContext, "전사", 500, 116, 92, 135, 92);
+			player = new Warrior(groundContext, "전사", 300, 116, 92, 135, 92);
 			name = "▶ ▷ " + player.getName() + " ◁ ◀";
 			modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
 		}
@@ -135,16 +135,19 @@ public class Ground extends JFrame {
 		} else {
 			new Thread(backgroundService = new BackgroundServiceHell(player)).start();
 			meteorList = new ArrayList<Meteor>();
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 7; i++) {
 				meteorList.add(new Meteor(groundContext));
 			}
 			meteorStart(modeCount);
 		}
 
+		System.out.println("모드 카운터 값 : " + modeCount);
+
 		if (modeCount == 1) {
 			// 마법사 / 노말
 			backgroundNormalImage = new JLabel(new ImageIcon("images/bossBackgroundMap.jpg"));
 			setContentPane(backgroundNormalImage);
+			System.out.println("마법사 / 노말");
 			add(player);
 			add(boss);
 
@@ -152,6 +155,7 @@ public class Ground extends JFrame {
 			// 전사 / 노말
 			backgroundNormalImage = new JLabel(new ImageIcon("images/bossBackgroundMap.jpg"));
 			setContentPane(backgroundNormalImage);
+			System.out.println("전사 / 노말");
 			add(player);
 			add(boss);
 
@@ -159,6 +163,7 @@ public class Ground extends JFrame {
 			// 마법사 / 헬
 			backgroundHellImage = new JLabel(new ImageIcon("images/bossBackgroundMapHell.jpg"));
 			setContentPane(backgroundHellImage);
+			System.out.println("마법사 / 헬");
 			add(player);
 			add(boss);
 
@@ -166,11 +171,13 @@ public class Ground extends JFrame {
 			// 전사 / 헬
 			backgroundHellImage = new JLabel(new ImageIcon("images/bossBackgroundMapHell.jpg"));
 			setContentPane(backgroundHellImage);
+			System.out.println("전사 / 헬");
 			add(player);
 			add(boss);
 
+		} else {
+			System.out.println("테스트용 메인 카운트값 확인 바람");
 		}
-		
 
 		bossHpBgBox = new JLabel();
 		bossHpBox = new JLabel();
@@ -373,7 +380,10 @@ public class Ground extends JFrame {
 	}
 
 	public void bossInfo() {
-		bossHpWidth = boss.getHp();
-		bossHpBox.setSize(bossHpWidth, 40);
+		if (boss.isBeAttacked()) {
+			bossHpWidth = boss.getHp();
+			bossHpBox.setSize(bossHpWidth, 40);
+		}
 	}
+
 }
