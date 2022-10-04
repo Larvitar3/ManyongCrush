@@ -17,11 +17,13 @@ import mainFrame.ChoiceCharacter;
 @Setter
 public class ChoiceLevel extends JFrame implements ActionListener {
 
+	ChoiceCharacter choiceCharacter;
+
 	JLabel backgroundImage;
 
 	JButton choiceNormal;
 	JButton choiceHell;
-	ChoiceCharacter choiceCharacter;
+
 	SelectBGM selectBGM;
 
 	int charcterNumber;
@@ -70,15 +72,12 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 		choiceNormal.setLocation(158, 248);
 		choiceNormal.setBorderPainted(false);
 		choiceNormal.setContentAreaFilled(false);
-		// 노말 선택 설정
 
 		add(choiceHell);
 		choiceHell.setSize(262, 310);
 		choiceHell.setLocation(563, 248);
 		choiceHell.setBorderPainted(false);
 		choiceHell.setContentAreaFilled(false);
-		// 헬 선택 설정
-
 	}
 
 	private void addEventListener() {

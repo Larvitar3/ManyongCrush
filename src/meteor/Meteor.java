@@ -14,25 +14,25 @@ import player.Player;
 @Getter
 @Setter
 public class Meteor extends JLabel {
+
 	private Random random = new Random();
 
+	private ChoiceLevel choiceLevel;
 	private Player player;
-
-	private int x;
-	private int y;
-	private final int POWER = 20;
-
-	private final int LAVA_METEOR_WIDTH = 57;
-	private final int LAVA_METEOR_HEIGHT = 123;
-
-	private boolean lavaMeteorFalling;// true : 떨어짐
-	private boolean hited; // 플레이어가 맞았을때
-
-	private int lavaMeteors;
 
 	private ImageIcon lavaMeteorImage;
 	private ImageIcon lavaBoomMeteorImage;
-	private ChoiceLevel choiceLevel;
+
+	private final int POWER = 20;
+	private final int LAVA_METEOR_WIDTH = 57;
+	private final int LAVA_METEOR_HEIGHT = 123;
+
+	private int x;
+	private int y;
+	private int lavaMeteors;
+
+	private boolean lavaMeteorFalling;// true : 떨어짐
+	private boolean hited; // 플레이어가 맞았을때
 
 	public Meteor(Ground groundContext) {
 		this.player = groundContext.getPlayer();

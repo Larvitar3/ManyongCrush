@@ -15,6 +15,15 @@ public class BottomFire extends JLabel {
 	private Player player;
 	private Ground groundContext;
 
+	private ImageIcon[] bottomFires = new ImageIcon[10];
+	private String[] bottomFireImages = { "images/bottomFire1.png", "images/bottomFire2.png", "images/bottomFire3.png",
+			"images/bottomFire4.png", "images/bottomFire5.png", "images/bottomFire6.png", "images/bottomFire7.png",
+			"images/bottomFire8.png", "images/bottomFire9.png", "images/bottomFire10.png" };
+
+	private final int DAMAGE = 1;
+	private final int WIDTH = 500;
+	private final int HEIGHT = 200;
+
 	private int x;
 	private int y;
 
@@ -23,15 +32,6 @@ public class BottomFire extends JLabel {
 
 	private int playerWidth;
 	private int playerHeight;
-
-	private final int DAMAGE = 1;
-	private final int WIDTH = 500;
-	private final int HEIGHT = 200;
-
-	private ImageIcon[] bottomFires = new ImageIcon[10];
-	private String[] bottomFireImages = { "images/bottomFire1.png", "images/bottomFire2.png", "images/bottomFire3.png",
-			"images/bottomFire4.png", "images/bottomFire5.png", "images/bottomFire6.png", "images/bottomFire7.png",
-			"images/bottomFire8.png", "images/bottomFire9.png", "images/bottomFire10.png" };
 
 	public BottomFire(Player player) {
 		this.player = player;

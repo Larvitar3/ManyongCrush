@@ -11,6 +11,7 @@ import interfaces.Attack;
 import interfaces.Moveable;
 import lombok.Getter;
 import lombok.Setter;
+import meteor.Meteor;
 import playerAttackSkill.SkillImpact;
 
 @Getter
@@ -18,8 +19,29 @@ import playerAttackSkill.SkillImpact;
 public class Player extends JLabel implements Attack, Moveable {
 
 	private Player player = this;
+	protected SkillImpact skillImpact;
+	protected Ground groundContext;
+	protected BottomFire bottomFire;
 
-	protected String name;
+	protected ImageIcon[] playerLeftAttackMotionImg = new ImageIcon[2];
+	protected ImageIcon[] playerRightAttackMotionImg = new ImageIcon[2];
+
+	protected ImageIcon[] playerLeftSkillMotionImg = new ImageIcon[2];
+	protected ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
+
+	protected ImageIcon[] playerLeftBeAttacked = new ImageIcon[7];
+	protected ImageIcon[] playerRightBeAttacked = new ImageIcon[7];
+
+	protected ImageIcon playerDieMotionImg;
+
+	protected PlayerWay pWay;
+
+	protected final int SPEED = 4;
+	protected final int JUMPSPEED = 2;
+	protected final int DOWNSPEED = 4;
+
+	private final int BOSSCRASHDAMAGE = 10;
+	private final int BOTTOMFIREDAMAGE = 10;
 
 	protected int hp;
 	protected int power;
@@ -29,27 +51,6 @@ public class Player extends JLabel implements Attack, Moveable {
 	protected int playerHeight;
 	protected int state = 0;
 	protected int skillCount;
-
-	protected boolean left;
-	protected boolean right;
-	protected boolean jump;
-	protected boolean down;
-
-	protected boolean crashWallL;
-	protected boolean crashWallR;
-	protected boolean crashBoss;
-
-	protected boolean beAttacked;
-
-	protected boolean attackCoolTime;
-	protected boolean skillCoolTime;
-
-	protected final int SPEED = 4;
-	protected final int JUMPSPEED = 2;
-	protected final int DOWNSPEED = 4;
-
-	private final int BOSSCRASHDAMAGE = 10;
-	private final int BOTTOMFIREDAMAGE = 10;
 
 	private int bossX;
 	private int bossY;
@@ -65,24 +66,21 @@ public class Player extends JLabel implements Attack, Moveable {
 
 	private int bressDamage;
 
-	protected PlayerWay pWay;
+	protected boolean left;
+	protected boolean right;
+	protected boolean jump;
+	protected boolean down;
 
-	protected SkillImpact skillImpact;
+	protected boolean crashWallL;
+	protected boolean crashWallR;
+	protected boolean crashBoss;
 
-	protected ImageIcon[] playerLeftAttackMotionImg = new ImageIcon[2];
-	protected ImageIcon[] playerRightAttackMotionImg = new ImageIcon[2];
+	protected boolean beAttacked;
 
-	protected ImageIcon[] playerLeftSkillMotionImg = new ImageIcon[2];
-	protected ImageIcon[] playerRightSkillMotionImg = new ImageIcon[2];
+	protected boolean attackCoolTime;
+	protected boolean skillCoolTime;
 
-	protected ImageIcon[] playerLeftBeAttacked = new ImageIcon[7];
-	protected ImageIcon[] playerRightBeAttacked = new ImageIcon[7];
-
-	protected ImageIcon playerDieMotionImg;
-
-	protected Ground groundContext;
-
-	protected BottomFire bottomFire;
+	protected String name;
 
 	public Player(Ground groundContext, String name, int hp, int x, int y, int playerWidth, int playerHeight) {
 		this.name = name;

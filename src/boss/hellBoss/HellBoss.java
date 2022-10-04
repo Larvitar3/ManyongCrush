@@ -39,5 +39,7 @@ public class HellBoss extends Boss {
 		for (int i = 0; i < bossDieImg.length; i++) {
 			bossDie[i] = new ImageIcon(bossDieImg[i]);
 		}
+
 	}
+
 }

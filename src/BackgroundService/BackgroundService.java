@@ -15,9 +15,9 @@ import player.Player;
 @Setter
 public class BackgroundService implements Runnable {
 
-	protected BufferedImage playerService;
-
 	private Player player;
+
+	protected BufferedImage playerService;
 
 	public BackgroundService(Player player) {
 		this.player = player;

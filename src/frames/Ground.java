@@ -36,17 +36,15 @@ public class Ground extends JFrame {
 	private Boss boss;
 	private Player player;
 	private BottomFire bottomFire;
-
-	private JLabel backgroundHellImage;
-	private JLabel backgroundNormalImage;
 	private BackgroundService backgroundService;
 
 	private List<Meteor> meteorList;
 
-	private boolean flag;
-
 	private JLabel[] characterSkillCounts = new JLabel[5];
 	private String[] skillCounts = { " ● ", " ● ", " ● ", " ● ", " ● " };
+
+	private JLabel backgroundHellImage;
+	private JLabel backgroundNormalImage;
 
 	private JLabel bossHpBox;
 	private JLabel bossHpText;
@@ -66,10 +64,9 @@ public class Ground extends JFrame {
 	private JLabel manualKeyLR;
 	private JLabel manualKeyAtaack;
 
-	private GroundBGM groundBGM;
-
 	private boolean attacking;
 	private boolean skillIng;
+	private boolean flag;
 
 	private int bossHpWidth;
 	private int characterHpWidth;
@@ -78,6 +75,8 @@ public class Ground extends JFrame {
 	private int skillCount;
 
 	private String name;
+
+	private GroundBGM groundBGM;
 
 	public Ground(int modeCount, int charcterNumber) {
 		this.modeCount = modeCount;
@@ -141,13 +140,10 @@ public class Ground extends JFrame {
 			meteorStart(modeCount);
 		}
 
-		System.out.println("모드 카운터 값 : " + modeCount);
-
 		if (modeCount == 1) {
 			// 마법사 / 노말
 			backgroundNormalImage = new JLabel(new ImageIcon("images/bossBackgroundMap.jpg"));
 			setContentPane(backgroundNormalImage);
-			System.out.println("마법사 / 노말");
 			add(player);
 			add(boss);
 
@@ -155,7 +151,6 @@ public class Ground extends JFrame {
 			// 전사 / 노말
 			backgroundNormalImage = new JLabel(new ImageIcon("images/bossBackgroundMap.jpg"));
 			setContentPane(backgroundNormalImage);
-			System.out.println("전사 / 노말");
 			add(player);
 			add(boss);
 
@@ -163,7 +158,6 @@ public class Ground extends JFrame {
 			// 마법사 / 헬
 			backgroundHellImage = new JLabel(new ImageIcon("images/bossBackgroundMapHell.jpg"));
 			setContentPane(backgroundHellImage);
-			System.out.println("마법사 / 헬");
 			add(player);
 			add(boss);
 
@@ -171,12 +165,9 @@ public class Ground extends JFrame {
 			// 전사 / 헬
 			backgroundHellImage = new JLabel(new ImageIcon("images/bossBackgroundMapHell.jpg"));
 			setContentPane(backgroundHellImage);
-			System.out.println("전사 / 헬");
 			add(player);
 			add(boss);
 
-		} else {
-			System.out.println("테스트용 메인 카운트값 확인 바람");
 		}
 
 		bossHpBgBox = new JLabel();

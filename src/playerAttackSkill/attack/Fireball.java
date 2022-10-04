@@ -17,13 +17,12 @@ public class Fireball extends SkillImpact {
 			int skillHeight) {
 		super(groundContext, player, x, y, power, skillPower, skillWidth, skillHeight);
 
-		
 		initData();
 		setInitLayout();
 	}
 
 	public void initData() {
-		
+
 		sight = 10;
 
 		skillBeforeDisappear = 10;

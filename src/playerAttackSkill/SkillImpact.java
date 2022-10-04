@@ -16,6 +16,9 @@ public class SkillImpact extends JLabel {
 	protected Player player;
 	protected SkillImpact skillImpact;
 
+	protected ImageIcon[] skillLeftImpact = new ImageIcon[16];
+	protected ImageIcon[] skillRightImpact = new ImageIcon[16];
+
 	protected int leftX;
 	protected int rightX;
 
@@ -45,9 +48,6 @@ public class SkillImpact extends JLabel {
 	private int changeMotion;
 
 	private boolean checkBoss;
-
-	protected ImageIcon[] skillLeftImpact = new ImageIcon[16];
-	protected ImageIcon[] skillRightImpact = new ImageIcon[16];
 
 	public SkillImpact(Ground groundContext, Player player, int x, int y, int power, int skillPower, int skillWidth,
 			int skillHeight) {

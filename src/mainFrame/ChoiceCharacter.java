@@ -26,9 +26,10 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 
 	JButton choiceWizard;
 	JButton choiceWarrior;
-	LoginBgm bgm;
 
 	int choiceCount;
+
+	LoginBgm bgm;
 
 	public ChoiceCharacter() {
 		initData();
@@ -91,6 +92,7 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 		choiceWarrior.setLocation(576, 537);
 		choiceWarrior.setBorderPainted(false);
 		choiceWarrior.setContentAreaFilled(false);
+
 	}
 
 	private void addEventListener() {
@@ -115,6 +117,7 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 			choiceLevel.setCharcterNumber(choiceCount);
 		}
 		bgm.clipStop();
+		System.out.println(choiceCount);
 
 	}
 

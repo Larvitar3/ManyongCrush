@@ -19,11 +19,7 @@ public class SelectBGM {
 			clip = AudioSystem.getClip();
 			clip.open(ais);
 
-			// 소리 설정
 			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-
-			// 볼륨 조정
-//            gainControl.setValue(-30.0f);
 
 			clip.start();
 

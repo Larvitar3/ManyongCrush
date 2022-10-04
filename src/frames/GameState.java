@@ -33,12 +33,10 @@ public class GameState extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		if (stateCount == 1) {
-			// 보스가 죽었을 경우
 			backgroundClearImage = new JLabel(new ImageIcon("images/gameClearBackground.jpg"));
 			setContentPane(backgroundClearImage);
 
 		} else if (stateCount == 0) {
-			// 플레이어가 죽었을경우
 			backgroundOverImage = new JLabel(new ImageIcon("images/gameOverBackground.jpg"));
 			setContentPane(backgroundOverImage);
 		}
@@ -86,10 +84,10 @@ public class GameState extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == yesBtn) {
+		if (e.getSource() == yesBtn) {
 			setVisible(false);
 			new ChoiceCharacter();
-		}else if(e.getSource() == noBtn) {
+		} else if (e.getSource() == noBtn) {
 			System.exit(0);
 		}
 	}
