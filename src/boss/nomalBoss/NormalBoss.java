@@ -28,7 +28,6 @@ public class NormalBoss extends Boss {
 	}
 
 	public void initData() {
-		System.out.println("보스이미지 생성");
 		for (int i = 0; i < bossImg.length; i++) {
 			boss[i] = new ImageIcon(bossImg[i]);
 		}
@@ -40,7 +39,5 @@ public class NormalBoss extends Boss {
 		for (int i = 0; i < bossDieImg.length; i++) {
 			bossDie[i] = new ImageIcon(bossDieImg[i]);
 		}
-
-		bossBeAttacked = new ImageIcon("images/bossBeattacked.png");
 	}
 }

@@ -272,7 +272,6 @@ public class Player extends JLabel implements Attack, Moveable {
 			try {
 				beAttacked(BOSSCRASHDAMAGE);
 				Thread.sleep(500);
-				System.out.println("먹나요");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

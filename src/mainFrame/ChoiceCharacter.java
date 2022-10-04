@@ -91,7 +91,6 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 		choiceWarrior.setLocation(576, 537);
 		choiceWarrior.setBorderPainted(false);
 		choiceWarrior.setContentAreaFilled(false);
-
 	}
 
 	private void addEventListener() {
@@ -106,24 +105,16 @@ public class ChoiceCharacter extends JFrame implements ActionListener {
 			setVisible(false);
 			choiceCount = 1;
 
-//			LoginBgm loginBgm = new LoginBgm();
 			ChoiceLevel choiceLevel = new ChoiceLevel();
 			choiceLevel.setCharcterNumber(choiceCount);
-			System.out.println("마법사 선택 ");
-			// wizard
-//			bgm.clipStop();
 
 		} else {
 			choiceCount = 2;
 			setVisible(false);
-//			LoginBgm loginBgm = new LoginBgm();
 			ChoiceLevel choiceLevel = new ChoiceLevel();
 			choiceLevel.setCharcterNumber(choiceCount);
-			System.out.println("전사 선택");
-			// warrior 선택
 		}
 		bgm.clipStop();
-		System.out.println(choiceCount);
 
 	}
 

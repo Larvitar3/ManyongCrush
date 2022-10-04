@@ -163,12 +163,21 @@ public class SkillImpact extends JLabel {
 
 		new Thread(() -> {
 
-			if (Math.abs((rightX + skillWidth) - bossX) < 1 || Math.abs(rightX - bossX) < 1
-					&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 280) {
-				if (Math.abs((leftX + skillWidth) - bossX) < 1 || Math.abs(leftX - bossX) < 1
-						&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 280) {
+			if (Math.abs((rightX + (skillWidth / 2)) - bossX) < 1 || Math.abs((rightX + skillWidth) - bossX) < 1
+					|| Math.abs(rightX - bossX) < 1
+							&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 280) {
+				if (Math.abs((leftX + (skillWidth / 2)) - bossX) < 1 || Math.abs((leftX + skillWidth) - bossX) < 1
+						|| Math.abs(leftX - bossX) < 1
+								&& Math.abs(((y + skillHeight) / 2) - (bossY + bossHeight) / 2) < 280) {
 				}
+				checkBoss = true;
 				groundContext.getBoss().beAttacked(power);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				checkBoss = false;
 			}
 		}).start();
 	}

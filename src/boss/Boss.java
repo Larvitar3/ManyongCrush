@@ -20,8 +20,6 @@ public class Boss extends JLabel {
 
 	protected ImageIcon[] bossDie = new ImageIcon[10];
 
-	protected ImageIcon bossBeAttacked;
-
 	private final int BOSS_WIDTH = 293;
 	private final int BOSS_HEIGHT = 590;
 
@@ -88,23 +86,16 @@ public class Boss extends JLabel {
 
 		new Thread(() -> {
 
-			attack = true;
-			wait = false;
-
-			while (attacking) {
-
-				for (int i = 0; i < bossAttack.length && attack && state == 0; i++) {
-					try {
-						setIcon(bossAttack[i]);
-						Thread.sleep(130);
-					} catch (InterruptedException e) {
-						System.err.println("보스 어택에서 에러");
-					}
+			for (int i = 0; i < bossAttack.length && attacking && state == 0; i++) {
+				try {
+					setIcon(bossAttack[i]);
+					Thread.sleep(130);
+				} catch (InterruptedException e) {
+					System.err.println("보스 어택에서 에러");
 				}
-				attacking = false;
 			}
+			attacking = false;
 			waiting = true;
-			attack = false;
 			waiting();
 		}).start();
 	}
@@ -113,22 +104,13 @@ public class Boss extends JLabel {
 
 		new Thread(() -> {
 
-			attack = false;
-			waiting = false;
-
 			if (state == 0 && hp > 0) {
 				try {
-					setIcon(bossBeAttacked);
 					hp -= damage;
 					groundContext.bossInfo();
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					System.err.println("보스 비 어택드 에러");
-				}
-				if (wait) {
-					waiting();
-				} else {
-					attack();
 				}
 			} else {
 				hp = 0;

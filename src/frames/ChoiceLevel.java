@@ -27,7 +27,7 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 	int charcterNumber;
 	int flagCount;
 
-	public ChoiceLevel( ) {
+	public ChoiceLevel() {
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -38,9 +38,6 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 		setSize(1000, 700);
 		setTitle("던전 선택");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-//		choiceCharacter = new ChoiceCharacter(); // 이거 누가?
-//		choiceCharacter.setVisible(false);
 
 		backgroundImage = new JLabel(new ImageIcon("Images/choiceLevelBakcground.jpg"));
 		setContentPane(backgroundImage);
@@ -98,7 +95,6 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 			setVisible(false);
 			flagCount = 1;
 			new Ground(flagCount, charcterNumber);
-			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
 
 			// 전사 노말 선택
 		} else if (e.getSource() == choiceNormal && charcterNumber == 2) {
@@ -107,7 +103,6 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 			flagCount = 2;
 
 			new Ground(flagCount, charcterNumber);
-			System.out.println("선택 : 노말선택" + "  번호 :  " + charcterNumber + " 전사 선택");
 
 			// 마법사 헬 선택
 		} else if (e.getSource() == choiceHell && charcterNumber == 1) {
@@ -116,7 +111,6 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 
 			flagCount = 3;
 			new Ground(flagCount, charcterNumber);
-			System.out.println("선택 : 헬 선택" + "  번호 :  " + charcterNumber + " 마법사 선택");
 
 			// 전사 헬 선택
 		} else if (e.getSource() == choiceHell && charcterNumber == 2) {
@@ -125,13 +119,9 @@ public class ChoiceLevel extends JFrame implements ActionListener {
 
 			flagCount = 4;
 			new Ground(flagCount, charcterNumber);
-			System.out.println("선택 : 헬 선택" + "  번호 :  " + charcterNumber + " 전사 선택");
-		} else {
-			System.out.println("값 없음");
 		}
 
 		selectBGM.clipStop(); // 선택후 음악끄기
 	}
-	
 
 }
