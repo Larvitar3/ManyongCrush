@@ -108,7 +108,7 @@ public class Ground extends JFrame {
       } else if (modeCount == 4) {
 
          boss = new HellBoss(groundContext, 800, 100);
-         player = new Warrior(groundContext, "전사", 500, 116, 92, 135, 92);
+         player = new Warrior(groundContext, "전사", 300, 116, 92, 135, 92);
          name = "▶ ▷ " + player.getName() + " ◁ ◀";
          modeLevel = new JLabel("◆ ◇ H E L L ◇ ◆");
       }
@@ -135,7 +135,7 @@ public class Ground extends JFrame {
       } else {
          new Thread(backgroundService = new BackgroundServiceHell(player)).start();
          meteorList = new ArrayList<Meteor>();
-         for (int i = 0; i < 10; i++) {
+         for (int i = 0; i < 7; i++) {
             meteorList.add(new Meteor(groundContext));
          }
          meteorStart(modeCount);

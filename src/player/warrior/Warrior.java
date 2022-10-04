@@ -117,7 +117,7 @@ public class Warrior extends Player {
 							System.out.println("워리어 왼쪽 스킬");
 						}
 					}
-					skillImpact = new MegaSlash(groundContext, this, getX(), getY(), 50, 70, 150, 170);
+					skillImpact = new MegaSlash(groundContext, this, getX(), getY(), 300, 70, 150, 170);
 					skillImpact.skillsLeftFly();
 				} else {
 					for (int i = 0; i < warriorRightSkillMotion.length; i++) {
@@ -128,7 +128,7 @@ public class Warrior extends Player {
 							System.out.println("워리어 오른쪽 스킬");
 						}
 					}
-					skillImpact = new MegaSlash(groundContext, this, getX(), getY(), 30, 50, 150, 170);
+					skillImpact = new MegaSlash(groundContext, this, getX(), getY(), 300, 50, 150, 170);
 					skillImpact.skillsRightFly();
 				}
 				skillCoolTime = false;
